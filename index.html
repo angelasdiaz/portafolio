@@ -8,124 +8,121 @@
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
         
         <style>
             :root {
-                --bg-color: #000000;
-                --text-color: #ffffff;
+                --bg-main: #000000;
+                --bg-alt: #0a0a0a;
+                --text-main: #ffffff;
                 --sidebar-bg: #000000;
-                --accent-color: #B57EDC; 
-                --card-bg: #1a1a1a;
-                --border-color: #333333;
+                --accent: #B57EDC; 
+                --card-bg: #151515;
+                --border: #222;
             }
 
             [data-theme="light"] {
-                --bg-color: #ffffff;
-                --text-color: #000000;
-                --sidebar-bg: #f8f9fa;
-                --accent-color: #2b064d;
+                --bg-main: #ffffff;
+                --bg-alt: #f8f9fa;
+                --text-main: #000000;
+                --sidebar-bg: #ffffff;
+                --accent: #2b064d;
                 --card-bg: #ffffff;
-                --border-color: #dee2e6;
+                --border: #dee2e6;
             }
 
             body {
                 font-family: 'Inter', sans-serif;
-                background-color: var(--bg-color);
-                color: var(--text-color);
+                background-color: var(--bg-main);
+                color: var(--text-main);
                 transition: all 0.3s ease;
             }
 
-            .text-justify { text-align: justify; }
+            h1, h2, .tech-font { font-family: 'JetBrains Mono', monospace; }
 
-            /* --- Sidebar --- */
+            /* --- Sidebar con Scrollbar invisible --- */
             .sidebar {
-                height: 100vh;
-                width: 260px;
-                position: fixed;
-                top: 0; left: 0;
-                background-color: var(--sidebar-bg);
-                padding: 40px 20px;
-                border-right: 1px solid var(--border-color);
-                z-index: 1000;
-                display: flex;
-                flex-direction: column;
-                overflow-y: auto;
+                height: 100vh; width: 260px; position: fixed;
+                top: 0; left: 0; background-color: var(--sidebar-bg);
+                padding: 40px 20px; border-right: 1px solid var(--border);
+                z-index: 1000; display: flex; flex-direction: column;
             }
+            .sidebar::-webkit-scrollbar { display: none; }
 
-            .sidebar a, .sidebar .nav-item {
-                padding: 12px 10px;
-                text-decoration: none;
-                font-size: 0.95rem;
-                font-weight: 500;
-                color: var(--text-color);
-                display: flex;
-                align-items: center;
-                transition: 0.3s;
-                cursor: pointer;
+            .nav-link-custom {
+                padding: 12px 10px; text-decoration: none; font-size: 0.95rem;
+                color: var(--text-main); display: flex; align-items: center; transition: 0.3s;
+                cursor: pointer; border: none; background: none; width: 100%;
             }
+            .nav-link-custom i { margin-right: 15px; width: 20px; text-align: center; }
+            .nav-link-custom:hover { color: var(--accent); }
 
-            .sidebar a i, .sidebar .nav-item i { margin-right: 15px; width: 20px; text-align: center; }
-            .sidebar a:hover, .sidebar .nav-item:hover { color: var(--accent-color); }
-
-            /* Menús desplegables (CV e Idioma) */
-            .sub-options { font-size: 0.85rem; padding-left: 45px; margin-bottom: 10px; }
-            .sub-options a, .sub-options span { 
-                cursor: pointer; transition: 0.2s; display: block; 
-                margin-bottom: 5px; color: var(--text-color); opacity: 0.7; 
-                text-decoration: none;
+            /* Menús desplegables */
+            .collapse-menu { padding-left: 45px; margin-bottom: 10px; display: none; }
+            .collapse-menu.show { display: block; }
+            .collapse-menu a, .collapse-menu span { 
+                display: block; padding: 5px 0; font-size: 0.85rem; 
+                color: var(--text-main); opacity: 0.6; text-decoration: none; cursor: pointer;
             }
-            .sub-options a:hover, .sub-options span:hover, .sub-options span.active { color: var(--accent-color); opacity: 1; }
+            .collapse-menu a:hover, .collapse-menu span:hover, .collapse-menu span.active { opacity: 1; color: var(--accent); }
 
-            /* --- Contenido Principal --- */
-            .main-content { margin-left: 260px; padding: 40px; }
+            /* --- Secciones con separaciones claras --- */
+            .main-content { margin-left: 260px; }
+            section { padding: 80px 40px; border-bottom: 1px solid var(--border); }
+            section:nth-child(even) { background-color: var(--bg-alt); }
 
             .custom-header { 
-                background-color: #2b064d; 
-                border-radius: 20px; 
-                padding: 60px 20px; 
-                color: white;
-                margin-bottom: 40px;
+                background-color: #2b064d; border-radius: 24px; padding: 80px 20px; 
+                color: white; text-align: center;
             }
-
             .profile-img { width: 150px; height: 150px; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); }
 
-            .card {
-                background-color: var(--card-bg);
-                border: 1px solid var(--border-color);
-                color: var(--text-color);
-                transition: transform 0.3s;
+            /* Tarjetas de Proyectos */
+            .card { background-color: var(--card-bg); border: 1px solid var(--border); color: var(--text-main); height: 100%; }
+            .card:hover { border-color: var(--accent); transform: translateY(-5px); transition: 0.3s; }
+
+            /* Contacto Estilo Grid */
+            .contact-box {
+                padding: 30px; border: 1px solid var(--border); border-radius: 15px;
+                transition: 0.3s; text-decoration: none; color: inherit; display: block;
             }
-            .card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+            .contact-box:hover { background-color: var(--accent); color: #fff !important; }
 
             @media (max-width: 992px) {
                 .sidebar { width: 100%; height: auto; position: relative; border-right: none; }
-                .main-content { margin-left: 0; padding: 20px; }
+                .main-content { margin-left: 0; }
             }
         </style>
     </head>
     <body data-theme="dark">
 
         <nav class="sidebar">
-            <a href="#inicio"><i class="fa-solid fa-house"></i> <span data-key="nav-home">Inicio</span></a>
-            <a href="#sobre-mi"><i class="fa-solid fa-user"></i> <span data-key="nav-about">Sobre Mí</span></a>
-            <a href="#habilidades"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-key="nav-skills">Habilidades</span></a>
-            <a href="#proyectos"><i class="fa-solid fa-heart"></i> <span data-key="nav-projects">Proyectos</span></a>
-            <a href="#contacto"><i class="fa-solid fa-envelope"></i> <span data-key="nav-contact">Contacto</span></a>
+            <a href="#inicio" class="nav-link-custom"><i class="fa-solid fa-house"></i> <span data-key="nav-home">Inicio</span></a>
+            <a href="#sobre-mi" class="nav-link-custom"><i class="fa-solid fa-user"></i> <span data-key="nav-about">Sobre Mí</span></a>
+            <a href="#habilidades" class="nav-link-custom"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-key="nav-skills">Habilidades</span></a>
+            <a href="#proyectos" class="nav-link-custom"><i class="fa-solid fa-heart"></i> <span data-key="nav-projects">Proyectos</span></a>
+            <a href="#contacto" class="nav-link-custom"><i class="fa-solid fa-envelope"></i> <span data-key="nav-contact">Contacto</span></a>
 
-            <div class="nav-item" style="cursor: default;"><i class="fa-solid fa-briefcase"></i> <span data-key="nav-cv">Curriculum</span></div>
-            <div class="sub-options">
-                <a href="assets/cv-es.pdf" target="_blank">Español</a>
-                <a href="assets/cv-en.pdf" target="_blank">English</a>
+            <div class="nav-item">
+                <button class="nav-link-custom" onclick="toggleMenu('menu-cv')">
+                    <i class="fa-solid fa-briefcase"></i> <span data-key="nav-cv">Curriculum</span>
+                    <i class="fa-solid fa-chevron-down ms-auto small"></i>
+                </button>
+                <div id="menu-cv" class="collapse-menu">
+                    <a href="assets/cv-es.pdf" target="_blank">Español</a>
+                    <a href="assets/cv-en.pdf" target="_blank">English</a>
+                </div>
             </div>
 
             <div class="nav-item" onclick="toggleTheme()">
-                <i id="theme-icon" class="fa-solid fa-sun"></i> <span id="theme-text" data-key="theme-light">Modo Claro</span>
+                <div class="nav-link-custom"><i id="theme-icon" class="fa-solid fa-sun"></i> <span id="theme-text" data-key="theme-light">Modo Claro</span></div>
             </div>
 
             <div class="mt-auto pt-4 border-top border-secondary">
-                <div class="nav-item" style="cursor: default;"><i class="fa-solid fa-language"></i> <span data-key="nav-lang">Idioma</span></div>
-                <div class="sub-options">
+                <button class="nav-link-custom" onclick="toggleMenu('menu-lang')">
+                    <i class="fa-solid fa-language"></i> <span data-key="nav-lang">Idioma</span>
+                </button>
+                <div id="menu-lang" class="collapse-menu show">
                     <span onclick="setLanguage('es')" id="btn-es" class="active">Español</span>
                     <span onclick="setLanguage('en')" id="btn-en">English</span>
                 </div>
@@ -133,93 +130,106 @@
         </nav>
 
         <div class="main-content">
-            <section id="inicio">
-                <header class="custom-header text-center">
-                    <img class="img-fluid rounded-circle mb-4 profile-img" src="assets/25037.jpg" alt="Ángela" />
-                    <h1 class="text-white fs-2 fw-bolder">Ángela Sánchez Díaz</h1>
-                    <p class="text-white-50" data-key="header-subtitle">Diseño y Desarrollo de Videojuegos</p>
+            <section id="inicio" style="border:none;">
+                <header class="custom-header">
+                    <img class="img-fluid rounded-circle mb-4 profile-img" src="assets/25037.jpg" alt="Angela" />
+                    <h1 class="display-5 fw-bold text-white">Ángela Sánchez Díaz</h1>
+                    <p class="fs-4 fw-light opacity-75 tech-font text-white" data-key="header-subtitle">Diseño y Desarrollo de Videojuegos</p>
                 </header>
             </section>
 
-            <section id="sobre-mi" class="py-5">
-                <div class="container">
-                    <h2 class="mb-4"><i class="fa-solid fa-user me-2"></i> <span data-key="nav-about">Sobre Mí</span></h2>
-                    <div class="lead text-justify" data-key="about-content">
-                        <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
-                        <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
-                        <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales. Mi objetivo es seguir creciendo profesionalmente y aportar mi granito de arena a proyectos que logren sorprender y emocionar.</p>
-                        <p>¡Si buscas a alguien con ganas e ilusión, échale un ojo a mi trabajo!</p>
+            <section id="sobre-mi">
+                <h2 class="mb-5"><span class="text-muted">01.</span> <span data-key="nav-about">Sobre Mí</span></h2>
+                <div class="lead text-justify" data-key="about-content">
+                    <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
+                    <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
+                    <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales. Mi objetivo es seguir creciendo profesionalmente y aportar mi granito de arena a proyectos que logren sorprender y emocionar.</p>
+                    <p class="fw-bold">¡Si buscas a alguien con ganas e ilusión, échale un ojo a mi trabajo!</p>
+                </div>
+            </section>
+
+            <section id="habilidades">
+                <h2 class="mb-5"><span class="text-muted">02.</span> <span data-key="nav-skills">Habilidades</span></h2>
+                <div class="row g-4 text-center">
+                    <div class="col-6 col-md-3"><i class="fa-brands fa-unity fa-3x mb-2"></i><p>Unity</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-cube fa-3x mb-2"></i><p>3D Modeling</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-paintbrush fa-3x mb-2"></i><p>Texturing</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-person-walking fa-3x mb-2"></i><p>Animación</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-pen-nib fa-3x mb-2"></i><p>Ilustración</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-window-restore fa-3x mb-2"></i><p>UI/UX Design</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-bezier-curve fa-3x mb-2"></i><p>Diseño Gráfico</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-brands fa-html5 fa-3x mb-2"></i><p>Web Design</p></div>
+                </div>
+            </section>
+
+            <section id="proyectos">
+                <h2 class="mb-5"><span class="text-muted">03.</span> <span data-key="nav-projects">Proyectos</span></h2>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card p-3">
+                            <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=Spyw4re" class="card-img-top rounded mb-3" alt="Spyw4re">
+                            <h5 class="fw-bold">Spyw4re</h5>
+                            <p class="small opacity-75" data-key="p-game">Videojuego interactivo en Unity.</p>
+                            <a href="https://botpa.itch.io/spyw4re" target="_blank" class="btn btn-sm btn-outline-light">Itch.io</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card p-3">
+                            <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=3D+Art" class="card-img-top rounded mb-3" alt="3D">
+                            <h5 class="fw-bold" data-key="p-3d-t">Modelado y Renders</h5>
+                            <p class="small opacity-75" data-key="p-3d-d">Blender / Maya / Texturing.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card p-3">
+                            <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=Ilustración" class="card-img-top rounded mb-3" alt="Art">
+                            <h5 class="fw-bold" data-key="p-art-t">Ilustración Digital</h5>
+                            <p class="small opacity-75" data-key="p-art-d">Concept Art y Diseño de Personajes.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card p-3">
+                            <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=Marketing" class="card-img-top rounded mb-3" alt="Marketing">
+                            <h5 class="fw-bold">Web & Marketing</h5>
+                            <p class="small opacity-75" data-key="p-mkt">Proyectos digitales y RRSS.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card p-3">
+                            <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=Video" class="card-img-top rounded mb-3" alt="Video">
+                            <h5 class="fw-bold" data-key="p-vid-t">Producción de Video</h5>
+                            <p class="small opacity-75" data-key="p-vid-d">Edición y montaje audiovisual.</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <section id="habilidades" class="py-5">
-                <div class="container">
-                    <h2 class="mb-4"><i class="fa-solid fa-wand-magic-sparkles me-2"></i> <span data-key="nav-skills">Habilidades</span></h2>
-                    <div class="row text-center">
-                        <div class="col-md-3 mb-3"><i class="fa-brands fa-unity fa-3x mb-2"></i><p>Unity</p></div>
-                        <div class="col-md-3 mb-3"><i class="fa-solid fa-cube fa-3x mb-2"></i><p>3D Modeling</p></div>
-                        <div class="col-md-3 mb-3"><i class="fa-solid fa-pen-nib fa-3x mb-2"></i><p>Ilustración</p></div>
-                        <div class="col-md-3 mb-3"><i class="fa-brands fa-html5 fa-3x mb-2"></i><p>Web Design</p></div>
+            <section id="contacto" style="border:none;">
+                <h2 class="mb-5"><span class="text-muted">04.</span> <span data-key="nav-contact">Contacto</span></h2>
+                <div class="row g-4 text-center">
+                    <div class="col-md-3">
+                        <a href="mailto:tuemail@gmail.com" class="contact-box">
+                            <i class="fa-solid fa-envelope fa-2x mb-3"></i>
+                            <h6 class="fw-bold">Gmail</h6>
+                        </a>
                     </div>
-                </div>
-            </section>
-
-            <section id="proyectos" class="py-5">
-                <div class="container">
-                    <h2 class="mb-4"><i class="fa-solid fa-heart me-2"></i> <span data-key="nav-projects">Proyectos</span></h2>
-                    <div class="row g-4">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card h-100">
-                                <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=Videojuegos" class="card-img-top" alt="Game">
-                                <div class="card-body">
-                                    <h5 class="card-title">Spyw4re</h5>
-                                    <p class="card-text small" data-key="project-game-desc">Proyecto de videojuego desarrollado en Unity.</p>
-                                    <a href="https://botpa.itch.io/spyw4re" target="_blank" class="btn btn-sm btn-outline-light">Ver en Itch.io</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card h-100">
-                                <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=3D+Art" class="card-img-top" alt="3D">
-                                <div class="card-body">
-                                    <h5 class="card-title" data-key="project-3d-title">Modelado y Renders</h5>
-                                    <p class="card-text small" data-key="project-3d-desc">Trabajos realizados en Blender y Maya.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-md-3">
+                        <a href="https://linkedin.com/in/tuperfil" target="_blank" class="contact-box">
+                            <i class="fa-brands fa-linkedin fa-2x mb-3"></i>
+                            <h6 class="fw-bold">LinkedIn</h6>
+                        </a>
                     </div>
-                </div>
-            </section>
-
-            <section id="contacto" class="py-5">
-                <div class="container text-center">
-                    <h2 class="mb-5"><i class="fa-solid fa-envelope me-2"></i> <span data-key="nav-contact">Contacto</span></h2>
-                    <div class="row justify-content-center g-4">
-                        <div class="col-6 col-md-3">
-                            <a href="mailto:tuemail@gmail.com" class="text-decoration-none text-reset">
-                                <i class="fa-solid fa-envelope fa-3x mb-2" style="color: #EA4335;"></i>
-                                <p>Gmail</p>
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <a href="https://linkedin.com/in/tuperfil" target="_blank" class="text-decoration-none text-reset">
-                                <i class="fa-brands fa-linkedin fa-3x mb-2" style="color: #0A66C2;"></i>
-                                <p>LinkedIn</p>
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <a href="https://angelasdiaz.itch.io" target="_blank" class="text-decoration-none text-reset">
-                                <i class="fa-brands fa-itch-io fa-3x mb-2" style="color: #FA5C5C;"></i>
-                                <p>Itch.io</p>
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <a href="https://instagram.com/deex.ddv" target="_blank" class="text-decoration-none text-reset">
-                                <i class="fa-brands fa-instagram fa-3x mb-2" style="color: #E4405F;"></i>
-                                <p>Instagram</p>
-                            </a>
-                        </div>
+                    <div class="col-md-3">
+                        <a href="https://angelasdiaz.itch.io" target="_blank" class="contact-box">
+                            <i class="fa-brands fa-itch-io fa-2x mb-3"></i>
+                            <h6 class="fw-bold">Itch.io</h6>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="https://instagram.com/deex.ddv" target="_blank" class="contact-box">
+                            <i class="fa-brands fa-instagram fa-2x mb-3"></i>
+                            <h6 class="fw-bold">Instagram</h6>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -228,51 +238,34 @@
         <script>
             const translations = {
                 es: {
-                    "nav-home": "Inicio",
-                    "nav-about": "Sobre Mí",
-                    "nav-skills": "Habilidades",
-                    "nav-projects": "Proyectos",
-                    "nav-contact": "Contacto",
-                    "nav-cv": "Curriculum",
-                    "nav-lang": "Idioma",
-                    "theme-light": "Modo Claro",
-                    "theme-dark": "Modo Oscuro",
+                    "nav-home": "Inicio", "nav-about": "Sobre Mí", "nav-skills": "Habilidades", "nav-projects": "Proyectos",
+                    "nav-contact": "Contacto", "nav-cv": "Curriculum", "nav-lang": "Idioma", "theme-light": "Modo Claro", "theme-dark": "Modo Oscuro",
                     "header-subtitle": "Diseño y Desarrollo de Videojuegos",
-                    "project-game-desc": "Proyecto de videojuego desarrollado en Unity.",
-                    "project-3d-title": "Modelado y Renders",
-                    "project-3d-desc": "Trabajos realizados en Blender y Maya.",
-                    "about-content": `<p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
-                                      <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
-                                      <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales. Mi objetivo es seguir creciendo profesionalmente y aportar mi granito de arena a proyectos que logren sorprender y emocionar.</p>
-                                      <p>¡Si buscas a alguien con ganas e ilusión, échale un ojo a mi trabajo!</p>`
+                    "p-game": "Videojuego interactivo en Unity.", "p-3d-t": "Modelado y Renders", "p-3d-d": "Blender / Maya / Texturing.",
+                    "p-art-t": "Ilustración Digital", "p-art-d": "Concept Art y Diseño de Personajes.", "p-mkt": "Proyectos digitales y RRSS.",
+                    "p-vid-t": "Producción de Video", "p-vid-d": "Edición y montaje audiovisual.",
+                    "about-content": `<p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p><p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p><p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales.</p>`
                 },
                 en: {
-                    "nav-home": "Home",
-                    "nav-about": "About Me",
-                    "nav-skills": "Skills",
-                    "nav-projects": "Projects",
-                    "nav-contact": "Contact",
-                    "nav-cv": "Resume",
-                    "nav-lang": "Language",
-                    "theme-light": "Light Mode",
-                    "theme-dark": "Dark Mode",
+                    "nav-home": "Home", "nav-about": "About Me", "nav-skills": "Skills", "nav-projects": "Projects",
+                    "nav-contact": "Contact", "nav-cv": "Resume", "nav-lang": "Language", "theme-light": "Light Mode", "theme-dark": "Dark Mode",
                     "header-subtitle": "Game Design & Development",
-                    "project-game-desc": "Video game project developed in Unity.",
-                    "project-3d-title": "Modeling & Rendering",
-                    "project-3d-desc": "Works created in Blender and Maya.",
-                    "about-content": `<p>I am a Game Design and Development student, eager to keep learning and creating new projects. I am passionate about digital art, illustration, and everything related to bringing ideas to life in virtual worlds.</p>
-                                      <p>I consider myself a creative, curious person who works well in a team environment.</p>
-                                      <p>In this portfolio, you will find a blend of my work in video games, 3D, illustration, and digital projects. My goal is to continue growing professionally and contribute to projects that surprise and excite.</p>
-                                      <p>If you are looking for someone with drive and enthusiasm, take a look at my work!</p>`
+                    "p-game": "Interactive game made in Unity.", "p-3d-t": "3D Art & Renders", "p-3d-d": "Blender / Maya / Texturing.",
+                    "p-art-t": "Digital Illustration", "p-art-d": "Concept Art and Character Design.", "p-mkt": "Digital projects and Social Media.",
+                    "p-vid-t": "Video Production", "p-vid-d": "Editing and audiovisual montage.",
+                    "about-content": `<p>I'm a Game Design and Development student, eager to keep learning and creating new projects. I love digital art, illustration, and building virtual worlds.</p><p>I consider myself creative, curious, and a great team player.</p><p>In this portfolio, you'll find a mix of games, 3D, illustration, and digital projects.</p>`
                 }
             };
 
+            function toggleMenu(id) {
+                const menu = document.getElementById(id);
+                menu.classList.toggle('show');
+            }
+
             function setLanguage(lang) {
-                document.querySelectorAll('[data-key]').forEach(element => {
-                    const key = element.getAttribute('data-key');
-                    if(translations[lang][key]) {
-                        element.innerHTML = translations[lang][key];
-                    }
+                document.querySelectorAll('[data-key]').forEach(el => {
+                    const key = el.getAttribute('data-key');
+                    if(translations[lang][key]) el.innerHTML = translations[lang][key];
                 });
                 document.getElementById('btn-es').classList.toggle('active', lang === 'es');
                 document.getElementById('btn-en').classList.toggle('active', lang === 'en');
@@ -282,16 +275,16 @@
                 const body = document.body;
                 const icon = document.getElementById('theme-icon');
                 const text = document.getElementById('theme-text');
-                const currentLang = document.getElementById('btn-es').classList.contains('active') ? 'es' : 'en';
+                const lang = document.getElementById('btn-es').classList.contains('active') ? 'es' : 'en';
 
                 if (body.getAttribute('data-theme') === 'dark') {
                     body.setAttribute('data-theme', 'light');
                     icon.classList.replace('fa-sun', 'fa-moon');
-                    text.innerText = translations[currentLang]["theme-dark"];
+                    text.innerText = translations[lang]["theme-dark"];
                 } else {
                     body.setAttribute('data-theme', 'dark');
                     icon.classList.replace('fa-moon', 'fa-sun');
-                    text.innerText = translations[currentLang]["theme-light"];
+                    text.innerText = translations[lang]["theme-light"];
                 }
             }
         </script>
