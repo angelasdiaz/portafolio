@@ -4,105 +4,123 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Ángela Sánchez Díaz | Portafolio</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
         <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
         
         <style>
-            body {
-                font-family: 'JetBrains Mono', monospace; /* Estilo similar a la imagen que pasaste */
-                background-color: #000;
-                color: #fff;
+            :root {
+                --bg-color: #ffffff;
+                --text-color: #000000;
+                --sidebar-bg: #f8f9fa;
+                --accent-color: #2b064d; /* Morado oscuro original */
+                --card-bg: #ffffff;
+                --border-color: #dee2e6;
             }
-            .text-justify { text-align: justify; }
 
-            /* --- Sidebar Estilo --- */
+            [data-theme="dark"] {
+                --bg-color: #000000;
+                --text-color: #ffffff;
+                --sidebar-bg: #000000;
+                --accent-color: #B57EDC; /* El morado claro que pediste (#B57EDC) */
+                --card-bg: #1a1a1a;
+                --border-color: #333333;
+            }
+
+            body {
+                font-family: 'JetBrains Mono', monospace;
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                transition: all 0.3s ease;
+            }
+
+            /* --- Sidebar --- */
             .sidebar {
                 height: 100vh;
                 width: 250px;
                 position: fixed;
                 top: 0;
                 left: 0;
-                background-color: #000;
+                background-color: var(--sidebar-bg);
                 padding-top: 40px;
                 padding-left: 20px;
-                border-right: 1px solid #333;
+                border-right: 1px solid var(--border-color);
+                z-index: 1000;
             }
             .sidebar a {
                 padding: 15px 10px;
                 text-decoration: none;
                 font-size: 1.1rem;
-                color: #fff;
+                color: var(--text-color);
                 display: flex;
                 align-items: center;
                 transition: 0.3s;
             }
-            .sidebar a i {
-                margin-right: 15px;
-                width: 25px;
-                text-align: center;
+            .sidebar a i { margin-right: 15px; width: 25px; text-align: center; }
+            
+            /* Cambio de color al seleccionar/hover */
+            .sidebar a:hover, .sidebar a.active {
+                color: var(--accent-color) !important;
+                background-color: rgba(181, 126, 220, 0.1);
             }
-            .sidebar a:hover {
-                color: #2b064d; /* Tu color morado */
-                background-color: rgba(255,255,255,0.05);
-            }
-            .lang-switch {
+
+            .theme-switch {
                 position: absolute;
-                bottom: 30px;
+                bottom: 80px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 10px;
             }
 
-            /* --- Contenido Principal --- */
-            .main-content {
-                margin-left: 250px; /* Ancho de la sidebar */
-                padding: 20px;
-            }
+            /* --- Contenido --- */
+            .main-content { margin-left: 250px; padding: 20px; }
 
-            /* --- Header dentro del contenido --- */
             .custom-header {
-                background-color: #2b064d;
+                background-color: #2b064d; /* Mantenemos el fondo del header morado oscuro */
                 border-radius: 15px;
-                margin-bottom: 30px;
+                color: white !important;
             }
+
             .profile-img {
-                width: 150px;
-                height: 150px;
+                width: 150px; height: 150px;
                 object-fit: cover;
                 border: 4px solid rgba(255, 255, 255, 0.2);
             }
 
-            /* --- Cartas de Proyectos --- */
             .card {
-                background-color: #1a1a1a;
-                border: 1px solid #333;
-                color: #fff;
-                transition: transform 0.3s;
+                background-color: var(--card-bg);
+                border: 1px solid var(--border-color);
+                color: var(--text-color);
             }
+            
             .card:hover {
+                border-color: var(--accent-color);
                 transform: translateY(-5px);
-                border-color: #2b064d;
+                transition: 0.3s;
             }
 
-            /* Responsivo para móviles */
             @media (max-width: 992px) {
-                .sidebar { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid #333; }
+                .sidebar { width: 100%; height: auto; position: relative; border-right: none; }
                 .main-content { margin-left: 0; }
-                .lang-switch { position: relative; bottom: 0; padding-top: 20px; }
+                .theme-switch { position: relative; bottom: 0; margin-top: 20px; }
             }
         </style>
     </head>
-    <body>
-
-        <div class="sidebar">
+    <body data-theme="dark"> <div class="sidebar">
             <a href="#inicio"><i class="fa-solid fa-house"></i> Inicio</a>
             <a href="#sobre-mi"><i class="fa-solid fa-user"></i> Sobre Mí</a>
             <a href="#habilidades"><i class="fa-solid fa-terminal"></i> Habilidades</a>
             <a href="#proyectos"><i class="fa-solid fa-heart"></i> Proyectos</a>
             <a href="#contacto"><i class="fa-solid fa-envelope"></i> Contacto</a>
-            <a href="#curriculum"><i class="fa-solid fa-briefcase"></i> Curriculum</a>
             
-            <div class="lang-switch">
+            <div class="theme-switch" onclick="toggleTheme()">
+                <i id="theme-icon" class="fa-solid fa-sun"></i>
+                <span id="theme-text">Modo Claro</span>
+            </div>
+
+            <div class="lang-switch mt-4">
                 <a href="#"><i class="fa-solid fa-language"></i> Español</a>
             </div>
         </div>
@@ -116,96 +134,40 @@
                 </header>
             </section>
 
-            <section id="sobre-mi" class="py-5">
-                <div class="container">
-                    <h2 class="mb-4"><i class="fa-solid fa-user me-2"></i> Sobre Mí</h2>
-                    <p class="lead text-justify">¡Hola! Soy Ángela. Estudiante de Diseño y Desarrollo de Videojuegos, apasionada por el arte digital y los mundos virtuales. Me considero una persona creativa y curiosa.</p>
-                </div>
-            </section>
-
-            <section id="habilidades" class="py-5">
-                <div class="container">
-                    <h2 class="mb-4"><i class="fa-solid fa-terminal me-2"></i> Habilidades</h2>
-                    <div class="row text-center">
-                        <div class="col-md-3 mb-3"><i class="fa-brands fa-unity fa-3x mb-2"></i><p>Unity</p></div>
-                        <div class="col-md-3 mb-3"><i class="fa-solid fa-cube fa-3x mb-2"></i><p>3D Modeling</p></div>
-                        <div class="col-md-3 mb-3"><i class="fa-solid fa-pen-nib fa-3x mb-2"></i><p>Ilustración</p></div>
-                        <div class="col-md-3 mb-3"><i class="fa-brands fa-html5 fa-3x mb-2"></i><p>Web Design</p></div>
-                    </div>
-                </div>
-            </section>
-
             <section id="proyectos" class="py-5">
                 <div class="container">
-                    <h2 class="mb-4"><i class="fa-solid fa-heart me-2"></i> Proyectos</h2>
-                    
+                    <h2 class="mb-4">Proyectos</h2>
                     <div class="row g-4">
                         <div class="col-md-6 col-lg-4">
-                            <div class="card h-100">
-                                <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=Videojuegos" class="card-img-top" alt="Videojuegos">
+                            <div class="card h-100 shadow-sm">
                                 <div class="card-body">
                                     <h5 class="card-title">Spyw4re</h5>
-                                    <p class="card-text small">Proyecto de videojuego desarrollado en Unity.</p>
-                                    <a href="https://botpa.itch.io/spyw4re" target="_blank" class="btn btn-sm btn-outline-light">Ver en Itch.io</a>
+                                    <p class="small">Videojuego / Itch.io</p>
+                                    <a href="https://botpa.itch.io/spyw4re" target="_blank" style="color: var(--accent-color)">Ver proyecto</a>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card h-100">
-                                <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=Modelado+3D" class="card-img-top" alt="3D">
-                                <div class="card-body">
-                                    <h5 class="card-title">Modelado y Renders</h5>
-                                    <p class="card-text small">Trabajos realizados en Blender y Maya.</p>
-                                </div>
-                            </div>
                         </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card h-100">
-                                <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=Ilustración" class="card-img-top" alt="Ilustración">
-                                <div class="card-body">
-                                    <h5 class="card-title">Arte Digital</h5>
-                                    <p class="card-text small">Galería de ilustraciones y concept art.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card h-100">
-                                <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=Web+Marketing" class="card-img-top" alt="Marketing">
-                                <div class="card-body">
-                                    <h5 class="card-title">Web & Marketing</h5>
-                                    <p class="card-text small">Diseño digital y estrategia de marca.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card h-100">
-                                <img src="https://via.placeholder.com/400x250/2b064d/ffffff?text=Producción+Video" class="card-img-top" alt="Video">
-                                <div class="card-body">
-                                    <h5 class="card-title">Edición de Vídeo</h5>
-                                    <p class="card-text small">Montaje y post-producción audiovisual.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="contacto" class="py-5">
-                <div class="container text-center">
-                    <h2 class="mb-4"><i class="fa-solid fa-envelope me-2"></i> Contacto</h2>
-                    <p>¡Hablemos de nuevos proyectos!</p>
-                    <div class="mt-4">
-                        <a href="https://instagram.com/deex.ddv" target="_blank" class="mx-3 text-white"><i class="fab fa-instagram fa-2x"></i></a>
-                        <a href="https://angelasdiaz.itch.io" target="_blank" class="mx-3 text-white"><i class="fab fa-itch-io fa-2x"></i></a>
-                    </div>
                 </div>
             </section>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function toggleTheme() {
+                const body = document.body;
+                const icon = document.getElementById('theme-icon');
+                const text = document.getElementById('theme-text');
+                
+                if (body.getAttribute('data-theme') === 'dark') {
+                    body.setAttribute('data-theme', 'light');
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    text.innerText = "Modo Oscuro";
+                } else {
+                    body.setAttribute('data-theme', 'dark');
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    text.innerText = "Modo Claro";
+                }
+            }
+        </script>
     </body>
 </html>
