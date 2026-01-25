@@ -64,9 +64,9 @@
             }
             .collapse-menu a:hover, .collapse-menu span:hover, .collapse-menu span.active { opacity: 1; color: var(--accent); }
 
-            /* --- Secciones --- */
+            /* --- Secciones con mayor espacio --- */
             .main-content { margin-left: 260px; }
-            section { padding: 80px 40px; border-bottom: 1px solid var(--border); }
+            section { padding: 120px 40px; border-bottom: 1px solid var(--border); } /* Espacio entre apartados */
             section:nth-child(even) { background-color: var(--bg-alt); }
 
             .custom-header { 
@@ -75,7 +75,7 @@
             }
             .profile-img { width: 150px; height: 150px; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); }
 
-            /* --- Proyectos (Grid 2x2) --- */
+            /* --- Grid Proyectos 2x2 --- */
             .project-card {
                 background-color: var(--card-bg);
                 border: 1px solid var(--border);
@@ -88,7 +88,7 @@
             .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
             .project-card img { border-radius: 10px; margin-bottom: 15px; width: 100%; height: 180px; object-fit: cover; }
 
-            /* --- Estilo Ventana Emergente (Modal) --- */
+            /* --- Estilo Modales (Ventana Emergente) --- */
             .modal-content {
                 background-color: #0a0a0a;
                 border: 1px solid var(--border);
@@ -99,7 +99,7 @@
             .modal-footer { border-top: 1px solid #222; justify-content: center; }
             .btn-close-white { filter: invert(1); opacity: 1; }
             
-            .btn-download {
+            .btn-more {
                 border: 1px solid white;
                 background: transparent;
                 color: white;
@@ -108,8 +108,15 @@
                 transition: 0.3s;
                 font-size: 0.9rem;
             }
-            .btn-download:hover { background-color: white; color: black; }
-            .btn-download em { font-style: italic; margin-left: 10px; font-weight: bold; }
+            .btn-more:hover { background-color: white; color: black; }
+            .btn-more em { font-style: italic; margin-left: 10px; font-weight: bold; }
+
+            /* --- Contact Box --- */
+            .contact-box {
+                padding: 30px; border: 1px solid var(--border); border-radius: 15px;
+                transition: 0.3s; text-decoration: none; color: inherit; display: block;
+            }
+            .contact-box:hover { background-color: var(--accent); color: #fff !important; }
 
             @media (max-width: 992px) {
                 .sidebar { width: 100%; height: auto; position: relative; border-right: none; }
@@ -125,6 +132,17 @@
             <a href="#habilidades" class="nav-link-custom"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-key="nav-skills">Habilidades</span></a>
             <a href="#proyectos" class="nav-link-custom"><i class="fa-solid fa-heart"></i> <span data-key="nav-projects">Proyectos</span></a>
             <a href="#contacto" class="nav-link-custom"><i class="fa-solid fa-envelope"></i> <span data-key="nav-contact">Contacto</span></a>
+
+            <div class="nav-item">
+                <button class="nav-link-custom" onclick="toggleMenu('menu-cv')">
+                    <i class="fa-solid fa-briefcase"></i> <span data-key="nav-cv">Curriculum</span>
+                    <i class="fa-solid fa-chevron-down ms-auto small"></i>
+                </button>
+                <div id="menu-cv" class="collapse-menu">
+                    <a href="assets/cv-es.pdf" target="_blank">Español</a>
+                    <a href="assets/cv-en.pdf" target="_blank">English</a>
+                </div>
+            </div>
 
             <div class="nav-item" onclick="toggleTheme()">
                 <div class="nav-link-custom"><i id="theme-icon" class="fa-solid fa-sun"></i> <span id="theme-text" data-key="theme-light">Modo Claro</span></div>
@@ -150,40 +168,91 @@
                 </header>
             </section>
 
+            <section id="sobre-mi">
+                <h2 class="mb-5 tech-font"><span class="text-muted">01.</span> <span data-key="nav-about">Sobre Mí</span></h2>
+                <div class="lead" style="text-align: justify;" data-key="about-content">
+                    <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
+                    <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
+                    <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales.</p>
+                    <p class="fw-bold">¡Si buscas a alguien con ganas e ilusión, échale un ojo a mi trabajo!</p>
+                </div>
+            </section>
+
+            <section id="habilidades">
+                <h2 class="mb-5 tech-font"><span class="text-muted">02.</span> <span data-key="nav-skills">Habilidades</span></h2>
+                <div class="row g-5 text-center">
+                    <div class="col-6 col-md-3"><i class="fa-brands fa-unity fa-3x mb-2"></i><p>Unity</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-cube fa-3x mb-2"></i><p>3D Modeling</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-paintbrush fa-3x mb-2"></i><p>Texturing</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-person-walking fa-3x mb-2"></i><p>Animación</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-video fa-3x mb-2"></i><p>Producción de Vídeo</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-window-restore fa-3x mb-2"></i><p>UI/UX Design</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-solid fa-bezier-curve fa-3x mb-2"></i><p>Diseño Gráfico</p></div>
+                    <div class="col-6 col-md-3"><i class="fa-brands fa-html5 fa-3x mb-2"></i><p>Web Design</p></div>
+                    <div class="col-6 col-md-4 offset-md-4"><i class="fa-solid fa-pen-nib fa-3x mb-2"></i><p>Ilustración</p></div>
+                </div>
+            </section>
+
             <section id="proyectos">
                 <h2 class="mb-5 tech-font"><span class="text-muted">03.</span> <span data-key="nav-projects">Proyectos</span></h2>
-                
                 <div class="row g-4">
                     <div class="col-md-6">
                         <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalSpyware">
-                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=Spyw4re+Cover" alt="Spyw4re">
+                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=Spyw4re" alt="Spyw4re">
                             <h3 class="h5 fw-bold">Videojuegos</h3>
-                            <p class="small opacity-75" data-key="p-game-d">Proyectos desarrollados en Unity.</p>
+                            <p class="small opacity-75">Proyectos desarrollados en Unity.</p>
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="project-card" data-bs-toggle="modal" data-bs-target="#modal3D">
-                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=3D+Models" alt="3D Art">
+                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=3D+Models" alt="3D">
                             <h3 class="h5 fw-bold">3D y Texturizado</h3>
-                            <p class="small opacity-75" data-key="p-3d-d">Modelado, texturizado y renders.</p>
+                            <p class="small opacity-75">Modelado, texturizado y renders.</p>
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalArt">
-                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=Illustration+Art" alt="Ilustración">
+                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=Illustration" alt="Art">
                             <h3 class="h5 fw-bold">Ilustración</h3>
-                            <p class="small opacity-75" data-key="p-art-d">Arte digital y concept art.</p>
+                            <p class="small opacity-75">Arte digital y concept art.</p>
                         </div>
                     </div>
-
                     <div class="col-md-6">
-                        <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalMarketing">
-                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=Marketing+Design" alt="Marketing">
+                        <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalWeb">
+                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=Web+Design" alt="Web">
                             <h3 class="h5 fw-bold">Web & Digital Marketing</h3>
-                            <p class="small opacity-75" data-key="p-mkt-d">Diseño web y estrategias digitales.</p>
+                            <p class="small opacity-75">Diseño web y estrategias digitales.</p>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contacto" style="border:none;">
+                <h2 class="mb-5 tech-font"><span class="text-muted">04.</span> <span data-key="nav-contact">Contacto</span></h2>
+                <div class="row g-4 text-center">
+                    <div class="col-md-3">
+                        <a href="mailto:tuemail@gmail.com" class="contact-box">
+                            <i class="fa-solid fa-envelope fa-2x mb-3"></i>
+                            <h6 class="fw-bold">Gmail</h6>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="https://linkedin.com/in/tuperfil" target="_blank" class="contact-box">
+                            <i class="fa-brands fa-linkedin fa-2x mb-3"></i>
+                            <h6 class="fw-bold">LinkedIn</h6>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="https://angelasdiaz.itch.io" target="_blank" class="contact-box">
+                            <i class="fa-brands fa-itch-io fa-2x mb-3"></i>
+                            <h6 class="fw-bold">Itch.io</h6>
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="https://instagram.com/deex.ddv" target="_blank" class="contact-box">
+                            <i class="fa-brands fa-instagram fa-2x mb-3"></i>
+                            <h6 class="fw-bold">Instagram</h6>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -193,18 +262,73 @@
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title h5 tech-font">CURRICULUM</h4>
+                        <h4 class="modal-title h6 tech-font">DETALLES DEL PROYECTO</h4>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center p-4">
                         <img src="https://via.placeholder.com/700x400/2b064d/ffffff?text=Spyw4re+Preview" class="img-fluid rounded mb-4" alt="Preview">
                         <h2 class="h4 mb-3">Spyw4re</h2>
-                        <p class="opacity-75 mb-4">Spyw4re es un videojuego de infiltración desarrollado en Unity donde el jugador debe hackear sistemas críticos sin ser detectado. Un reto de puzzles y sigilo.</p>
+                        <p class="opacity-75 mb-4">Un juego de sigilo y puzzles desarrollado íntegramente en Unity. El jugador debe navegar por una red informática superando sistemas de seguridad.</p>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn-download">
-                            Descargar <em>Spyw4re</em>
-                        </button>
+                        <button class="btn-more">Ver más sobre <em>Spyw4re</em></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modal3D" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title h6 tech-font">DETALLES DEL PROYECTO</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center p-4">
+                        <img src="https://via.placeholder.com/700x400/2b064d/ffffff?text=3D+Asset+Preview" class="img-fluid rounded mb-4" alt="3D">
+                        <h2 class="h4 mb-3">Modelado 3D</h2>
+                        <p class="opacity-75 mb-4">Muestra de modelos realizados en Blender y texturizados en Substance Painter, enfocados en assets para videojuegos.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-more">Ver más sobre <em>Modelado 3D</em></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalArt" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title h6 tech-font">DETALLES DEL PROYECTO</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center p-4">
+                        <img src="https://via.placeholder.com/700x400/2b064d/ffffff?text=Illustration+Preview" class="img-fluid rounded mb-4" alt="Art">
+                        <h2 class="h4 mb-3">Ilustración Digital</h2>
+                        <p class="opacity-75 mb-4">Concept art y piezas digitales explorando diferentes estilos visuales y paletas de colores.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-more">Ver más sobre <em>Ilustración</em></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalWeb" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title h6 tech-font">DETALLES DEL PROYECTO</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center p-4">
+                        <img src="https://via.placeholder.com/700x400/2b064d/ffffff?text=Web+Design+Preview" class="img-fluid rounded mb-4" alt="Web">
+                        <h2 class="h4 mb-3">Diseño Web</h2>
+                        <p class="opacity-75 mb-4">Estrategias de marketing digital y diseño de interfaces modernas y funcionales.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-more">Ver más sobre <em>Diseño Web</em></button>
                     </div>
                 </div>
             </div>
@@ -217,7 +341,7 @@
             }
 
             function setLanguage(lang) {
-                // (Misma lógica de traducción que antes)
+                // Lógica de traducción similar a la anterior
                 document.getElementById('btn-es').classList.toggle('active', lang === 'es');
                 document.getElementById('btn-en').classList.toggle('active', lang === 'en');
             }
