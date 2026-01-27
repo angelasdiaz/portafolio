@@ -57,15 +57,7 @@
             .nav-link-custom i { margin-right: 15px; width: 20px; text-align: center; }
             .nav-link-custom:hover { color: var(--accent); }
 
-            .collapse-menu { padding-left: 45px; margin-bottom: 10px; display: none; }
-            .collapse-menu.show { display: block; }
-            .collapse-menu a, .collapse-menu span { 
-                display: block; padding: 5px 0; font-size: 0.85rem; 
-                color: var(--text-main); opacity: 0.6; text-decoration: none; cursor: pointer;
-            }
-            .collapse-menu a:hover, .collapse-menu span:hover, .collapse-menu span.active { opacity: 1; color: var(--accent); }
-
-            /* --- Secciones --- */
+            /* --- Secciones con mayor espacio --- */
             .main-content { margin-left: 260px; }
             section { padding: 120px 40px; border-bottom: 1px solid var(--border); }
             section:nth-child(even) { background-color: var(--bg-alt); }
@@ -76,41 +68,61 @@
             }
             .profile-img { width: 150px; height: 150px; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); }
 
-            /* --- Proyectos Grid 2x2 --- */
-            .project-card {
+            /* --- Estilo Polaroid para Proyectos --- */
+            .polaroid-container {
+                position: relative;
+                height: 550px;
                 background-color: var(--card-bg);
-                border: 1px solid var(--border);
-                border-radius: 15px;
-                padding: 20px;
-                cursor: pointer;
-                transition: 0.3s;
-                height: 100%;
-            }
-            .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-            .project-card img { border-radius: 10px; margin-bottom: 15px; width: 100%; height: 180px; object-fit: cover; }
-
-            /* --- Estilo Modales --- */
-            .modal-content {
-                background-color: #0a0a0a;
-                border: 1px solid var(--border);
                 border-radius: 20px;
+                overflow: hidden;
+                border: 1px solid var(--border);
+            }
+            .polaroid {
+                background: #fff;
+                padding: 15px 15px 40px 15px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+                display: inline-block;
+                position: absolute;
+                transition: transform 0.3s ease;
+                cursor: pointer;
+            }
+            .polaroid img { width: 250px; height: 180px; object-fit: cover; }
+            .polaroid p { color: #333; font-family: 'JetBrains Mono'; font-size: 0.75rem; margin-top: 10px; font-weight: bold; }
+            
+            /* Posicionamiento basado en tu imagen Games.png */
+            .p-spy { top: 60px; left: 60px; transform: rotate(-6deg); }
+            .p-cat { top: 40px; right: 100px; transform: rotate(4deg); }
+            .p-miou { bottom: 60px; left: 35%; transform: rotate(2deg); z-index: 2; }
+            
+            .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 10; }
+            .tape {
+                position: absolute; top: -15px; left: 30%; width: 100px; height: 30px;
+                background-color: rgba(255,255,255,0.3); backdrop-filter: blur(2px); transform: rotate(-2deg);
+            }
+
+            /* --- Estilo Modales (Ventana Emergente) --- */
+            .modal-content {
+                background-color: #000;
+                border: 1px solid var(--border);
+                border-radius: 25px;
                 color: white;
+                padding: 15px;
             }
             .modal-header { border-bottom: 1px solid #222; }
             .modal-footer { border-top: 1px solid #222; justify-content: center; }
-            .btn-close-white { filter: invert(1); opacity: 1; }
+            .btn-close-white { filter: invert(1); }
             
-            .btn-more {
-                border: 1px solid white;
+            .btn-oval {
+                border: 2px solid #fff;
                 background: transparent;
-                color: white;
-                padding: 10px 25px;
+                color: #fff;
                 border-radius: 50px;
+                padding: 10px 30px;
                 transition: 0.3s;
-                font-size: 0.9rem;
+                text-decoration: none;
+                display: inline-block;
             }
-            .btn-more:hover { background-color: white; color: black; }
-            .btn-more em { font-style: italic; margin-left: 10px; font-weight: bold; }
+            .btn-oval:hover { background: #fff; color: #000; }
 
             /* --- Contacto --- */
             .contact-box {
@@ -122,41 +134,28 @@
             @media (max-width: 992px) {
                 .sidebar { width: 100%; height: auto; position: relative; border-right: none; }
                 .main-content { margin-left: 0; }
+                .polaroid-container { height: auto; padding-bottom: 50px; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+                .polaroid { position: relative; top: 0; left: 0; right: 0; transform: rotate(0); }
             }
         </style>
     </head>
     <body data-theme="dark">
 
         <nav class="sidebar">
-            <a href="#inicio" class="nav-link-custom"><i class="fa-solid fa-house"></i> <span data-key="nav-home">Inicio</span></a>
-            <a href="#sobre-mi" class="nav-link-custom"><i class="fa-solid fa-user"></i> <span data-key="nav-about">Sobre Mí</span></a>
-            <a href="#habilidades" class="nav-link-custom"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-key="nav-skills">Habilidades</span></a>
-            <a href="#proyectos" class="nav-link-custom"><i class="fa-solid fa-heart"></i> <span data-key="nav-projects">Proyectos</span></a>
-            <a href="#contacto" class="nav-link-custom"><i class="fa-solid fa-envelope"></i> <span data-key="nav-contact">Contacto</span></a>
+            <a href="#inicio" class="nav-link-custom"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
+            <a href="#sobre-mi" class="nav-link-custom"><i class="fa-solid fa-user"></i> <span>Sobre Mí</span></a>
+            <a href="#habilidades" class="nav-link-custom"><i class="fa-solid fa-wand-magic-sparkles"></i> <span>Habilidades</span></a>
+            <a href="#proyectos" class="nav-link-custom"><i class="fa-solid fa-heart"></i> <span>Proyectos</span></a>
+            <a href="#contacto" class="nav-link-custom"><i class="fa-solid fa-envelope"></i> <span>Contacto</span></a>
 
             <div class="nav-item">
-                <button class="nav-link-custom" onclick="toggleMenu('menu-cv')">
-                    <i class="fa-solid fa-briefcase"></i> <span data-key="nav-cv">Curriculum</span>
-                    <i class="fa-solid fa-chevron-down ms-auto small"></i>
+                <button class="nav-link-custom" data-bs-toggle="modal" data-bs-target="#modalCV">
+                    <i class="fa-solid fa-briefcase"></i> <span>Curriculum</span>
                 </button>
-                <div id="menu-cv" class="collapse-menu">
-                    <a href="assets/cv-es.pdf" target="_blank">Español</a>
-                    <a href="assets/cv-en.pdf" target="_blank">English</a>
-                </div>
             </div>
 
-            <div class="nav-item" onclick="toggleTheme()">
-                <div class="nav-link-custom"><i id="theme-icon" class="fa-solid fa-sun"></i> <span id="theme-text" data-key="theme-light">Modo Claro</span></div>
-            </div>
-
-            <div class="mt-auto pt-4 border-top border-secondary">
-                <button class="nav-link-custom" onclick="toggleMenu('menu-lang')">
-                    <i class="fa-solid fa-language"></i> <span data-key="nav-lang">Idioma</span>
-                </button>
-                <div id="menu-lang" class="collapse-menu show">
-                    <span onclick="setLanguage('es')" id="btn-es" class="active">Español</span>
-                    <span onclick="setLanguage('en')" id="btn-en">English</span>
-                </div>
+            <div class="mt-auto">
+                <div class="nav-link-custom" style="cursor: default;"><i class="fa-solid fa-language"></i> <span>Español</span></div>
             </div>
         </nav>
 
@@ -165,13 +164,13 @@
                 <header class="custom-header">
                     <img class="img-fluid rounded-circle mb-4 profile-img" src="assets/25037.jpg" alt="Angela" />
                     <h1 class="display-5 fw-bold text-white">Ángela Sánchez Díaz</h1>
-                    <p class="fs-4 fw-light opacity-75 tech-font text-white" data-key="header-subtitle">Diseño y Desarrollo de Videojuegos</p>
+                    <p class="fs-4 fw-light opacity-75 tech-font text-white">Diseño y Desarrollo de Videojuegos</p>
                 </header>
             </section>
 
             <section id="sobre-mi">
-                <h2 class="mb-5 tech-font"><span class="text-muted">01.</span> <span data-key="nav-about">Sobre Mí</span></h2>
-                <div class="lead" style="text-align: justify;" data-key="about-content">
+                <h2 class="mb-5 tech-font"><span class="text-muted">01.</span> Sobre Mí</h2>
+                <div class="lead text-justify" data-key="about-content">
                     <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
                     <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
                     <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales. Mi objetivo es seguir creciendo profesionalmente y aportar mi granito de arena a proyectos que logren sorprender y emocionar.</p>
@@ -180,7 +179,7 @@
             </section>
 
             <section id="habilidades">
-                <h2 class="mb-5 tech-font"><span class="text-muted">02.</span> <span data-key="nav-skills">Habilidades</span></h2>
+                <h2 class="mb-5 tech-font"><span class="text-muted">02.</span> Habilidades</h2>
                 <div class="row g-5 text-center">
                     <div class="col-6 col-md-3"><i class="fa-brands fa-unity fa-3x mb-2"></i><p>Unity</p></div>
                     <div class="col-6 col-md-3"><i class="fa-solid fa-cube fa-3x mb-2"></i><p>3D Modeling</p></div>
@@ -190,46 +189,33 @@
                     <div class="col-6 col-md-3"><i class="fa-solid fa-window-restore fa-3x mb-2"></i><p>UI/UX Design</p></div>
                     <div class="col-6 col-md-3"><i class="fa-solid fa-bezier-curve fa-3x mb-2"></i><p>Diseño Gráfico</p></div>
                     <div class="col-6 col-md-3"><i class="fa-brands fa-html5 fa-3x mb-2"></i><p>Web Design</p></div>
-                    <div class="col-6 col-md-4 offset-md-4"><i class="fa-solid fa-pen-nib fa-3x mb-2"></i><p>Ilustración</p></div>
                 </div>
             </section>
 
             <section id="proyectos">
-                <h2 class="mb-5 tech-font"><span class="text-muted">03.</span> <span data-key="nav-projects">Proyectos</span></h2>
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalSpyware">
-                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=Videojuegos" alt="Game">
-                            <h3 class="h5 fw-bold">Videojuegos</h3>
-                            <p class="small opacity-75">Proyectos desarrollados en Unity.</p>
-                        </div>
+                <h2 class="mb-5 tech-font"><span class="text-muted">03.</span> Proyectos</h2>
+                <div class="polaroid-container">
+                    <div class="polaroid p-spy" data-bs-toggle="modal" data-bs-target="#modalSpyware">
+                        <div class="tape"></div>
+                        <img src="assets/spyware_thumb.jpg" alt="Spyw4re">
+                        <p>Game Jam Project</p>
                     </div>
-                    <div class="col-md-6">
-                        <div class="project-card" data-bs-toggle="modal" data-bs-target="#modal3D">
-                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=3D+Art" alt="3D">
-                            <h3 class="h5 fw-bold">3D y Texturizado</h3>
-                            <p class="small opacity-75">Modelado, texturizado y renders.</p>
-                        </div>
+                    
+                    <div class="polaroid p-cat" data-bs-toggle="modal" data-bs-target="#modalProject">
+                        <div class="tape"></div>
+                        <img src="assets/cat_thumb.jpg" alt="Catpuccinos">
+                        <p>Game Project</p>
                     </div>
-                    <div class="col-md-6">
-                        <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalArt">
-                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=Illustration" alt="Art">
-                            <h3 class="h5 fw-bold">Ilustración</h3>
-                            <p class="small opacity-75">Arte digital y concept art.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalWeb">
-                            <img src="https://via.placeholder.com/600x400/2b064d/ffffff?text=Web+Design" alt="Web">
-                            <h3 class="h5 fw-bold">Web & Digital Marketing</h3>
-                            <p class="small opacity-75">Diseño web y estrategias digitales.</p>
-                        </div>
+
+                    <div class="polaroid p-miou" data-bs-toggle="modal" data-bs-target="#modalProject">
+                        <img src="assets/miou_thumb.jpg" alt="MiouPet">
+                        <p>Mobile App Game</p>
                     </div>
                 </div>
             </section>
 
             <section id="contacto" style="border:none;">
-                <h2 class="mb-5 tech-font"><span class="text-muted">04.</span> <span data-key="nav-contact">Contacto</span></h2>
+                <h2 class="mb-5 tech-font"><span class="text-muted">04.</span> Contacto</h2>
                 <div class="row g-4 text-center">
                     <div class="col-md-3">
                         <a href="mailto:angelasanchezd04@gmail.com" class="contact-box">
@@ -259,94 +245,40 @@
             </section>
         </div>
 
-        <div class="modal fade" id="modalSpyware" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="modalCV" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content text-center">
+                    <div class="modal-header border-0">
+                        <h2 class="modal-title w-100 tech-font">CURRICULUM</h2>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body d-flex justify-content-center gap-3 py-4">
+                        <a href="assets/cv-en.pdf" class="btn-oval">English</a>
+                        <a href="assets/cv-es.pdf" class="btn-oval">Español</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalSpyware" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title h6 tech-font">CURRICULUM</h4>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h4 class="modal-title h6 tech-font">DETALLES</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body text-center p-4">
-                        <img src="https://via.placeholder.com/700x400/2b064d/ffffff?text=Spyw4re+Preview" class="img-fluid rounded mb-4">
+                        <img src="assets/spyware_large.jpg" class="img-fluid rounded mb-4" alt="Spyw4re">
                         <h2 class="h4 mb-3">Spyw4re</h2>
-                        <p class="opacity-75">Videojuego de sigilo desarrollado en Unity.</p>
+                        <p class="opacity-75">Un juego de sigilo y puzzles desarrollado en Unity para una Game Jam.</p>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn-more">Ver más sobre <em>Spyw4re</em></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="modal fade" id="modal3D" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title h6 tech-font">CURRICULUM</h4>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center p-4">
-                        <img src="https://via.placeholder.com/700x400/2b064d/ffffff?text=3D+Models+Preview" class="img-fluid rounded mb-4">
-                        <h2 class="h4 mb-3">3D y Texturizado</h2>
-                        <p class="opacity-75">Modelado, texturizado y renders realizados en Blender y Maya.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn-more">Ver más sobre <em>3D y Texturizado</em></button>
+                        <a href="#" class="btn-oval">Descargar <span style="font-style: italic; font-weight: 800; margin-left: 8px;">Spyw4re</span></a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="modal fade" id="modalArt" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title h6 tech-font">CURRICULUM</h4>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center p-4">
-                        <img src="https://via.placeholder.com/700x400/2b064d/ffffff?text=Art+Preview" class="img-fluid rounded mb-4">
-                        <h2 class="h4 mb-3">Ilustración</h2>
-                        <p class="opacity-75">Arte digital y concept art enfocado en el desarrollo visual de videojuegos.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn-more">Ver más sobre <em>Ilustración</em></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="modalWeb" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title h6 tech-font">CURRICULUM</h4>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center p-4">
-                        <img src="https://via.placeholder.com/700x400/2b064d/ffffff?text=Marketing+Preview" class="img-fluid rounded mb-4">
-                        <h2 class="h4 mb-3">Web & Digital Marketing</h2>
-                        <p class="opacity-75">Diseño de interfaces web y estrategias para presencia digital.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn-more">Ver más sobre <em>Web & Marketing</em></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            function toggleMenu(id) {
-                document.getElementById(id).classList.toggle('show');
-            }
-            function setLanguage(lang) {
-                // (Misma lógica de traducción)
-            }
-            function toggleTheme() {
-                const b = document.body;
-                b.setAttribute('data-theme', b.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-            }
-        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
