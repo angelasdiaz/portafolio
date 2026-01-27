@@ -21,21 +21,10 @@
             --border: #222;
         }
 
-        [data-theme="light"] {
-            --bg-main: #ffffff;
-            --bg-alt: #f8f9fa;
-            --text-main: #000000;
-            --sidebar-bg: #ffffff;
-            --accent: #2b064d;
-            --card-bg: #ffffff;
-            --border: #dee2e6;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-main);
             color: var(--text-main);
-            transition: all 0.3s ease;
             margin: 0;
         }
 
@@ -60,7 +49,7 @@
         .collapse-menu { padding-left: 45px; margin-bottom: 10px; display: none; }
         .collapse-menu.show { display: block; }
 
-        /* --- Contenido Principal --- */
+        /* --- Main Content --- */
         .main-content { margin-left: 260px; }
         section { padding: 120px 40px; border-bottom: 1px solid var(--border); }
         section:nth-child(even) { background-color: var(--bg-alt); }
@@ -70,7 +59,6 @@
         }
         .profile-img { width: 150px; height: 150px; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); }
 
-        /* --- Tarjetas de Categoría --- */
         .project-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
@@ -83,7 +71,6 @@
         .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .project-card img { border-radius: 10px; margin-bottom: 15px; width: 100%; height: 200px; object-fit: cover; }
 
-        /* --- Estilo Polaroid dentro del Modal --- */
         .polaroid-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -96,7 +83,6 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             transition: transform 0.3s;
             cursor: pointer;
-            text-decoration: none;
             position: relative;
         }
         .polaroid:hover { transform: rotate(0deg) scale(1.05); z-index: 5; }
@@ -108,7 +94,6 @@
             background-color: rgba(255,255,255,0.3); backdrop-filter: blur(2px); transform: rotate(-2deg);
         }
 
-        /* --- Modales Estilizados --- */
         .modal-content { background-color: #000; border: 1px solid var(--border); border-radius: 25px; color: white; padding: 15px; }
         .modal-header { border-bottom: 1px solid #222; }
         .btn-close-white { filter: invert(1); }
@@ -119,7 +104,6 @@
         }
         .btn-oval:hover { background: #fff; color: #000; }
 
-        /* --- Contacto --- */
         .contact-box {
             padding: 30px; border: 1px solid var(--border); border-radius: 15px;
             transition: 0.3s; text-decoration: none; color: inherit; display: block;
@@ -165,25 +149,8 @@
         <section id="sobre-mi">
             <h2 class="mb-5 tech-font"><span class="text-muted">01.</span> Sobre Mí</h2>
             <div class="lead" style="text-align: justify;">
-                <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
-                <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
-                <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales. Mi objetivo es seguir creciendo profesionalmente y aportar mi granito de arena a proyectos que logren sorprender y emocionar.</p>
+                <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos...</p>
                 <p class="fw-bold">¡Si buscas a alguien con ganas e ilusión, échale un ojo a mi trabajo!</p>
-            </div>
-        </section>
-
-        <section id="habilidades">
-            <h2 class="mb-5 tech-font"><span class="text-muted">02.</span> Habilidades</h2>
-            <div class="row g-5 text-center">
-                <div class="col-6 col-md-3"><i class="fa-brands fa-unity fa-3x mb-2"></i><p>Unity</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-cube fa-3x mb-2"></i><p>3D Modeling</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-paintbrush fa-3x mb-2"></i><p>Texturing</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-person-walking fa-3x mb-2"></i><p>Animación</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-video fa-3x mb-2"></i><p>Producción de Vídeo</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-window-restore fa-3x mb-2"></i><p>UI/UX Design</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-bezier-curve fa-3x mb-2"></i><p>Diseño Gráfico</p></div>
-                <div class="col-6 col-md-3"><i class="fa-brands fa-html5 fa-3x mb-2"></i><p>Web Design</p></div>
-                <div class="col-12 mt-4"><i class="fa-solid fa-pen-nib fa-3x mb-2"></i><p>Ilustración</p></div>
             </div>
         </section>
 
@@ -197,28 +164,7 @@
                         <p class="small opacity-75">Haz clic para ver mis proyectos de juegos.</p>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="project-card">
-                        <img src="https://via.placeholder.com/600x400/222/fff?text=3D+Art" alt="3D">
-                        <h3 class="h5 fw-bold">3D y Texturizado</h3>
-                        <p class="small opacity-75">Modelado, texturizado y renders.</p>
-                    </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="project-card">
-                        <img src="https://via.placeholder.com/600x400/222/fff?text=Illustration" alt="Ilustración">
-                        <h3 class="h5 fw-bold">Ilustración</h3>
-                        <p class="small opacity-75">Arte digital y concept art.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="project-card">
-                        <img src="https://via.placeholder.com/600x400/222/fff?text=Web+Design" alt="Web">
-                        <h3 class="h5 fw-bold">Web & Digital Marketing</h3>
-                        <p class="small opacity-75">Diseño web y estrategias digitales.</p>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <section id="contacto" style="border:none;">
@@ -234,18 +180,6 @@
                     <a href="https://www.linkedin.com/in/angela-sanchez-53388a3a8/" target="_blank" class="contact-box">
                         <i class="fa-brands fa-linkedin fa-2x mb-3"></i>
                         <h6 class="fw-bold">LinkedIn</h6>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://angelasdiaz.itch.io" target="_blank" class="contact-box">
-                        <i class="fa-brands fa-itch-io fa-2x mb-3"></i>
-                        <h6 class="fw-bold">Itch.io</h6>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://instagram.com/deex.ddv" target="_blank" class="contact-box">
-                        <i class="fa-brands fa-instagram fa-2x mb-3"></i>
-                        <h6 class="fw-bold">Instagram</h6>
                     </a>
                 </div>
             </div>
@@ -277,72 +211,6 @@
                             <p>Mobile App Game</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalCV" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-center">
-                <div class="modal-header border-0">
-                    <h2 class="modal-title w-100 tech-font">CURRICULUM</h2>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body d-flex justify-content-center gap-3 py-4">
-                    <a href="cv-en.pdf" class="btn-oval" target="_blank">English</a>
-                    <a href="cv-es.pdf" class="btn-oval" target="_blank">Español</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalSpyware" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content text-center">
-                <div class="modal-header border-0">
-                    <h4 class="modal-title w-100 tech-font">CURRICULUM</h4>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <img src="spyw4re.png" class="img-fluid rounded mb-4">
-                    <h2 class="h4 mb-3">Spyw4re</h2>
-                    <p class="opacity-75">Un juego de sigilo y hackeo desarrollado en Unity.</p>
-                    <a href="#" class="btn-oval mt-3">Descargar <em>Spyw4re</em></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalCat" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content text-center">
-                <div class="modal-header border-0">
-                    <h4 class="modal-title w-100 tech-font">CURRICULUM</h4>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <img src="catpuccino.png" class="img-fluid rounded mb-4">
-                    <h2 class="h4 mb-3">Catpuccinos</h2>
-                    <p class="opacity-75">Simulador de cafetería felina.</p>
-                    <a href="#" class="btn-oval mt-3">Descargar <em>Catpuccinos</em></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalMiau" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content text-center">
-                <div class="modal-header border-0">
-                    <h4 class="modal-title w-100 tech-font">CURRICULUM</h4>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <img src="miaupet.png" class="img-fluid rounded mb-4">
-                    <h2 class="h4 mb-3">Miaupet</h2>
-                    <p class="opacity-75">Cuidado de mascotas virtuales en dispositivos móviles.</p>
-                    <a href="#" class="btn-oval mt-3">Descargar <em>Miaupet</em></a>
                 </div>
             </div>
         </div>
