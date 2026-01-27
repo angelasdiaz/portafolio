@@ -21,21 +21,10 @@
                 --border: #222;
             }
 
-            [data-theme="light"] {
-                --bg-main: #ffffff;
-                --bg-alt: #f8f9fa;
-                --text-main: #000000;
-                --sidebar-bg: #ffffff;
-                --accent: #2b064d;
-                --card-bg: #ffffff;
-                --border: #dee2e6;
-            }
-
             body {
                 font-family: 'Inter', sans-serif;
                 background-color: var(--bg-main);
                 color: var(--text-main);
-                transition: all 0.3s ease;
                 margin: 0;
             }
 
@@ -57,89 +46,74 @@
             .nav-link-custom i { margin-right: 15px; width: 20px; text-align: center; }
             .nav-link-custom:hover { color: var(--accent); }
 
-            /* --- Secciones con mayor espacio --- */
+            .collapse-menu { padding-left: 45px; margin-bottom: 10px; display: none; }
+            .collapse-menu.show { display: block; }
+
+            /* --- Main Content --- */
             .main-content { margin-left: 260px; }
             section { padding: 120px 40px; border-bottom: 1px solid var(--border); }
             section:nth-child(even) { background-color: var(--bg-alt); }
 
             .custom-header { 
-                background-color: #2b064d; border-radius: 24px; padding: 80px 20px; 
-                color: white; text-align: center;
+                background-color: #2b064d; border-radius: 24px; padding: 80px 20px; color: white; text-align: center;
             }
             .profile-img { width: 150px; height: 150px; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); }
 
-            /* --- Estilo Polaroid para Proyectos --- */
-            .polaroid-container {
-                position: relative;
-                height: 550px;
+            /* --- Estilo Proyectos (Categorías Principales) --- */
+            .project-card {
                 background-color: var(--card-bg);
-                border-radius: 20px;
-                overflow: hidden;
                 border: 1px solid var(--border);
-            }
-            .polaroid {
-                background: #fff;
-                padding: 15px 15px 40px 15px;
-                box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-                display: inline-block;
-                position: absolute;
-                transition: transform 0.3s ease;
+                border-radius: 15px;
+                padding: 20px;
                 cursor: pointer;
+                transition: 0.3s;
+                height: 100%;
             }
-            .polaroid img { width: 250px; height: 180px; object-fit: cover; }
-            .polaroid p { color: #333; font-family: 'JetBrains Mono'; font-size: 0.75rem; margin-top: 10px; font-weight: bold; }
-            
-            /* Posicionamiento basado en tu imagen Games.png */
-            .p-spy { top: 60px; left: 60px; transform: rotate(-6deg); }
-            .p-cat { top: 40px; right: 100px; transform: rotate(4deg); }
-            .p-miou { bottom: 60px; left: 35%; transform: rotate(2deg); z-index: 2; }
-            
-            .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 10; }
-            .tape {
-                position: absolute; top: -15px; left: 30%; width: 100px; height: 30px;
-                background-color: rgba(255,255,255,0.3); backdrop-filter: blur(2px); transform: rotate(-2deg);
-            }
+            .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+            .project-card img { border-radius: 10px; margin-bottom: 15px; width: 100%; height: 200px; object-fit: cover; }
 
-            /* --- Estilo Modales (Ventana Emergente) --- */
-            .modal-content {
-                background-color: #000;
-                border: 1px solid var(--border);
-                border-radius: 25px;
-                color: white;
-                padding: 15px;
-            }
+            /* --- Modales --- */
+            .modal-content { background-color: #000; border: 1px solid var(--border); border-radius: 25px; color: white; padding: 15px; }
             .modal-header { border-bottom: 1px solid #222; }
-            .modal-footer { border-top: 1px solid #222; justify-content: center; }
             .btn-close-white { filter: invert(1); }
             
             .btn-oval {
-                border: 2px solid #fff;
-                background: transparent;
-                color: #fff;
-                border-radius: 50px;
-                padding: 10px 30px;
-                transition: 0.3s;
-                text-decoration: none;
-                display: inline-block;
+                border: 2px solid #fff; background: transparent; color: #fff; border-radius: 50px;
+                padding: 10px 30px; transition: 0.3s; text-decoration: none; display: inline-block;
             }
             .btn-oval:hover { background: #fff; color: #000; }
 
-            /* --- Contacto --- */
-            .contact-box {
-                padding: 30px; border: 1px solid var(--border); border-radius: 15px;
-                transition: 0.3s; text-decoration: none; color: inherit; display: block;
+            /* --- Grid de Polaroids dentro del Modal de Videojuegos --- */
+            .polaroid-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 20px;
             }
-            .contact-box:hover { background-color: var(--accent); color: #fff !important; }
+            .polaroid {
+                background: #fff;
+                padding: 10px 10px 30px 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+                transition: transform 0.3s;
+                cursor: pointer;
+                text-decoration: none;
+            }
+            .polaroid:hover { transform: rotate(0deg) scale(1.05); }
+            .polaroid img { width: 100%; height: 150px; object-fit: cover; }
+            .polaroid p { color: #333; font-family: 'JetBrains Mono'; font-size: 0.7rem; margin: 10px 0 0 0; font-weight: bold; text-align: right; }
+            
+            /* Rotaciones para el efecto visual */
+            .rot-left { transform: rotate(-3deg); }
+            .rot-right { transform: rotate(3deg); }
 
             @media (max-width: 992px) {
                 .sidebar { width: 100%; height: auto; position: relative; border-right: none; }
                 .main-content { margin-left: 0; }
-                .polaroid-container { height: auto; padding-bottom: 50px; display: flex; flex-direction: column; align-items: center; gap: 30px; }
-                .polaroid { position: relative; top: 0; left: 0; right: 0; transform: rotate(0); }
+                .polaroid-grid { grid-template-columns: 1fr; }
             }
         </style>
     </head>
-    <body data-theme="dark">
+    <body>
 
         <nav class="sidebar">
             <a href="#inicio" class="nav-link-custom"><i class="fa-solid fa-house"></i> <span>Inicio</span></a>
@@ -147,15 +121,14 @@
             <a href="#habilidades" class="nav-link-custom"><i class="fa-solid fa-wand-magic-sparkles"></i> <span>Habilidades</span></a>
             <a href="#proyectos" class="nav-link-custom"><i class="fa-solid fa-heart"></i> <span>Proyectos</span></a>
             <a href="#contacto" class="nav-link-custom"><i class="fa-solid fa-envelope"></i> <span>Contacto</span></a>
-
             <div class="nav-item">
-                <button class="nav-link-custom" data-bs-toggle="modal" data-bs-target="#modalCV">
+                <button class="nav-link-custom" onclick="toggleMenu('menu-cv')">
                     <i class="fa-solid fa-briefcase"></i> <span>Curriculum</span>
                 </button>
-            </div>
-
-            <div class="mt-auto">
-                <div class="nav-link-custom" style="cursor: default;"><i class="fa-solid fa-language"></i> <span>Español</span></div>
+                <div id="menu-cv" class="collapse-menu">
+                    <a href="assets/cv-es.pdf" target="_blank">Español</a>
+                    <a href="assets/cv-en.pdf" target="_blank">English</a>
+                </div>
             </div>
         </nav>
 
@@ -170,7 +143,7 @@
 
             <section id="sobre-mi">
                 <h2 class="mb-5 tech-font"><span class="text-muted">01.</span> Sobre Mí</h2>
-                <div class="lead text-justify" data-key="about-content">
+                <div class="lead" style="text-align: justify;">
                     <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
                     <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
                     <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales. Mi objetivo es seguir creciendo profesionalmente y aportar mi granito de arena a proyectos que logren sorprender y emocionar.</p>
@@ -178,44 +151,42 @@
                 </div>
             </section>
 
-            <section id="habilidades">
-                <h2 class="mb-5 tech-font"><span class="text-muted">02.</span> Habilidades</h2>
-                <div class="row g-5 text-center">
-                    <div class="col-6 col-md-3"><i class="fa-brands fa-unity fa-3x mb-2"></i><p>Unity</p></div>
-                    <div class="col-6 col-md-3"><i class="fa-solid fa-cube fa-3x mb-2"></i><p>3D Modeling</p></div>
-                    <div class="col-6 col-md-3"><i class="fa-solid fa-paintbrush fa-3x mb-2"></i><p>Texturing</p></div>
-                    <div class="col-6 col-md-3"><i class="fa-solid fa-person-walking fa-3x mb-2"></i><p>Animación</p></div>
-                    <div class="col-6 col-md-3"><i class="fa-solid fa-video fa-3x mb-2"></i><p>Producción de Vídeo</p></div>
-                    <div class="col-6 col-md-3"><i class="fa-solid fa-window-restore fa-3x mb-2"></i><p>UI/UX Design</p></div>
-                    <div class="col-6 col-md-3"><i class="fa-solid fa-bezier-curve fa-3x mb-2"></i><p>Diseño Gráfico</p></div>
-                    <div class="col-6 col-md-3"><i class="fa-brands fa-html5 fa-3x mb-2"></i><p>Web Design</p></div>
-                </div>
-            </section>
-
             <section id="proyectos">
-                <h2 class="mb-5 tech-font"><span class="text-muted">03.</span> Proyectos</h2>
-                <div class="polaroid-container">
-                    <div class="polaroid p-spy" data-bs-toggle="modal" data-bs-target="#modalSpyware">
-                        <div class="tape"></div>
-                        <img src="assets/spyware_thumb.jpg" alt="Spyw4re">
-                        <p>Game Jam Project</p>
+                <h2 class="mb-5 tech-font"><span class="text-muted">02.</span> Proyectos</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalVideojuegos">
+                            <img src="Games.png" alt="Videojuegos">
+                            <h3 class="h5 fw-bold">Videojuegos</h3>
+                            <p class="small opacity-75">Click para ver mis juegos.</p>
+                        </div>
                     </div>
-                    
-                    <div class="polaroid p-cat" data-bs-toggle="modal" data-bs-target="#modalProject">
-                        <div class="tape"></div>
-                        <img src="assets/cat_thumb.jpg" alt="Catpuccinos">
-                        <p>Game Project</p>
+                    <div class="col-md-6">
+                        <div class="project-card">
+                            <img src="https://via.placeholder.com/600x400/222/fff?text=3D+Art" alt="3D">
+                            <h3 class="h5 fw-bold">3D y Texturizado</h3>
+                            <p class="small opacity-75">Modelado y texturizado.</p>
+                        </div>
                     </div>
-
-                    <div class="polaroid p-miou" data-bs-toggle="modal" data-bs-target="#modalProject">
-                        <img src="assets/miou_thumb.jpg" alt="MiouPet">
-                        <p>Mobile App Game</p>
+                    <div class="col-md-6">
+                        <div class="project-card">
+                            <img src="https://via.placeholder.com/600x400/222/fff?text=Ilustración" alt="Ilustración">
+                            <h3 class="h5 fw-bold">Ilustración</h3>
+                            <p class="small opacity-75">Arte digital.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="project-card">
+                            <img src="https://via.placeholder.com/600x400/222/fff?text=Marketing" alt="Marketing">
+                            <h3 class="h5 fw-bold">Web & Digital Marketing</h3>
+                            <p class="small opacity-75">Estrategia y diseño.</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section id="contacto" style="border:none;">
-                <h2 class="mb-5 tech-font"><span class="text-muted">04.</span> Contacto</h2>
+                <h2 class="mb-5 tech-font"><span class="text-muted">03.</span> Contacto</h2>
                 <div class="row g-4 text-center">
                     <div class="col-md-3">
                         <a href="mailto:angelasanchezd04@gmail.com" class="contact-box">
@@ -245,40 +216,53 @@
             </section>
         </div>
 
-        <div class="modal fade" id="modalCV" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content text-center">
-                    <div class="modal-header border-0">
-                        <h2 class="modal-title w-100 tech-font">CURRICULUM</h2>
+        <div class="modal fade" id="modalVideojuegos" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title h6 tech-font">VIDEOJUEGOS</h4>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="modal-body d-flex justify-content-center gap-3 py-4">
-                        <a href="assets/cv-en.pdf" class="btn-oval">English</a>
-                        <a href="assets/cv-es.pdf" class="btn-oval">Español</a>
+                    <div class="modal-body">
+                        <div class="polaroid-grid">
+                            <div class="polaroid rot-left" data-bs-toggle="modal" data-bs-target="#modalSpyware">
+                                <img src="spyw4re.png" alt="Spyw4re">
+                                <p>Game Jam Project</p>
+                            </div>
+                            <div class="polaroid rot-right" data-bs-toggle="modal" data-bs-target="#modalCat">
+                                <img src="catpuccino.png" alt="Catpuccino">
+                                <p>Game Project</p>
+                            </div>
+                            <div class="polaroid rot-left" data-bs-toggle="modal" data-bs-target="#modalMiau">
+                                <img src="miaupet.png" alt="Miaupet">
+                                <p>Mobile App Game</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="modal fade" id="modalSpyware" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title h6 tech-font">DETALLES</h4>
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content text-center">
+                    <div class="modal-header border-0">
+                        <h4 class="modal-title w-100 tech-font">CURRICULUM</h4>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="modal-body text-center p-4">
-                        <img src="assets/spyware_large.jpg" class="img-fluid rounded mb-4" alt="Spyw4re">
-                        <h2 class="h4 mb-3">Spyw4re</h2>
-                        <p class="opacity-75">Un juego de sigilo y puzzles desarrollado en Unity para una Game Jam.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" class="btn-oval">Descargar <span style="font-style: italic; font-weight: 800; margin-left: 8px;">Spyw4re</span></a>
+                    <div class="modal-body">
+                        <img src="spyw4re.png" class="img-fluid rounded mb-3">
+                        <h2 class="h4">Spyw4re</h2>
+                        <p class="opacity-75">Juego de sigilo e infiltración desarrollado en Unity.</p>
+                        <a href="#" class="btn-oval mt-3">Descargar <em>Spyw4re</em></a>
                     </div>
                 </div>
             </div>
         </div>
 
+        <script>
+            function toggleMenu(id) { document.getElementById(id).classList.toggle('show'); }
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
