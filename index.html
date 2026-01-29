@@ -41,7 +41,7 @@
 
         h1, h2, h3, h4, h5, .tech-font { font-family: 'JetBrains Mono', monospace; }
 
-        /* --- Sidebar --- */
+        /* --- Sidebar Lógica --- */
         .sidebar {
             height: 100vh; width: 260px; position: fixed;
             top: 0; left: 0; background-color: var(--sidebar-bg);
@@ -67,6 +67,10 @@
 
         .collapse-menu { padding-left: 45px; margin-bottom: 10px; display: none; }
         .collapse-menu.show { display: block; }
+        .collapse-menu a, .collapse-menu span { 
+            display: block; padding: 5px 0; font-size: 0.85rem; 
+            color: var(--text-main); opacity: 0.6; text-decoration: none; cursor: pointer;
+        }
 
         /* --- Contenido Principal --- */
         .main-content { margin-left: 260px; }
@@ -77,48 +81,33 @@
         .profile-img { width: 150px; height: 150px; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); }
 
         /* --- Proyectos --- */
-        .project-card { 
-            background-color: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 15px; 
-            padding: 30px; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            height: 100%; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+        .project-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; height: 100%; }
         .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .project-card img { border-radius: 10px; margin-bottom: 15px; width: 100%; height: 200px; object-fit: cover; }
 
-        /* Polaroid Grid (Texto sobre tarjetas blancas) */
         .polaroid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 20px; }
-        .polaroid { 
-            background: #fff; 
-            padding: 20px 20px 40px 20px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
-            position: relative; 
-            transition: 0.3s; 
-            cursor: pointer; 
-            min-height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .polaroid:hover { transform: rotate(0deg) scale(1.05); z-index: 5; }
-        .polaroid span { color: #000; font-weight: bold; font-size: 1.2rem; }
-        .polaroid p { color: #333; font-family: 'JetBrains Mono'; font-size: 0.7rem; margin: 0; position: absolute; bottom: 10px; right: 15px; font-weight: bold; }
-        .tape { position: absolute; top: -10px; left: 35%; width: 60px; height: 20px; background-color: rgba(0,0,0,0.1); backdrop-filter: blur(2px); }
+        .polaroid { background: #fff; padding: 10px 10px 35px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; transition: 0.3s; cursor: pointer; }
+        .polaroid img { width: 100%; height: 160px; object-fit: cover; }
+        .polaroid p { color: #333; font-family: 'JetBrains Mono'; font-size: 0.7rem; margin: 10px 0 0 0; text-align: right; font-weight: bold; }
+        .tape { position: absolute; top: -10px; left: 35%; width: 60px; height: 20px; background-color: rgba(255,255,255,0.3); backdrop-filter: blur(2px); }
 
         /* Modales */
         .modal-content { background-color: #000; border: 1px solid var(--border); border-radius: 25px; color: white; }
         .btn-oval { border: 2px solid #fff; background: transparent; color: #fff; border-radius: 50px; padding: 10px 30px; text-decoration: none; display: inline-block; transition: 0.3s; }
         .btn-oval:hover { background: #fff; color: #000; }
 
+        /* Carousel en modal */
+        #carouselIllustration .carousel-item img {
+            max-height: 500px; /* Ajusta la altura máxima para que las imágenes no sean demasiado grandes */
+            object-fit: contain; /* Para que la imagen se ajuste dentro del contenedor sin recortarse */
+            width: 100%;
+        }
+
         /* Contacto */
         .contact-box { padding: 30px; border: 1px solid var(--border); border-radius: 15px; transition: 0.3s; text-decoration: none; color: inherit; display: block; text-align: center; }
         .contact-box:hover { background-color: var(--accent); color: #fff !important; }
 
+        /* Responsive */
         @media (max-width: 991.98px) and (orientation: portrait) {
             .sidebar { transform: translateX(-100%); width: 260px; }
             .sidebar.active { transform: translateX(0); }
@@ -169,6 +158,7 @@
     <div class="main-content">
         <section id="inicio" style="border:none;">
             <header class="custom-header">
+                <img class="img-fluid rounded-circle mb-4 profile-img" src="assets/25037.jpg" alt="Angela" />
                 <h1 class="display-5 fw-bold text-white">Ángela Sánchez Díaz</h1>
                 <p class="fs-4 fw-light opacity-75 tech-font text-white" data-key="header-subtitle">Diseño y Desarrollo de Videojuegos</p>
             </header>
@@ -176,9 +166,26 @@
 
         <section id="sobre-mi">
             <h2 class="mb-5 tech-font">01. <span data-key="nav-about">Sobre Mí</span></h2>
-            <div class="lead" style="text-align: justify;">
-                <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos...</p>
+            <div class="lead" style="text-align: justify;" data-key="about-content">
+                <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
+                <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
+                <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales.</p>
                 <p class="fw-bold">¡Si buscas a alguien con ganas e ilusión, échale un ojo a mi trabajo!</p>
+            </div>
+        </section>
+
+        <section id="habilidades">
+            <h2 class="mb-5 tech-font">02. <span data-key="nav-skills">Habilidades</span></h2>
+            <div class="row g-5 text-center">
+                <div class="col-6 col-md-3"><i class="fa-brands fa-unity fa-3x mb-2"></i><p>Unity</p></div>
+                <div class="col-6 col-md-3"><i class="fa-solid fa-cube fa-3x mb-2"></i><p>3D Modeling</p></div>
+                <div class="col-6 col-md-3"><i class="fa-solid fa-paintbrush fa-3x mb-2"></i><p>Texturing</p></div>
+                <div class="col-6 col-md-3"><i class="fa-solid fa-person-walking fa-3x mb-2"></i><p>Animación</p></div>
+                <div class="col-6 col-md-3"><i class="fa-solid fa-video fa-3x mb-2"></i><p>Producción de Vídeo</p></div>
+                <div class="col-6 col-md-3"><i class="fa-solid fa-window-restore fa-3x mb-2"></i><p>UI/UX Design</p></div>
+                <div class="col-6 col-md-3"><i class="fa-solid fa-bezier-curve fa-3x mb-2"></i><p>Diseño Gráfico</p></div>
+                <div class="col-6 col-md-3"><i class="fa-brands fa-html5 fa-3x mb-2"></i><p>Web Design</p></div>
+                <div class="col-12 mt-4"><i class="fa-solid fa-pen-nib fa-3x mb-2"></i><p>Ilustración</p></div>
             </div>
         </section>
 
@@ -187,24 +194,28 @@
             <div class="row g-4">
                 <div class="col-md-6">
                     <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalVideojuegos">
+                        <img src="assets/Games.png" alt="Videojuegos">
                         <h3 class="h5 fw-bold">Videojuegos</h3>
                         <p class="small opacity-75">Haz clic para ver mis proyectos de juegos.</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="project-card">
+                        <img src="https://via.placeholder.com/600x400/222/fff?text=3D+Art" alt="3D">
                         <h3 class="h5 fw-bold">3D y Texturizado</h3>
                         <p class="small opacity-75">Modelado, texturizado y renders.</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalIlustracion">
+                        <img src="assets/Illustration.png" alt="Ilustración">
                         <h3 class="h5 fw-bold">Ilustración</h3>
                         <p class="small opacity-75">Arte digital y concept art.</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalMarketing">
+                        <img src="assets/Web.png" alt="Web">
                         <h3 class="h5 fw-bold">Web & Digital Marketing</h3>
                         <p class="small opacity-75">Diseño web y estrategias digitales.</p>
                     </div>
@@ -247,17 +258,17 @@
                     <div class="polaroid-grid">
                         <div class="polaroid" style="transform: rotate(-3deg);" data-bs-toggle="modal" data-bs-target="#modalSpyware">
                             <div class="tape"></div>
-                            <span>Spyw4re</span>
+                            <img src="assets/spyw4re.png" alt="Spyw4re">
                             <p>Game Jam Project</p>
                         </div>
                         <div class="polaroid" style="transform: rotate(3deg);" data-bs-toggle="modal" data-bs-target="#modalCat">
                             <div class="tape"></div>
-                            <span>Catpuccino</span>
+                            <img src="assets/catpuccino.png" alt="Catpuccinos">
                             <p>Game Project</p>
                         </div>
                         <div class="polaroid" style="transform: rotate(-2deg);" data-bs-toggle="modal" data-bs-target="#modalMiau">
                             <div class="tape"></div>
-                            <span>Miaupet</span>
+                            <img src="assets/miaupet.png" alt="Miaupet">
                             <p>Mobile App Game</p>
                         </div>
                     </div>
@@ -271,9 +282,138 @@
             <div class="modal-content text-center">
                 <div class="modal-header border-0"><h4 class="modal-title w-100 tech-font">DETALLES</h4><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
                 <div class="modal-body p-4">
+                    <img src="assets/spyw4re.png" class="img-fluid rounded mb-4">
                     <h2 class="h4">Spyw4re</h2>
-                    <p class="opacity-75">Toma el control de los sistemas de vigilancia como guardia de seguridad. Tu misión es coordinar las cámaras y puntos de acceso para guiar a un paciente hacia la salida.</p>
+                    <p class="opacity-75 text-start">Toma el control de los sistemas de vigilancia como guardia de seguridad. Tu misión es coordinar las cámaras y puntos de acceso para guiar a un paciente hacia la salida antes de que el edificio colapse por completo.</p>
                     <a href="https://botpa.itch.io/spyw4re" target="_blank" class="btn-oval mt-3">Ver más sobre <em>Spyw4re</em></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCat" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content text-center">
+                <div class="modal-header border-0"><h4 class="modal-title w-100 tech-font">DETALLES</h4><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body p-4">
+                    <img src="assets/catpuccino.png" class="img-fluid rounded mb-4">
+                    <h2 class="h4">Catpuccino</h2>
+                    <p class="opacity-75 text-start">Sumérgete en la gestión de una acogedora cafetería temática. Prepara las mejores recetas de café, atiende a tus clientes y expande tu colección de adorables gatos para crear el ambiente perfecto.</p>
+                    <a href="https://mangostudiourjc.itch.io/catpuccino" target="_blank" class="btn-oval mt-3">Ver más sobre <em>Catpuccino</em></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalMiau" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content text-center">
+                <div class="modal-header border-0"><h4 class="modal-title w-100 tech-font">DETALLES</h4><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body p-4">
+                    <img src="assets/miaupet.png" class="img-fluid rounded mb-4">
+                    <h2 class="h4">Miaupet</h2>
+                    <p class="opacity-75 text-start">Tu compañero ideal en formato digital. Cuida, alimenta y juega con tu mascota virtual en esta experiencia interactiva diseñada para crear un vínculo único desde tu dispositivo.</p>
+                    <a href="https://mangostudiourjc.itch.io/mioupet" target="_blank" class="btn-oval mt-3">Ver más sobre <em>Miaupet</em></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalIlustracion" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content text-center">
+                <div class="modal-header border-0">
+                    <h4 class="modal-title w-100 tech-font">ILUSTRACIONES</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <img src="assets/almonacid_fiestas_2021.png" class="img-fluid rounded mb-4">
+                    <h2 class="h4">Portada del cartel de fiestas de Almonacid de Toledo (2021)</h2>
+                    <p class="opacity-75 text-start mb-4">Diseño de la ilustración principal para el cartel de las fiestas patronales de Almonacid de Toledo en 2021, reflejando la tradición y el espíritu festivo local.</p>
+                    
+                    <h5 class="tech-font mt-5 mb-3" style="color: var(--accent);">Galería de Ilustraciones</h5>
+                    <div id="carouselIllustration" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                            <div class="carousel-item">
+                                
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselIllustration" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselIllustration" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalMarketing" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h4 class="modal-title w-100 tech-font text-center">DETALLES</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <img src="assets/Web.png" class="img-fluid rounded mb-4 w-100" style="height: 300px; object-fit: cover;">
+                    <h2 class="h4 mb-4 tech-font text-center">Web & Digital Marketing</h2>
+                    
+                    <div class="mb-4">
+                        <h5 class="tech-font" style="color: var(--accent);">Diseño Institucional</h5>
+                        <p class="opacity-75">En 2024, colaboré con el <strong>Ayuntamiento de Almonacid de Toledo</strong> en la creación de un cartel turístico profesional, diseñando una guía visual de los puntos de referencia clave.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="tech-font" style="color: var(--accent);">Gestión de Marca y Contenido</h5>
+                        <p class="opacity-75">Lideré la estrategia de contenidos para el proyecto ficticio <strong>Mango Studio</strong>, creando material audiovisual específico para Instagram, YouTube y TikTok.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="tech-font" style="color: var(--accent);">Desarrollo Web</h5>
+                        <p class="opacity-75">Desarrollé íntegramente la página web de Mango Studio y este mismo portafolio personal, demostrando habilidades técnicas y de UX/UI.</p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="https://mangostudiosa.github.io/Catpuccino/" target="_blank" class="btn-oval">Ver Web de Mango Studio</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -281,11 +421,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        const translations = {
+            es: { "nav-home": "Inicio", "nav-about": "Sobre Mí", "nav-skills": "Habilidades", "nav-projects": "Proyectos", "nav-contact": "Contacto", "nav-cv": "Curriculum", "nav-lang": "Idioma", "theme-light": "Modo Claro", "theme-dark": "Modo Oscuro", "header-subtitle": "Diseño y Desarrollo de Videojuegos" },
+            en: { "nav-home": "Home", "nav-about": "About Me", "nav-skills": "Skills", "nav-projects": "Projects", "nav-contact": "Contact", "nav-cv": "Resume", "nav-lang": "Language", "theme-light": "Light Mode", "theme-dark": "Dark Mode", "header-subtitle": "Game Design & Development" }
+        };
+
         function setLanguage(lang) {
-            const translations = {
-                es: { "nav-home": "Inicio", "nav-about": "Sobre Mí", "nav-skills": "Habilidades", "nav-projects": "Proyectos", "nav-contact": "Contacto", "nav-cv": "Curriculum", "nav-lang": "Idioma", "theme-light": "Modo Claro", "theme-dark": "Modo Oscuro" },
-                en: { "nav-home": "Home", "nav-about": "About Me", "nav-skills": "Skills", "nav-projects": "Projects", "nav-contact": "Contact", "nav-cv": "Resume", "nav-lang": "Language", "theme-light": "Light Mode", "theme-dark": "Dark Mode" }
-            };
             document.querySelectorAll('[data-key]').forEach(el => {
                 const key = el.getAttribute('data-key');
                 if(translations[lang][key]) el.innerText = translations[lang][key];
@@ -297,7 +438,31 @@
             const isDark = body.getAttribute('data-theme') === 'dark';
             body.setAttribute('data-theme', isDark ? 'light' : 'dark');
             document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+            document.getElementById('theme-text').innerText = isDark ? translations[getCurrentLanguage()]['theme-dark'] : translations[getCurrentLanguage()]['theme-light'];
         }
+
+        function getCurrentLanguage() {
+            return localStorage.getItem('lang') || 'es'; // Default to Spanish
+        }
+
+        // Generate carousel items dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselInner = document.querySelector('#carouselIllustration .carousel-inner');
+            const imageCount = 12; // Número total de imágenes
+            let carouselHTML = '';
+
+            for (let i = 1; i <= imageCount; i++) {
+                const isActive = i === 1 ? ' active' : '';
+                carouselHTML += `
+                    <div class="carousel-item${isActive}">
+                        <img src="assets/ilustracion_${i}.png" class="d-block w-100" alt="Ilustración ${i}">
+                    </div>
+                `;
+            }
+            carouselInner.innerHTML = carouselHTML;
+            setLanguage(getCurrentLanguage()); // Set language on load
+            toggleTheme(); // Set initial theme (will correctly pick up sun/moon)
+        });
     </script>
 </body>
 </html>
