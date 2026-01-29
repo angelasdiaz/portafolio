@@ -16,7 +16,7 @@
             --bg-alt: #0a0a0a;
             --text-main: #ffffff;
             --sidebar-bg: #000000;
-            --accent: #B57EDC; /* Morado tema oscuro */
+            --accent: #B57EDC; 
             --card-bg: #151515;
             --border: #222;
         }
@@ -26,7 +26,7 @@
             --bg-alt: #f8f9fa;
             --text-main: #000000;
             --sidebar-bg: #ffffff;
-            --accent: #2b064d; /* Morado tema claro */
+            --accent: #2b064d;
             --card-bg: #ffffff;
             --border: #dee2e6;
         }
@@ -41,7 +41,7 @@
 
         h1, h2, h3, h4, .tech-font { font-family: 'JetBrains Mono', monospace; }
 
-        /* --- Sidebar Lógica Desktop/Horizontal --- */
+        /* --- Sidebar --- */
         .sidebar {
             height: 100vh; width: 260px; position: fixed;
             top: 0; left: 0; background-color: var(--sidebar-bg);
@@ -50,7 +50,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* Botón hamburguesa (solo visible en móvil vertical) */
         .menu-toggle {
             display: none;
             position: fixed; top: 20px; left: 20px;
@@ -58,7 +57,6 @@
             color: white; border: none; padding: 10px 15px; border-radius: 8px;
         }
 
-        /* --- Estilos de Navegación --- */
         .nav-link-custom {
             padding: 12px 10px; text-decoration: none; font-size: 0.95rem;
             color: var(--text-main); display: flex; align-items: center; transition: 0.3s;
@@ -82,32 +80,33 @@
         .custom-header { background-color: #2b064d; border-radius: 24px; padding: 80px 20px; color: white; text-align: center; }
         .profile-img { width: 150px; height: 150px; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); }
 
-        /* --- Proyectos & Polaroid --- */
+        /* --- Proyectos --- */
         .project-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; height: 100%; }
         .project-card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .project-card img { border-radius: 10px; margin-bottom: 15px; width: 100%; height: 200px; object-fit: cover; }
 
+        /* Estilo Polaroid dentro del Modal de Juegos */
         .polaroid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 20px; }
         .polaroid { background: #fff; padding: 10px 10px 35px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; transition: 0.3s; cursor: pointer; }
         .polaroid img { width: 100%; height: 160px; object-fit: cover; }
-        .polaroid p { color: #333; font-family: 'JetBrains Mono'; font-size: 0.7rem; margin: 10px 0 0 0; text-align: right; }
+        .polaroid p { color: #333; font-family: 'JetBrains Mono'; font-size: 0.7rem; margin: 10px 0 0 0; text-align: right; font-weight: bold; }
         .tape { position: absolute; top: -10px; left: 35%; width: 60px; height: 20px; background-color: rgba(255,255,255,0.3); backdrop-filter: blur(2px); }
 
         /* Modales */
         .modal-content { background-color: #000; border: 1px solid var(--border); border-radius: 25px; color: white; }
-        .btn-oval { border: 2px solid #fff; background: transparent; color: #fff; border-radius: 50px; padding: 10px 30px; text-decoration: none; display: inline-block; }
+        .btn-oval { border: 2px solid #fff; background: transparent; color: #fff; border-radius: 50px; padding: 10px 30px; text-decoration: none; display: inline-block; transition: 0.3s; }
         .btn-oval:hover { background: #fff; color: #000; }
 
         /* Contacto */
         .contact-box { padding: 30px; border: 1px solid var(--border); border-radius: 15px; transition: 0.3s; text-decoration: none; color: inherit; display: block; text-align: center; }
         .contact-box:hover { background-color: var(--accent); color: #fff !important; }
 
-        /* --- RESPONSIVE MOBILE VERTICAL --- */
         @media (max-width: 991.98px) and (orientation: portrait) {
             .sidebar { transform: translateX(-100%); width: 260px; }
             .sidebar.active { transform: translateX(0); }
             .menu-toggle { display: block; }
             .main-content { margin-left: 0; }
+            .polaroid-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -163,7 +162,8 @@
             <div class="lead" style="text-align: justify;" data-key="about-content">
                 <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
                 <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
-                <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales.</p>
+                <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales. Mi objetivo es seguir creciendo profesionalmente y aportar mi granito de arena a proyectos que logren sorprender y emocionar.</p>
+                <p class="fw-bold">¡Si buscas a alguien con ganas e ilusión, échale un ojo a mi trabajo!</p>
             </div>
         </section>
 
@@ -174,15 +174,36 @@
                     <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalVideojuegos">
                         <img src="assets/Games.png" alt="Videojuegos">
                         <h3 class="h5 fw-bold">Videojuegos</h3>
-                        <p class="small opacity-75">Haz clic para ver mis juegos.</p>
+                        <p class="small opacity-75">Haz clic para ver mis proyectos de juegos.</p>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/600x400/222/fff?text=3D+Art" alt="3D">
+                        <h3 class="h5 fw-bold">3D y Texturizado</h3>
+                        <p class="small opacity-75">Modelado, texturizado y renders.</p>
+                    </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/600x400/222/fff?text=Illustration" alt="Ilustración">
+                        <h3 class="h5 fw-bold">Ilustración</h3>
+                        <p class="small opacity-75">Arte digital y concept art.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/600x400/222/fff?text=Web+Design" alt="Web">
+                        <h3 class="h5 fw-bold">Web & Digital Marketing</h3>
+                        <p class="small opacity-75">Diseño web y estrategias digitales.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="contacto">
+        <section id="contacto" style="border:none;">
             <h2 class="mb-5 tech-font">04. <span data-key="nav-contact">Contacto</span></h2>
-            <div class="row g-4">
+            <div class="row g-4 text-center">
                 <div class="col-md-3">
                     <a href="mailto:angelasanchezd04@gmail.com" class="contact-box">
                         <i class="fa-solid fa-envelope fa-2x mb-3"></i><h6>Gmail</h6>
@@ -193,6 +214,16 @@
                         <i class="fa-brands fa-linkedin fa-2x mb-3"></i><h6>LinkedIn</h6>
                     </a>
                 </div>
+                <div class="col-md-3">
+                    <a href="https://angelasdiaz.itch.io" target="_blank" class="contact-box">
+                        <i class="fa-brands fa-itch-io fa-2x mb-3"></i><h6>Itch.io</h6>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a href="https://instagram.com/deex.ddv" target="_blank" class="contact-box">
+                        <i class="fa-brands fa-instagram fa-2x mb-3"></i><h6>Instagram</h6>
+                    </a>
+                </div>
             </div>
         </section>
     </div>
@@ -200,7 +231,10 @@
     <div class="modal fade" id="modalVideojuegos" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header border-0"><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-header border-0">
+                    <h4 class="modal-title h6 tech-font">GALERÍA DE JUEGOS</h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
                 <div class="modal-body">
                     <div class="polaroid-grid">
                         <div class="polaroid" style="transform: rotate(-3deg);" data-bs-toggle="modal" data-bs-target="#modalSpyware">
@@ -213,6 +247,11 @@
                             <img src="assets/catpuccino.png" alt="Catpuccinos">
                             <p>Game Project</p>
                         </div>
+                        <div class="polaroid" style="transform: rotate(-2deg);" data-bs-toggle="modal" data-bs-target="#modalMiau">
+                            <div class="tape"></div>
+                            <img src="assets/miaupet.png" alt="Miaupet">
+                            <p>Mobile App Game</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -222,12 +261,40 @@
     <div class="modal fade" id="modalSpyware" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
-                <div class="modal-header border-0"><h4 class="modal-title w-100 tech-font">CURRICULUM</h4><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-header border-0"><h4 class="modal-title w-100 tech-font">DETALLES</h4><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
                 <div class="modal-body p-4">
                     <img src="assets/spyw4re.png" class="img-fluid rounded mb-4">
                     <h2 class="h4">Spyw4re</h2>
-                    <p class="opacity-75">Hackeo y sigilo en Unity.</p>
-                    <a href="https://botpa.itch.io/spyw4re" target="_blank" class="btn-oval mt-3">Descargar <em>Spyw4re</em></a>
+                    <p class="opacity-75">Toma el control de los sistemas de vigilancia como guardia de seguridad. Tu misión es coordinar las cámaras y puntos de acceso para guiar a un paciente hacia la salida antes de que el edificio colapse por completo.</p>
+                    <a href="#" class="btn-oval mt-3">Ver más sobre <em>Spyw4re</em></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCat" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content text-center">
+                <div class="modal-header border-0"><h4 class="modal-title w-100 tech-font">DETALLES</h4><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body p-4">
+                    <img src="assets/catpuccino.png" class="img-fluid rounded mb-4">
+                    <h2 class="h4">Catpuccino</h2>
+                    <p class="opacity-75">Sumérgete en la gestión de una acogedora cafetería temática. Prepara las mejores recetas de café, atiende a tus clientes y expande tu colección de adorables gatos para crear el ambiente perfecto.</p>
+                    <a href="#" class="btn-oval mt-3">Ver más sobre <em>Catpuccino</em></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalMiau" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content text-center">
+                <div class="modal-header border-0"><h4 class="modal-title w-100 tech-font">DETALLES</h4><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body p-4">
+                    <img src="assets/miaupet.png" class="img-fluid rounded mb-4">
+                    <h2 class="h4">Miaupet</h2>
+                    <p class="opacity-75">Tu compañero ideal en formato digital. Cuida, alimenta y juega con tu mascota virtual en esta experiencia interactiva diseñada para crear un vínculo único desde tu dispositivo.</p>
+                    <a href="#" class="btn-oval mt-3">Ver más sobre <em>Miaupet</em></a>
                 </div>
             </div>
         </div>
@@ -245,15 +312,13 @@
                 const key = el.getAttribute('data-key');
                 if(translations[lang][key]) el.innerText = translations[lang][key];
             });
-            localStorage.setItem('lang', lang);
         }
 
         function toggleTheme() {
             const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            body.setAttribute('data-theme', newTheme);
-            document.getElementById('theme-icon').className = newTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
         }
     </script>
 </body>
