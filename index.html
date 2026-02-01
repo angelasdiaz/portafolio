@@ -98,8 +98,8 @@
 
         /* Carousel en modal */
         #carouselIllustration .carousel-item img {
-            max-height: 500px; /* Ajusta la altura máxima para que las imágenes no sean demasiado grandes */
-            object-fit: contain; /* Para que la imagen se ajuste dentro del contenedor sin recortarse */
+            max-height: 500px; 
+            object-fit: contain; 
             width: 100%;
         }
 
@@ -330,43 +330,7 @@
                     <h5 class="tech-font mt-5 mb-3" style="color: var(--accent);">Galería de Ilustraciones</h5>
                     <div id="carouselIllustration" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                
                             </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                            <div class="carousel-item">
-                                
-                            </div>
-                        </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselIllustration" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
@@ -427,37 +391,44 @@
                 const key = el.getAttribute('data-key');
                 if(translations[lang][key]) el.innerText = translations[lang][key];
             });
+            localStorage.setItem('lang', lang);
         }
 
         function toggleTheme() {
             const body = document.body;
             const isDark = body.getAttribute('data-theme') === 'dark';
-            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-            document.getElementById('theme-icon').className = isDark ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
-            document.getElementById('theme-text').innerText = isDark ? translations[getCurrentLanguage()]['theme-dark'] : translations[getCurrentLanguage()]['theme-light'];
+            const newTheme = isDark ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            
+            document.getElementById('theme-icon').className = newTheme === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+            document.getElementById('theme-text').innerText = newTheme === 'light' ? translations[getCurrentLanguage()]['theme-dark'] : translations[getCurrentLanguage()]['theme-light'];
         }
 
         function getCurrentLanguage() {
-            return localStorage.getItem('lang') || 'es'; // Default to Spanish
+            return localStorage.getItem('lang') || 'es';
         }
 
-        // Generate carousel items dynamically
         document.addEventListener('DOMContentLoaded', function() {
             const carouselInner = document.querySelector('#carouselIllustration .carousel-inner');
-            const imageCount = 12; // Número total de imágenes
+            const imageCount = 16; 
             let carouselHTML = '';
 
             for (let i = 1; i <= imageCount; i++) {
                 const isActive = i === 1 ? ' active' : '';
                 carouselHTML += `
                     <div class="carousel-item${isActive}">
-                        <img src="assets/ilustracion_${i}.png" class="d-block w-100" alt="Ilustración ${i}">
+                        <img src="assets/ilustracion (${i}).PNG" class="d-block w-100" alt="Ilustración ${i}">
                     </div>
                 `;
             }
             carouselInner.innerHTML = carouselHTML;
-            setLanguage(getCurrentLanguage()); // Set language on load
-            toggleTheme(); // Set initial theme (will correctly pick up sun/moon)
+            
+            // Forzar tema oscuro por defecto al cargar
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-icon').className = 'fa-solid fa-sun';
+            document.getElementById('theme-text').innerText = translations[getCurrentLanguage()]['theme-light'];
+            
+            setLanguage(getCurrentLanguage());
         });
     </script>
 </body>
