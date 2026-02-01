@@ -106,10 +106,10 @@
             border-radius: 10px; 
             margin-bottom: 15px; 
             width: 100%; 
-            height: auto;           /* Cambiado de 200px a auto para que no se estire */
-            aspect-ratio: 16 / 9;   /* Fuerza el formato 1280x720 */
-            object-fit: contain;    /* Cambiado de cover a contain para ver la imagen completa */
-            background-color: rgba(0,0,0,0.1); /* Fondo sutil si la imagen no llena el espacio */
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: contain; 
+            background-color: rgba(0,0,0,0.1);
         }
 
         .polaroid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 20px; }
@@ -124,6 +124,8 @@
         
         .btn-oval { border: 2px solid var(--modal-text); background: transparent; color: var(--modal-text); border-radius: 50px; padding: 10px 30px; text-decoration: none; display: inline-block; transition: 0.3s; }
         .btn-oval:hover { background: var(--modal-text); color: var(--modal-bg); }
+
+        .btn-back { background: none; border: none; color: var(--modal-text); font-size: 1.2rem; cursor: pointer; margin-right: 15px; }
 
         /* Carousel en modal */
         #carouselIllustration .carousel-item img {
@@ -308,9 +310,12 @@
     <div class="modal fade" id="modalSpyware" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
-                <div class="modal-header border-0"><h4 class="modal-title w-100 tech-font"></h4><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-back" data-bs-toggle="modal" data-bs-target="#modalVideojuegos"><i class="fa-solid fa-arrow-left"></i> Volver</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
                 <div class="modal-body p-4">
-                    <img src="assets/spyw4re.png" class="img-fluid rounded mb-4">
+                    <img src="assets/spyw4re.png" class="img-fluid rounded mb-4" style="aspect-ratio: 16/9; object-fit: contain;">
                     <h2 class="h4">Spyw4re</h2>
                     <p class="opacity-75 text-start">Toma el control de los sistemas de vigilancia como guardia de seguridad. Tu misión es coordinar las cámaras y puntos de acceso para guiar a un paciente hacia la salida antes de que el edificio colapse por completo.</p>
                     <a href="https://botpa.itch.io/spyw4re" target="_blank" class="btn-oval mt-3">Ver más sobre <em>Spyw4re</em></a>
@@ -322,9 +327,12 @@
     <div class="modal fade" id="modalCat" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
-                <div class="modal-header border-0"><h4 class="modal-title w-100 tech-font"></h4><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-back" data-bs-toggle="modal" data-bs-target="#modalVideojuegos"><i class="fa-solid fa-arrow-left"></i> Volver</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
                 <div class="modal-body p-4">
-                    <img src="assets/catpuccino.png" class="img-fluid rounded mb-4">
+                    <img src="assets/catpuccino.png" class="img-fluid rounded mb-4" style="aspect-ratio: 16/9; object-fit: contain;">
                     <h2 class="h4">Catpuccino</h2>
                     <p class="opacity-75 text-start">Sumérgete en la gestión de una acogedora cafetería. Prepara las mejores recetas de café, atiende a tus clientes y expande tu colección de adorables gatos para crear el ambiente perfecto.</p>
                     <a href="https://mangostudiourjc.itch.io/catpuccino" target="_blank" class="btn-oval mt-3">Ver más sobre <em>Catpuccino</em></a>
@@ -336,9 +344,12 @@
     <div class="modal fade" id="modalMiau" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
-                <div class="modal-header border-0"><h4 class="modal-title w-100 tech-font"></h4><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-back" data-bs-toggle="modal" data-bs-target="#modalVideojuegos"><i class="fa-solid fa-arrow-left"></i> Volver</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
                 <div class="modal-body p-4">
-                    <img src="assets/miaupet.png" class="img-fluid rounded mb-4">
+                    <img src="assets/miaupet.png" class="img-fluid rounded mb-4" style="aspect-ratio: 16/9; object-fit: contain;">
                     <h2 class="h4">Miaupet</h2>
                     <p class="opacity-75 text-start">Tu compañero ideal. Cuida, alimenta y juega con tu mascota virtual.</p>
                     <a href="https://mangostudiourjc.itch.io/mioupet" target="_blank" class="btn-oval mt-3">Ver más sobre <em>Miaupet</em></a>
@@ -364,11 +375,9 @@
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselIllustration" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
                         </button>
                         <button class="carousel-control-next" type="button" data-bs-target="#carouselIllustration" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
                         </button>
                     </div>
                 </div>
@@ -384,36 +393,41 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-4">
-                    
-                        <div class="col-md-4">
-                            <img src="assets/spywareCartel.PNG" class="img-fluid rounded" style="height: 150px; width: 100%; object-fit: cover;">
+                    <div class="mb-5">
+                        <h5 class="tech-font mb-3" style="color: var(--accent);">Diseño Institucional</h5>
+                        <p class="opacity-75 mb-3">En 2024, colaboré con el <strong>Ayuntamiento de Almonacid de Toledo</strong> en la creación de un cartel turístico, diseñando una guía visual de los puntos de referencia clave.</p>
+                        <div class="text-center">
+                            <img src="assets/spywareCartel.PNG" class="img-fluid rounded shadow-sm" style="max-height: 400px; width: auto; object-fit: contain;">
                         </div>
                     </div>
-                    
-                    
-                    <div class="mb-4">
-                        <h5 class="tech-font" style="color: var(--accent);">Diseño Institucional</h5>
-                        <p class="opacity-75">En 2024, colaboré con el <strong>Ayuntamiento de Almonacid de Toledo</strong> en la creación de un cartel turístico, diseñando una guía visual de los puntos de referencia clave.</p>
-                    </div>
 
-                    <div class="mb-4">
-                        <h5 class="tech-font" style="color: var(--accent);">Gestión de Marca y Contenido</h5>
+                    <hr class="opacity-25">
+
+                    <div class="mb-5">
+                        <h5 class="tech-font mb-3" style="color: var(--accent);">Gestión de Marca y Contenido</h5>
                         <p class="opacity-75">Lideré la estrategia de contenidos para el proyecto ficticio <strong>Mango Studio</strong>, creando material audiovisual específico para Instagram, YouTube y TikTok.</p>
                     </div>
 
+                    <hr class="opacity-25">
+
                     <div class="mb-4">
-                        <h5 class="tech-font" style="color: var(--accent);">Desarrollo Web</h5>
-                        <p class="opacity-75">Desarrollé íntegramente la página web de Mango Studio y este mismo portafolio personal, demostrando habilidades técnicas y de UX/UI.</p>
-                            <div class="row g-3 mb-4">
-                            <div class="col-md-4">
-                                <img src="assets/WebMango.png" class="img-fluid rounded" style="height: 150px; width: 100%; object-fit: cover;">
+                        <h5 class="tech-font mb-3" style="color: var(--accent);">Desarrollo Web y Branding</h5>
+                        <p class="opacity-75 mb-3">Desarrollé íntegramente la página web de Mango Studio y este mismo portafolio personal, demostrando habilidades técnicas y de UX/UI.</p>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="bg-dark p-2 rounded">
+                                    <img src="assets/WebMango.png" class="img-fluid rounded" style="aspect-ratio: 16/9; object-fit: cover;">
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                <img src="assets/logos.PNG" class="img-fluid rounded" style="height: 150px; width: 100%; object-fit: cover;">
+                            <div class="col-md-6">
+                                <div class="bg-dark p-2 rounded">
+                                    <img src="assets/logos.PNG" class="img-fluid rounded" style="aspect-ratio: 16/9; object-fit: cover;">
+                                </div>
                             </div>
+                        </div>
                     </div>
 
-                    <div class="text-center mt-4">
+                    <div class="text-center mt-5">
                         <a href="https://mangostudiosa.github.io/Catpuccino/" target="_blank" class="btn-oval">Ver Web de Mango Studio</a>
                     </div>
                 </div>
