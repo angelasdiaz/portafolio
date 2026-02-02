@@ -372,8 +372,7 @@
                     
                     <h5 class="tech-font mt-5 mb-3" style="color: var(--accent);">Galería de Ilustraciones</h5>
                     <div id="carouselIllustration" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                        </div>
+                        <div class="carousel-inner"></div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselIllustration" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         </button>
@@ -395,10 +394,8 @@
                 </div>
                 <div class="modal-body p-4">
                     <p class="opacity-75 text-start mb-4">Trabajos realizados en modelado 3D, enfocados en assets para videojuegos, props y entornos.</p>
-                    
                     <div id="carousel3D" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            </div>
+                        <div class="carousel-inner"></div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carousel3D" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         </button>
@@ -421,38 +418,25 @@
                 <div class="modal-body p-4">
                     <div class="mb-5">
                         <h5 class="tech-font mb-3" style="color: var(--accent);">Diseño Institucional</h5>
-                        <p class="opacity-75 mb-3">En 2024, colaboré con el <strong>Ayuntamiento de Almonacid de Toledo</strong> en la creación de un cartel turístico, diseñando una guía visual de los puntos de referencia clave.</p>
+                        <p class="opacity-75 mb-3">En 2024, colaboré con el <strong>Ayuntamiento de Almonacid de Toledo</strong> en la creación de un cartel turístico.</p>
+                        <h5 class="tech-font mb-3" style="color: var(--accent);">Diseño cartel para Spyw4re Gerrilla 2024</h5>
                         <div class="text-center">
                             <img src="assets/spywareCartel.PNG" class="img-fluid rounded shadow-sm" style="max-height: 400px; width: auto; object-fit: contain;">
                         </div>
                     </div>
-
                     <hr class="opacity-25">
-
                     <div class="mb-5">
                         <h5 class="tech-font mb-3" style="color: var(--accent);">Gestión de Marca y Contenido</h5>
-                        <p class="opacity-75">Lideré la estrategia de contenidos para el proyecto ficticio <strong>Mango Studio</strong>, creando material audiovisual específico para Instagram, YouTube y TikTok.</p>
+                        <p class="opacity-75">Lideré la estrategia de contenidos para el proyecto ficticio <strong>Mango Studio</strong>.</p>
                     </div>
-
                     <hr class="opacity-25">
-
                     <div class="mb-4">
                         <h5 class="tech-font mb-3" style="color: var(--accent);">Desarrollo Web y Branding</h5>
-                        <p class="opacity-75 mb-3">Desarrollé íntegramente la página web de Mango Studio y este mismo portafolio personal, demostrando habilidades técnicas y de UX/UI.</p>
                         <div class="row g-4">
-                            <div class="col-md-6">
-                                <div class="bg-dark p-2 rounded">
-                                    <img src="assets/WebMango.png" class="img-fluid rounded" style="aspect-ratio: 16/9; object-fit: cover;">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="bg-dark p-2 rounded">
-                                    <img src="assets/logos.PNG" class="img-fluid rounded" style="aspect-ratio: 16/9; object-fit: cover;">
-                                </div>
-                            </div>
+                            <div class="col-md-6"><img src="assets/WebMango.png" class="img-fluid rounded"></div>
+                            <div class="col-md-6"><img src="assets/logos.PNG" class="img-fluid rounded"></div>
                         </div>
                     </div>
-
                     <div class="text-center mt-5">
                         <a href="https://mangostudiosa.github.io/Catpuccino/" target="_blank" class="btn-oval">Ver Web de Mango Studio</a>
                     </div>
@@ -481,53 +465,38 @@
             const isDark = body.getAttribute('data-theme') === 'dark';
             const newTheme = isDark ? 'light' : 'dark';
             body.setAttribute('data-theme', newTheme);
-            
             document.getElementById('theme-icon').className = newTheme === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
             document.getElementById('theme-text').innerText = newTheme === 'light' ? translations[getCurrentLanguage()]['theme-dark'] : translations[getCurrentLanguage()]['theme-light'];
         }
 
-        function getCurrentLanguage() {
-            return localStorage.getItem('lang') || 'es';
-        }
+        function getCurrentLanguage() { return localStorage.getItem('lang') || 'es'; }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Carrusel de Ilustración
+            // Ilustraciones
             const carouselInnerIllus = document.querySelector('#carouselIllustration .carousel-inner');
-            const imageCountIllus = 16; 
             let illusHTML = '';
-            for (let i = 1; i <= imageCountIllus; i++) {
-                illusHTML += `
-                    <div class="carousel-item${i === 1 ? ' active' : ''}">
-                        <img src="assets/ilustracion (${i}).PNG" class="d-block w-100" alt="Ilustración ${i}">
-                    </div>
-                `;
+            for (let i = 1; i <= 16; i++) {
+                illusHTML += `<div class="carousel-item${i === 1 ? ' active' : ''}"><img src="assets/ilustracion (${i}).PNG" class="d-block w-100"></div>`;
             }
             carouselInnerIllus.innerHTML = illusHTML;
 
-            // Carrusel 3D
+            // Carrusel 3D (Actualizado)
             const carouselInner3D = document.querySelector('#carousel3D .carousel-inner');
             let threeDHTML = '';
             
-            // Primero la imagen 3d.PNG
-            threeDHTML += `
-                <div class="carousel-item active">
-                    <img src="assets/3d.PNG" class="d-block w-100" alt="3D Cover">
-                </div>
-            `;
-            // Luego las de modelado (1) a (9)
-            for (let i = 1; i <= 9; i++) {
-                threeDHTML += `
-                    <div class="carousel-item">
-                        <img src="assets/modelado (${i}).png" class="d-block w-100" alt="Modelado ${i}">
-                    </div>
-                `;
+            // 1. Imagen 4.png (Activa)
+            threeDHTML += `<div class="carousel-item active"><img src="assets/4.png" class="d-block w-100"></div>`;
+            
+            // 2. Imagen 3d.PNG
+            threeDHTML += `<div class="carousel-item"><img src="assets/3d.PNG" class="d-block w-100"></div>`;
+            
+            // 3. Imágenes modelado (1) a (9)
+            for (let i = 1; i <= 7; i++) {
+                threeDHTML += `<div class="carousel-item"><img src="assets/modelado (${i}).png" class="d-block w-100"></div>`;
             }
             carouselInner3D.innerHTML = threeDHTML;
             
             document.body.setAttribute('data-theme', 'dark');
-            document.getElementById('theme-icon').className = 'fa-solid fa-sun';
-            document.getElementById('theme-text').innerText = translations[getCurrentLanguage()]['theme-light'];
-            
             setLanguage(getCurrentLanguage());
         });
     </script>
