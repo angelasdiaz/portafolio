@@ -128,7 +128,7 @@
         .btn-back { background: none; border: none; color: var(--modal-text); font-size: 1.2rem; cursor: pointer; margin-right: 15px; }
 
         /* Carousel en modal */
-        #carouselIllustration .carousel-item img {
+        #carouselIllustration .carousel-item img, #carousel3D .carousel-item img {
             max-height: 500px; 
             object-fit: contain; 
             width: 100%;
@@ -231,7 +231,8 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="project-card">
+                    <div class="project-card" data-bs-toggle="modal" data-bs-target="#modal3D">
+                        <img src="assets/3d.PNG" alt="3dCover">
                         <h3 class="h5 fw-bold">3D y Texturizado</h3>
                         <p class="small opacity-75">Pulsa para ver algunos proyectos de modelado, texturizado y renders.</p>
                     </div>
@@ -385,6 +386,31 @@
         </div>
     </div>
 
+    <div class="modal fade" id="modal3D" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content text-center">
+                <div class="modal-header border-0">
+                    <h4 class="modal-title w-100 tech-font">MODELADO Y TEXTURIZADO 3D</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="opacity-75 text-start mb-4">Selección de trabajos realizados en software de modelado 3D, enfocados en assets para videojuegos, props y entornos.</p>
+                    
+                    <div id="carousel3D" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel3D" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel3D" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modalMarketing" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -465,19 +491,38 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const carouselInner = document.querySelector('#carouselIllustration .carousel-inner');
-            const imageCount = 16; 
-            let carouselHTML = '';
-
-            for (let i = 1; i <= imageCount; i++) {
-                const isActive = i === 1 ? ' active' : '';
-                carouselHTML += `
-                    <div class="carousel-item${isActive}">
+            // Carrusel de Ilustración
+            const carouselInnerIllus = document.querySelector('#carouselIllustration .carousel-inner');
+            const imageCountIllus = 16; 
+            let illusHTML = '';
+            for (let i = 1; i <= imageCountIllus; i++) {
+                illusHTML += `
+                    <div class="carousel-item${i === 1 ? ' active' : ''}">
                         <img src="assets/ilustracion (${i}).PNG" class="d-block w-100" alt="Ilustración ${i}">
                     </div>
                 `;
             }
-            carouselInner.innerHTML = carouselHTML;
+            carouselInnerIllus.innerHTML = illusHTML;
+
+            // Carrusel 3D
+            const carouselInner3D = document.querySelector('#carousel3D .carousel-inner');
+            let threeDHTML = '';
+            
+            // Primero la imagen 3d.PNG
+            threeDHTML += `
+                <div class="carousel-item active">
+                    <img src="assets/3d.PNG" class="d-block w-100" alt="3D Cover">
+                </div>
+            `;
+            // Luego las de modelado (1) a (9)
+            for (let i = 1; i <= 9; i++) {
+                threeDHTML += `
+                    <div class="carousel-item">
+                        <img src="assets/modelado (${i}).PNG" class="d-block w-100" alt="Modelado ${i}">
+                    </div>
+                `;
+            }
+            carouselInner3D.innerHTML = threeDHTML;
             
             document.body.setAttribute('data-theme', 'dark');
             document.getElementById('theme-icon').className = 'fa-solid fa-sun';
