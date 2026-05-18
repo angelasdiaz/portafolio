@@ -57,7 +57,7 @@
             letter-spacing: -0.02em;
         }
 
-        /* --- Custom Custom Cursor --- */
+        /* --- Custom Cursor --- */
         #custom-cursor {
             width: 24px;
             height: 24px;
@@ -67,7 +67,7 @@
             transform: translate(-50%, -50%);
             pointer-events: none;
             z-index: 9999;
-            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            transition: width 0.3s, height 0.3s, background-color 0.3s, border-color 0.3s;
             opacity: 0;
         }
         @media (pointer: coarse) { #custom-cursor { display: none; } }
@@ -115,7 +115,6 @@
             cursor: pointer; border: none; background: none; font-family: var(--font-mono);
             font-weight: 500;
         }
-        .nav-link-custom span-text { position: relative; }
         .nav-link-custom:hover { color: var(--text-main); padding-left: 5px; }
 
         .collapse-menu { padding-left: 20px; margin-top: 5px; margin-bottom: 10px; display: none; }
@@ -237,7 +236,7 @@
         }
         .project-card-editorial:hover img { transform: scale(1.04); }
 
-        /* Retícula de Sub-proyectos dentro de modales (Cambiado el estilo polaroid antiguo por cajas de arte asimétricas) */
+        /* Retícula de Sub-proyectos dentro de modales */
         .art-modern-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -294,7 +293,7 @@
             padding: 20px;
         }
         .modal-header { border: none; padding-bottom: 0; }
-        .btn-close { filter: var(--btn-close); opacity: 0.7; }
+        .btn-close { filter: var(--btn-close); opacity: 0.7; transition: opacity 0.2s; }
         .btn-close:hover { opacity: 1; }
         
         .btn-oval { 
@@ -315,7 +314,7 @@
             max-height: 550px; object-fit: contain; width: 100%; border-radius: 12px;
         }
 
-        /* --- Responsive Design Avanzado --- */
+        /* --- Responsive Design --- */
         @media (max-width: 1200px) {
             section { padding: 100px 40px; }
             .display-title { font-size: 3.5rem; }
@@ -397,7 +396,7 @@
                 <div class="profile-wrapper">
                     <img class="profile-img" src="assets/25037.jpg" alt="Angela" />
                     <div>
-                        <span class="subtitle-tech" data-key="header-subtitle">Portafolio</span>
+                        <span class="subtitle-tech" data-key="header-subtitle">Diseño y Desarrollo de Videojuegos</span>
                         <h1 class="display-title">Ángela Sánchez Díaz</h1>
                     </div>
                 </div>
@@ -411,7 +410,7 @@
             <div class="about-text" data-key="about-content">
                 <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas creativas.</p>
                 <p>Soy una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
-                <p>En este espacio encontrarás selección de mis trabajos en arquitectura de videojuegos, modelado 3D, ilustración y desarrollo estratégico digital.</p>
+                <p>En este espacio encontrarás una selección de mis trabajos en arquitectura de videojuegos, modelado 3D, ilustración y desarrollo estratégico digital.</p>
             </div>
         </section>
 
@@ -677,17 +676,22 @@
         });
         
         // Efecto magnético/escala en elementos clicables
-        const interactiveElements = document.querySelectorAll('a, button, .project-card-editorial, .art-box, span');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
-                cursor.style.backgroundColor = 'rgba(181, 126, 220, 0.1)';
+        function applyCursorInteractions() {
+            const interactiveElements = document.querySelectorAll('a, button, .project-card-editorial, .art-box, span, [onclick]');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.width = '45px';
+                    cursor.style.height = '45px';
+                    cursor.style.backgroundColor = 'rgba(181, 126, 220, 0.1)';
+                    cursor.style.borderColor = 'var(--accent)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.width = '24px';
+                    cursor.style.height = '24px';
+                    cursor.style.backgroundColor = 'transparent';
+                });
             });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursor.style.backgroundColor = 'transparent';
-            });
-        });
+        }
 
         // --- Lógica Scroll Reveal (Intersection Observer) ---
         const observer = new IntersectionObserver((entries) => {
@@ -739,6 +743,7 @@
             
             document.body.setAttribute('data-theme', 'dark');
             setLanguage(getCurrentLanguage());
+            applyCursorInteractions();
         });
     </script>
 </body>
