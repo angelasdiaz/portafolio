@@ -69,7 +69,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: var(--bg-main); /* El fondo del preloader es el mismo de la web */
+            background-color: var(--bg-main);
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -80,11 +80,10 @@
             overflow: hidden;
         }
 
-        /* Estilo para que el GIF ocupe toda la pantalla y no se deforme */
         #preloader img {
             width: 100vw;
             height: 100vh;
-            object-fit: contain; /* Ajusta la escala proporcional sin recortar */
+            object-fit: contain;
             user-select: none;
             pointer-events: none;
             position: absolute;
@@ -162,15 +161,6 @@
             font-weight: 400;
         }
         .nav-link-custom:hover { color: var(--text-main); padding-left: 5px; }
-
-        .collapse-menu { padding-left: 20px; margin-top: 5px; margin-bottom: 10px; display: none; }
-        .collapse-menu.show { display: block; }
-        .collapse-menu a, .collapse-menu span { 
-            display: block; padding: 6px 0; font-size: 0.95rem; 
-            color: var(--text-muted); text-decoration: none; cursor: pointer; transition: 0.2s;
-            font-family: var(--font-editorial) !important;
-        }
-        .collapse-menu a:hover, .collapse-menu span:hover { color: var(--accent); }
 
         .sidebar .text-muted, .sidebar .d-flex span {
             font-family: var(--font-editorial) !important;
@@ -411,15 +401,9 @@
             <a href="#proyectos" class="nav-link-custom"><span data-key="nav-projects">Proyectos</span></a>
             <a href="#contacto" class="nav-link-custom"><span data-key="nav-contact">Contacto</span></a>
             
-            <div class="mt-3">
-                <button class="nav-link-custom" onclick="this.nextElementSibling.classList.toggle('show')">
-                    <span data-key="nav-cv">Curriculum</span> <i class="fa-solid fa-chevron-down ms-2" style="font-size:0.7rem;"></i>
-                </button>
-                <div class="collapse-menu">
-                    <a href="https://drive.google.com/file/d/1jFYblduqJbAQPlV5EWYGL9Sr-EW6Hgpt/view?usp=sharing" target="_blank">// Español</a>
-                    <a href="assets/cv-en.pdf" target="_blank">// English</a>
-                </div>
-            </div>
+            <a href="https://drive.google.com/file/d/1KrqAbdOgTFKwEUxU6aSyNeXIn4AV95E9/view?usp=sharing" target="_blank" class="nav-link-custom mt-2">
+                <span data-key="nav-cv">Curriculum</span>
+            </a>
         </div>
 
         <div class="mt-auto pt-4">
@@ -701,16 +685,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bundle.min.js"></script>
     <script>
-        // === LÓGICA DEL PRELOADER MODIFICADA (3.5 SEGUNDOS) ===
+        // === LÓGICA DEL PRELOADER (3.5 SEGUNDOS) ===
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             
-            // Forzamos que la animación se mantenga visible exactamente 3500ms (3.5 segundos)
             setTimeout(function() {
-                // Iniciamos la animación de desvanecimiento suave (opacidad a 0)
                 preloader.classList.add('fade-out');
                 
-                // Una vez termina la transición de CSS (0.8s), liberamos el scroll de la web
                 setTimeout(function() {
                     document.body.style.overflow = 'visible';
                 }, 800);
@@ -731,7 +712,6 @@
             cursor.style.opacity = '1';
         });
         
-        // Efecto magnético/escala en elementos clicables
         function applyCursorInteractions() {
             const interactiveElements = document.querySelectorAll('a, button, .project-card-editorial, .art-box, span, [onclick]');
             interactiveElements.forEach(el => {
