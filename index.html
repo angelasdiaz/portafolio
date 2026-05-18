@@ -701,11 +701,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bundle.min.js"></script>
     <script>
-        // === LÓGICA DEL PRELOADER MODIFICADA (5 SEGUNDOS) ===
+        // === LÓGICA DEL PRELOADER MODIFICADA (4 SEGUNDOS) ===
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             
-            // Forzamos que la animación se mantenga visible exactamente 5000ms (5 segundos)
+            // Forzamos que la animación se mantenga visible exactamente 4000ms (4 segundos)
             setTimeout(function() {
                 // Iniciamos la animación de desvanecimiento suave (opacidad a 0)
                 preloader.classList.add('fade-out');
@@ -715,7 +715,7 @@
                     document.body.style.overflow = 'visible';
                 }, 800);
                 
-            }, 5000); 
+            }, 4000); 
         });
 
         const translations = {
