@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
+        /* Importación ultra-estable de fuentes con fallbacks directos */
         @import url('https://fonts.cdnfonts.com/css/coolvetica-2');
         @import url('https://fonts.cdnfonts.com/css/cream-2');
 
@@ -26,6 +27,7 @@
             --modal-bg: #0a0a0c;
             --btn-close: invert(1);
             
+            /* --- Sistema tipográfico unificado --- */
             --font-editorial: 'Cream', 'Plus Jakarta Sans', sans-serif;
             --font-titles: 'Coolvetica', sans-serif;
         }
@@ -59,6 +61,7 @@
             letter-spacing: -0.02em;
         }
 
+        /* === ESTILOS DEL PRELOADER (A pantalla completa con tu GIF) === */
         #preloader {
             position: fixed;
             top: 0;
@@ -92,12 +95,14 @@
             visibility: hidden;
         }
 
+        /* --- Aplicación estricta de Coolvetica a todos los títulos --- */
         h1, h2, h3, h4, h5, h6, .display-title, .section-title, .brand-logo {
             font-family: var(--font-titles) !important;
             font-weight: 400 !important;
             letter-spacing: 0.02em;
         }
 
+        /* --- Custom Cursor --- */
         #custom-cursor {
             width: 24px;
             height: 24px;
@@ -112,11 +117,13 @@
         }
         @media (pointer: coarse) { #custom-cursor { display: none; } }
 
+        /* --- Scrollbar --- */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-main); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
+        /* --- Menú Lateral --- */
         .sidebar {
             height: 100vh; width: 280px; position: fixed;
             top: 0; left: 0; background-color: var(--sidebar-bg);
@@ -135,6 +142,20 @@
         }
         .brand-logo span { color: var(--accent); }
 
+        .menu-toggle {
+            display: none;
+            position: fixed; top: 25px; right: 25px;
+            z-index: 1100; 
+            background: #ffffff; 
+            color: var(--accent); 
+            border: none; width: 45px; height: 45px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+        .menu-toggle:active { transform: scale(0.9); }
+
         .nav-links-wrapper { display: flex; flex-direction: column; gap: 12px; }
 
         .nav-link-custom {
@@ -146,6 +167,11 @@
         }
         .nav-link-custom:hover { color: var(--text-main); padding-left: 5px; }
 
+        .sidebar .text-muted, .sidebar .d-flex span {
+            font-family: var(--font-editorial) !important;
+        }
+
+        /* --- Contenido Principal --- */
         .main-content { margin-left: 280px; }
         
         .scroll-reveal {
@@ -158,6 +184,7 @@
         section { padding: 140px 80px; position: relative; }
         section:nth-child(even) { background-color: var(--bg-alt); }
 
+        /* --- Hero Section Editorial --- */
         #inicio { 
             height: 100vh; display: flex; align-items: center; justify-content: flex-start;
             overflow: hidden; padding-top: 0; padding-bottom: 0;
@@ -187,6 +214,7 @@
         .display-title { font-size: 4.5rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: 15px; }
         .subtitle-tech { font-family: var(--font-titles); color: var(--accent); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
+        /* --- Secciones Tipográficas --- */
         .section-label { font-family: var(--font-editorial); font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; display: block; }
         .section-title { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 50px; }
 
@@ -194,6 +222,149 @@
         .about-text p { margin-bottom: 25px; }
         .about-text strong { color: var(--text-main); font-weight: 600; }
 
+
+        /* ==============================================================
+           === NUEVOS ESTILOS: CONSTELACIÓN DE HABILIDADES EN CÍRCULO ===
+           ============================================================== */
+        .skills-system-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: visible;
+            margin-top: 20px;
+        }
+
+        /* Nodo Central (Título de la sección) */
+        .skills-core-node {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, var(--card-bg), var(--bg-main));
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.15);
+            text-align: center;
+            padding: 20px;
+            pointer-events: none;
+        }
+        .skills-core-node h3 {
+            font-size: 1.6rem;
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.1;
+        }
+        .skills-core-node span {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 5px;
+        }
+
+        /* Contenedor Órbita donde se posicionan los Nodos Satélites */
+        .skills-orbit-wrapper {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border: 1px dashed rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Estilo base de cada Círculo de Habilidad (Satélite) */
+        .skill-satellite-node {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .skill-satellite-node i {
+            color: var(--accent);
+            margin-bottom: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-satellite-node p {
+            font-size: 0.75rem;
+            margin: 0;
+            line-height: 1.2;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        /* Efectos Hover Interactivos individuales */
+        .skill-satellite-node:hover {
+            transform: scale(1.15);
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.25);
+            background: var(--bg-alt);
+            z-index: 12;
+        }
+        .skill-satellite-node:hover i {
+            transform: scale(1.1);
+        }
+        .skill-satellite-node:hover p {
+            color: var(--text-main);
+        }
+
+        /* Posicionamiento Matemático en la Órbita Circular (8 Nodos) */
+        .skill-node-1 { transform: translate(0, -250px); animation: floatNode1 6s ease-in-out infinite; }
+        .skill-node-2 { transform: translate(177px, -177px); animation: floatNode2 5s ease-in-out infinite 0.5s; }
+        .skill-node-3 { transform: translate(250px, 0); animation: floatNode3 7s ease-in-out infinite 1s; }
+        .skill-node-4 { transform: translate(177px, 177px); animation: floatNode4 5.5s ease-in-out infinite 1.5s; }
+        .skill-node-5 { transform: translate(0, 250px); animation: floatNode5 6.5s ease-in-out infinite; }
+        .skill-node-6 { transform: translate(-177px, 177px); animation: floatNode6 4.8s ease-in-out infinite 0.7s; }
+        .skill-node-7 { transform: translate(-250px, 0); animation: floatNode7 6.2s ease-in-out infinite 1.2s; }
+        .skill-node-8 { transform: translate(-177px, -177px); animation: floatNode8 5.3s ease-in-out infinite 0.3s; }
+
+        /* Keyframes de flotado sutil asimétrico para simular gravedad cero */
+        @keyframes floatNode1 { 0%, 100% { transform: translate(0, -255px); } 50% { transform: translate(4px, -245px); } }
+        @keyframes floatNode2 { 0%, 100% { transform: translate(179px, -174px); } 50% { transform: translate(174px, -180px); } }
+        @keyframes floatNode3 { 0%, 100% { transform: translate(255px, 2px); } 50% { transform: translate(245px, -3px); } }
+        @keyframes floatNode4 { 0%, 100% { transform: translate(174px, 179px); } 50% { transform: translate(180px, 174px); } }
+        @keyframes floatNode5 { 0%, 100% { transform: translate(-3px, 255px); } 50% { transform: translate(3px, 245px); } }
+        @keyframes floatNode6 { 0%, 100% { transform: translate(-174px, 174px); } 50% { transform: translate(-180px, 180px); } }
+        @keyframes floatNode7 { 0%, 100% { transform: translate(-245px, -3px); } 50% { transform: translate(-255px, 3px); } }
+        @keyframes floatNode8 { 0%, 100% { transform: translate(-180px, -174px); } 50% { transform: translate(-174px, -180px); } }
+
+        /* Ajuste responsive para pantallas de móvil */
+        @media (max-width: 768px) {
+            .skills-system-container { height: auto; padding: 40px 0; flex-direction: column; gap: 15px; }
+            .skills-orbit-wrapper { display: none; } /* Quitamos la disposición circular compleja en móvil */
+            .skills-core-node { position: static; width: 100%; max-width: 280px; height: auto; border-radius: 20px; padding: 20px; margin-bottom: 20px; }
+            .skill-satellite-node { position: static !important; width: 100%; max-width: 280px; height: auto; flex-direction: row; justify-content: flex-start; gap: 20px; border-radius: 16px; padding: 15px 25px; transform: none !important; animation: none !important; }
+            .skill-satellite-node i { margin-bottom: 0; }
+            .skill-satellite-node p { font-size: 1rem; }
+        }
+        /* ============================================================== */
+
+
+        /* --- Retícula de Proyectos Estilo Editorial --- */
         .projects-masonry {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -226,6 +397,7 @@
         }
         .project-card-editorial:hover img { transform: scale(1.04); }
 
+        /* Retícula de Sub-proyectos dentro de modales */
         .art-modern-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -244,6 +416,7 @@
         .art-box p { font-size: 0.85rem; margin: 0; text-align: left; color: var(--text-main); }
         .art-box:hover { border-color: var(--accent); transform: scale(1.02); }
 
+        /* --- Caja de Contacto --- */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -272,6 +445,7 @@
         }
         .contact-card-modern:hover i { color: var(--accent); }
 
+        /* --- Modales --- */
         .modal-content { 
             background-color: var(--modal-bg); 
             border: 1px solid var(--border); 
@@ -301,147 +475,7 @@
             max-height: 550px; object-fit: contain; width: 100%; border-radius: 12px;
         }
 
-        /* --- Cambios Responsive y Habilidades --- */
-        
-        /* Botón Menú Actualizado (Círculo Negro, Icono Morado) */
-        .menu-toggle {
-            display: none;
-            position: fixed; 
-            top: 25px; 
-            right: 25px;
-            z-index: 1100; 
-            background: #000000; /* Negro absoluto */
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
-            transition: transform 0.2s ease, opacity 0.3s ease;
-        }
-        .menu-toggle i {
-            color: #b57edc; /* Morado accent */
-            font-size: 1.5rem;
-        }
-        .menu-toggle:active { transform: scale(0.9); }
-        .menu-toggle:hover { opacity: 0.9; }
-
-        /* Contenedor Habilidades Actualizado */
-        .skills-system-container {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: visible;
-            margin-top: 20px;
-        }
-
-        .skills-core-node {
-            position: relative;
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, var(--card-bg), var(--bg-main));
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            box-shadow: 0 0 40px rgba(var(--accent-rgb), 0.15);
-            text-align: center;
-            padding: 20px;
-            pointer-events: none;
-        }
-        .skills-core-node h3 { font-size: 1.6rem; color: var(--text-main); margin: 0; line-height: 1.1; }
-        .skills-core-node span { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 5px; }
-
-        .skills-orbit-wrapper {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border: 1px dashed rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .skill-satellite-node {
-            position: absolute;
-            width: 110px;
-            height: 110px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            padding: 10px;
-        }
-
-        .skill-satellite-node i, .skill-satellite-node img {
-            color: var(--accent);
-            max-width: 40px;
-            height: auto;
-            margin-bottom: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .skill-satellite-node p {
-            font-size: 0.75rem;
-            margin: 0;
-            line-height: 1.2;
-            font-weight: 500;
-            color: var(--text-muted);
-            transition: color 0.3s ease;
-        }
-
-        .skill-satellite-node:hover {
-            transform: scale(1.15);
-            border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.25);
-            background: var(--bg-alt);
-            z-index: 12;
-        }
-        .skill-satellite-node:hover i, .skill-satellite-node:hover img { transform: scale(1.1); }
-        .skill-satellite-node:hover p { color: var(--text-main); }
-
-        /* Posiciones Habilidades */
-        .skill-node-1 { transform: translate(0, -250px); animation: floatNode1 6s ease-in-out infinite; }
-        .skill-node-2 { transform: translate(177px, -177px); animation: floatNode2 5s ease-in-out infinite 0.5s; }
-        .skill-node-3 { transform: translate(250px, 0); animation: floatNode3 7s ease-in-out infinite 1s; }
-        .skill-node-4 { transform: translate(177px, 177px); animation: floatNode4 5.5s ease-in-out infinite 1.5s; }
-        .skill-node-5 { transform: translate(0, 250px); animation: floatNode5 6.5s ease-in-out infinite; }
-        .skill-node-6 { transform: translate(-177px, 177px); animation: floatNode6 4.8s ease-in-out infinite 0.7s; }
-        .skill-node-7 { transform: translate(-250px, 0); animation: floatNode7 6.2s ease-in-out infinite 1.2s; }
-        .skill-node-8 { transform: translate(-177px, -177px); animation: floatNode8 5.3s ease-in-out infinite 0.3s; }
-
-        @keyframes floatNode1 { 0%, 100% { transform: translate(0, -255px); } 50% { transform: translate(4px, -245px); } }
-        @keyframes floatNode2 { 0%, 100% { transform: translate(179px, -174px); } 50% { transform: translate(174px, -180px); } }
-        @keyframes floatNode3 { 0%, 100% { transform: translate(255px, 2px); } 50% { transform: translate(245px, -3px); } }
-        @keyframes floatNode4 { 0%, 100% { transform: translate(174px, 179px); } 50% { transform: translate(180px, 174px); } }
-        @keyframes floatNode5 { 0%, 100% { transform: translate(-3px, 255px); } 50% { transform: translate(3px, 245px); } }
-        @keyframes floatNode6 { 0%, 100% { transform: translate(-174px, 174px); } 50% { transform: translate(-180px, 180px); } }
-        @keyframes floatNode7 { 0%, 100% { transform: translate(-245px, -3px); } 50% { transform: translate(-255px, 3px); } }
-        @keyframes floatNode8 { 0%, 100% { transform: translate(-180px, -174px); } 50% { transform: translate(-174px, -180px); } }
-
-        /* Estilo para los iconos de imagen */
-        .icon-svg { fill: var(--accent); }
-
-        /* Media Queries Actualizadas */
+        /* --- Responsive Design --- */
         @media (max-width: 1200px) {
             section { padding: 100px 40px; }
             .display-title { font-size: 3.5rem; }
@@ -456,16 +490,6 @@
             .projects-masonry { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: repeat(2, 1fr); }
             #inicio { height: auto; padding-top: 160px; padding-bottom: 100px; }
-        }
-
-        @media (max-width: 768px) {
-            /* Ajuste Habilidades para Móvil */
-            .skills-system-container { height: auto; padding: 40px 0; flex-direction: column; gap: 15px; }
-            .skills-orbit-wrapper { display: none; }
-            .skills-core-node { position: static; width: 100%; max-width: 280px; height: auto; border-radius: 20px; padding: 20px; margin-bottom: 20px; }
-            .skill-satellite-node { position: static !important; width: 100%; max-width: 280px; height: auto; flex-direction: row; justify-content: flex-start; gap: 20px; border-radius: 16px; padding: 15px 25px; transform: none !important; animation: none !important; }
-            .skill-satellite-node i, .skill-satellite-node img { margin-bottom: 0; max-width: 30px; }
-            .skill-satellite-node p { font-size: 1rem; }
         }
 
         @media (max-width: 576px) {
@@ -558,7 +582,7 @@
                 
                 <div class="skills-orbit-wrapper">
                     <a href="#proyectos" class="skill-satellite-node skill-node-1">
-                        <img src="assets/unity-logo.svg" alt="Unity Engine" class="icon-svg">
+                        <i class="fa-brands fa-unity fa-2x"></i>
                         <p>Unity Engine</p>
                     </a>
                     <a href="#proyectos" class="skill-satellite-node skill-node-2">
@@ -578,7 +602,7 @@
                         <p>Producción Vídeo</p>
                     </a>
                     <a href="#proyectos" class="skill-satellite-node skill-node-6">
-                        <i class="fa-solid fa-layer-group fa-2x"></i>
+                        <i class="fa-solid fa-window-restore fa-2x"></i>
                         <p>UI/UX Design</p>
                     </a>
                     <a href="#proyectos" class="skill-satellite-node skill-node-7">
@@ -586,7 +610,7 @@
                         <p>Diseño Gráfico</p>
                     </a>
                     <a href="#proyectos" class="skill-satellite-node skill-node-8">
-                        <img src="assets/web-design-logo.svg" alt="Web Design" class="icon-svg">
+                        <i class="fa-brands fa-html5 fa-2x"></i>
                         <p>Web Design</p>
                     </a>
                 </div>
@@ -814,6 +838,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bundle.min.js"></script>
     <script>
+        // === LÓGICA DEL PRELOADER ===
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             setTimeout(function() {
@@ -824,6 +849,7 @@
             }, 3500); 
         });
 
+        // === INTERACCIÓN DEL ICONO RESPONSIVE ===
         const toggleBtn = document.getElementById('menu-toggle-btn');
         const sidebar = document.getElementById('sidebar-menu');
         const menuIcon = document.getElementById('menu-icon');
@@ -852,11 +878,13 @@
             }
         });
 
+        // Sincronización del sistema de idiomas
         const translations = {
             es: { "nav-home": "Inicio", "nav-about": "Sobre Mí", "nav-skills": "Habilidades", "nav-projects": "Proyectos", "nav-contact": "Contacto", "nav-cv": "Curriculum", "nav-lang": "Idioma", "theme-light": "Modo Claro", "theme-dark": "Modo Oscuro", "header-subtitle": "Diseño y Desarrollo de Videojuegos" },
             en: { "nav-home": "Home", "nav-about": "About Me", "nav-skills": "Skills", "nav-projects": "Projects", "nav-contact": "Contact", "nav-cv": "Resume", "nav-lang": "Language", "theme-light": "Light Mode", "theme-dark": "Dark Mode", "header-subtitle": "Game Design & Development" }
         };
 
+        // --- Lógica del Custom Cursor Avanzado ---
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
@@ -881,6 +909,7 @@
             });
         }
 
+        // --- Lógica Scroll Reveal (Intersection Observer) ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -911,6 +940,7 @@
         function getCurrentLanguage() { return localStorage.getItem('lang') || 'es'; }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar Carruseles
             const carouselInnerIllus = document.querySelector('#carouselIllustration .carousel-inner');
             let illusHTML = '';
             for (let i = 1; i <= 16; i++) {
@@ -931,6 +961,7 @@
             setLanguage(getCurrentLanguage());
             applyCursorInteractions();
 
+            // --- SUAVE SCROLL DESDE NODOS HACIA PROYECTOS ---
             document.querySelectorAll('.skill-satellite-node').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
