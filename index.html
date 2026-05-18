@@ -6,301 +6,512 @@
     <title>Ángela Sánchez Díaz | Portafolio</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     
+    <!-- CSS Estilos Core de Componentes Interactivos Básicos (Modales/Carruseles) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@300;500;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-main: #000000;
-            --bg-alt: #0a0a0a;
-            --text-main: #ffffff;
-            --sidebar-bg: #000000;
-            --accent: #B57EDC; 
-            --card-bg: #151515;
-            --border: #222;
-            --modal-bg: #000000;
-            --modal-text: #ffffff;
+            --bg-main: #0a0a0c;
+            --bg-alt: #111115;
+            --text-main: #f3f4f6;
+            --text-muted: #8e929b;
+            --sidebar-bg: rgba(10, 10, 12, 0.85);
+            --accent: #b57edc; 
+            --accent-rgb: 181, 126, 220;
+            --card-bg: #16161f;
+            --border: rgba(255, 255, 255, 0.07);
+            --modal-bg: #0a0a0c;
             --btn-close: invert(1);
+            --font-editorial: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
         [data-theme="light"] {
-            --bg-main: #ffffff;
-            --bg-alt: #f8f9fa;
-            --text-main: #000000;
-            --sidebar-bg: #ffffff;
-            --accent: #2b064d;
-            --card-bg: #ffffff;
-            --border: #dee2e6;
+            --bg-main: #f8f9fa;
+            --bg-alt: #ffffff;
+            --text-main: #0f1115;
+            --text-muted: #616670;
+            --sidebar-bg: rgba(248, 249, 250, 0.9);
+            --accent: #632ca6;
+            --accent-rgb: 99, 44, 166;
+            --card-bg: #f1f3f5;
+            --border: rgba(0, 0, 0, 0.08);
             --modal-bg: #ffffff;
-            --modal-text: #000000;
             --btn-close: invert(0);
         }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-editorial);
             background-color: var(--bg-main);
             color: var(--text-main);
-            transition: all 0.3s ease;
-            margin: 0;
+            transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-x: hidden;
+            letter-spacing: -0.02em;
         }
 
-        h1, h2, h3, h4, h5, .tech-font { font-family: 'JetBrains Mono', monospace; }
+        /* --- Custom Custom Cursor --- */
+        #custom-cursor {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.3s, height 0.3s, background-color 0.3s;
+            opacity: 0;
+        }
+        @media (pointer: coarse) { #custom-cursor { display: none; } }
 
-        /* --- Sidebar Lógica --- */
+        /* --- Scrollbar --- */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-main); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* --- Menú Lateral Minimalista --- */
         .sidebar {
-            height: 100vh; width: 260px; position: fixed;
+            height: 100vh; width: 280px; position: fixed;
             top: 0; left: 0; background-color: var(--sidebar-bg);
-            padding: 40px 20px; border-right: 1px solid var(--border);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 50px 35px; border-right: 1px solid var(--border);
             z-index: 1050; display: flex; flex-direction: column;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
+        .brand-logo {
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.05em;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+        }
+        .brand-logo span { color: var(--accent); }
 
         .menu-toggle {
             display: none;
-            position: fixed; top: 20px; left: 20px;
-            z-index: 1100; background: var(--accent);
-            color: white; border: none; padding: 10px 15px; border-radius: 8px;
+            position: fixed; top: 25px; right: 25px;
+            z-index: 1100; background: var(--text-main);
+            color: var(--bg-main); border: none; width: 45px; height: 45px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
         }
+
+        .nav-links-wrapper { display: flex; flex-direction: column; gap: 8px; }
 
         .nav-link-custom {
-            padding: 12px 10px; text-decoration: none; font-size: 0.95rem;
-            color: var(--text-main); display: flex; align-items: center; transition: 0.3s;
-            cursor: pointer; border: none; background: none; width: 100%; text-align: left;
+            padding: 10px 0; text-decoration: none; font-size: 0.95rem;
+            color: var(--text-muted); display: flex; align-items: center; transition: 0.25s ease;
+            cursor: pointer; border: none; background: none; font-family: var(--font-mono);
+            font-weight: 500;
         }
-        .nav-link-custom i { margin-right: 15px; width: 20px; text-align: center; }
-        .nav-link-custom:hover { color: var(--accent); }
+        .nav-link-custom span-text { position: relative; }
+        .nav-link-custom:hover { color: var(--text-main); padding-left: 5px; }
 
-        .collapse-menu { padding-left: 45px; margin-bottom: 10px; display: none; }
+        .collapse-menu { padding-left: 20px; margin-top: 5px; margin-bottom: 10px; display: none; }
         .collapse-menu.show { display: block; }
         .collapse-menu a, .collapse-menu span { 
-            display: block; padding: 5px 0; font-size: 0.85rem; 
-            color: var(--text-main); opacity: 0.6; text-decoration: none; cursor: pointer;
+            display: block; padding: 6px 0; font-size: 0.85rem; 
+            color: var(--text-muted); text-decoration: none; cursor: pointer; transition: 0.2s;
         }
+        .collapse-menu a:hover, .collapse-menu span:hover { color: var(--accent); }
 
-        /* --- Contenido Principal --- */
-        .main-content { margin-left: 260px; }
-        section { padding: 120px 40px; border-bottom: 1px solid var(--border); }
+        /* --- Contenido Principal con Animación de Entrada --- */
+        .main-content { margin-left: 280px; }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+        section { padding: 140px 80px; position: relative; }
         section:nth-child(even) { background-color: var(--bg-alt); }
 
-        .custom-header { background-color: #2b064d; border-radius: 24px; padding: 80px 20px; color: white; text-align: center; }
-        .profile-img { width: 150px; height: 150px; object-fit: cover; border: 4px solid rgba(255,255,255,0.2); }
+        /* --- Hero Section Editorial --- */
+        #inicio { 
+            height: 100vh; display: flex; align-items: center; justify-content: flex-start;
+            overflow: hidden; padding-top: 0; padding-bottom: 0;
+        }
+        .hero-container { position: relative; z-index: 2; width: 100%; }
+        
+        /* Marquee de Fondo */
+        .marquee-bg {
+            position: absolute; bottom: 10%; left: 0; width: 100%;
+            overflow: hidden; white-space: nowrap; pointer-events: none; opacity: 0.03;
+            font-family: var(--font-mono); font-weight: 800; font-size: 12vw; text-transform: uppercase;
+        }
+        .marquee-inner { display: inline-block; animation: marquee 25s linear infinite; }
 
-        /* --- Proyectos --- */
-        .project-card { 
-            background-color: var(--card-bg); 
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        .profile-wrapper { display: flex; align-items: center; gap: 40px; }
+        .profile-img { 
+            width: 160px; height: 160px; object-fit: cover; 
+            filter: grayscale(100%); transition: filter 0.5s ease, transform 0.5s ease;
+            border-radius: 24px; border: 1px solid var(--border);
+        }
+        .profile-wrapper:hover .profile-img { filter: grayscale(0%); transform: scale(1.03); }
+        
+        .display-title { font-size: 4.5rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: 15px; }
+        .subtitle-tech { font-family: var(--font-mono); color: var(--accent); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em; }
+
+        /* --- Secciones Tipográficas --- */
+        .section-label { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; display: block; }
+        .section-title { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 50px; }
+
+        .about-text { max-width: 800px; font-size: 1.25rem; line-height: 1.6; color: var(--text-muted); }
+        .about-text p { margin-bottom: 25px; }
+        .about-text strong { color: var(--text-main); font-weight: 600; }
+
+        /* --- Retícula Grid de Habilidades --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .skill-item-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: left;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-item-card i { color: var(--accent); margin-bottom: 20px; transition: transform 0.3s ease; }
+        .skill-item-card p { font-family: var(--font-mono); font-weight: 500; font-size: 1rem; margin: 0; }
+        .skill-item-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(var(--accent-rgb), 0.05);
+        }
+        .skill-item-card:hover i { transform: scale(1.1); }
+
+        /* --- Retícula de Proyectos Estilo Editorial --- */
+        .projects-masonry {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .project-card-editorial {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .project-img-container {
+            width: 100%; aspect-ratio: 16 / 10; overflow: hidden;
+            background: rgba(0,0,0,0.2); position: relative;
+        }
+        .project-card-editorial img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-meta-content { padding: 30px; }
+        .project-meta-content h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+        .project-meta-content p { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
+        
+        /* Efectos Hover Proyectos */
+        .project-card-editorial:hover {
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .project-card-editorial:hover img { transform: scale(1.04); }
+
+        /* Retícula de Sub-proyectos dentro de modales (Cambiado el estilo polaroid antiguo por cajas de arte asimétricas) */
+        .art-modern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 10px 0;
+        }
+        .art-box {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        .art-box img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
+        .art-box p { font-family: var(--font-mono); font-size: 0.85rem; margin: 0; text-align: left; color: var(--text-main); }
+        .art-box:hover { border-color: var(--accent); transform: scale(1.02); }
+
+        /* --- Caja de Contacto Estilo Brutalista --- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .contact-card-modern {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .contact-card-modern h6 { font-family: var(--font-mono); font-size: 1rem; font-weight: 500; margin: 0; }
+        .contact-card-modern i { color: var(--text-muted); transition: color 0.3s; }
+        .contact-card-modern:hover {
+            border-color: var(--accent);
+            background: linear-gradient(145deg, var(--card-bg), rgba(var(--accent-rgb), 0.03));
+            transform: translateY(-3px);
+        }
+        .contact-card-modern:hover i { color: var(--accent); }
+
+        /* --- Ajustes Avanzados de Modales --- */
+        .modal-content { 
+            background-color: var(--modal-bg); 
             border: 1px solid var(--border); 
-            border-radius: 15px; 
-            padding: 20px; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            height: 100%; 
+            border-radius: 32px; 
+            color: var(--text-main);
+            padding: 20px;
         }
+        .modal-header { border: none; padding-bottom: 0; }
+        .btn-close { filter: var(--btn-close); opacity: 0.7; }
+        .btn-close:hover { opacity: 1; }
         
-        .project-card:hover { 
-            border-color: var(--accent); 
-            transform: translateY(-5px); 
+        .btn-oval { 
+            border: 1px solid var(--text-main); background: transparent; 
+            color: var(--text-main); border-radius: 50px; padding: 12px 32px; 
+            text-decoration: none; display: inline-block; transition: 0.3s ease;
+            font-family: var(--font-mono); font-size: 0.9rem;
         }
-        
-        .project-card img { 
-            border-radius: 10px; 
-            margin-bottom: 15px; 
-            width: 100%; 
-            height: auto;
-            aspect-ratio: 16 / 9;
-            object-fit: contain; 
-            background-color: rgba(0,0,0,0.1);
+        .btn-oval:hover { background: var(--text-main); color: var(--bg-main); transform: translateY(-2px); }
+        .btn-back { 
+            background: none; border: none; color: var(--text-muted); 
+            font-size: 0.95rem; font-family: var(--font-mono); cursor: pointer; 
+            transition: color 0.2s; display: flex; align-items: center; gap: 8px;
         }
+        .btn-back:hover { color: var(--text-main); }
 
-        .polaroid-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; padding: 20px; }
-        .polaroid { background: #fff; padding: 10px 10px 35px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); position: relative; transition: 0.3s; cursor: pointer; }
-        .polaroid img { width: 100%; height: 160px; object-fit: cover; }
-        .polaroid p { color: #333; font-family: 'JetBrains Mono'; font-size: 0.7rem; margin: 10px 0 0 0; text-align: right; font-weight: bold; }
-        .tape { position: absolute; top: -10px; left: 35%; width: 60px; height: 20px; background-color: rgba(255,255,255,0.3); backdrop-filter: blur(2px); }
-
-        /* Modales Dinámicos */
-        .modal-content { background-color: var(--modal-bg); border: 1px solid var(--border); border-radius: 25px; color: var(--modal-text); transition: background-color 0.3s ease, color 0.3s ease; }
-        .btn-close { filter: var(--btn-close); }
-        
-        .btn-oval { border: 2px solid var(--modal-text); background: transparent; color: var(--modal-text); border-radius: 50px; padding: 10px 30px; text-decoration: none; display: inline-block; transition: 0.3s; }
-        .btn-oval:hover { background: var(--modal-text); color: var(--modal-bg); }
-
-        .btn-back { background: none; border: none; color: var(--modal-text); font-size: 1.2rem; cursor: pointer; margin-right: 15px; }
-
-        /* Carousel en modal */
         #carouselIllustration .carousel-item img, #carousel3D .carousel-item img {
-            max-height: 500px; 
-            object-fit: contain; 
-            width: 100%;
+            max-height: 550px; object-fit: contain; width: 100%; border-radius: 12px;
         }
 
-        /* Contacto */
-        .contact-box { padding: 30px; border: 1px solid var(--border); border-radius: 15px; transition: 0.3s; text-decoration: none; color: inherit; display: block; text-align: center; }
-        .contact-box:hover { background-color: var(--accent); color: #fff !important; }
+        /* --- Responsive Design Avanzado --- */
+        @media (max-width: 1200px) {
+            section { padding: 100px 40px; }
+            .display-title { font-size: 3.5rem; }
+        }
 
-        /* Responsive */
-        @media (max-width: 991.98px) and (orientation: portrait) {
-            .sidebar { transform: translateX(-100%); width: 260px; }
-            .sidebar.active { transform: translateX(0); }
-            .menu-toggle { display: block; }
+        @media (max-width: 991px) {
+            .sidebar { transform: translateX(-100%); width: 280px; }
+            .sidebar.active { transform: translateX(0); box-shadow: 30px 0 60px rgba(0,0,0,0.5); }
+            .menu-toggle { display: flex; }
             .main-content { margin-left: 0; }
-            .polaroid-grid { grid-template-columns: 1fr; }
+            section { padding: 100px 30px; }
+            .projects-masonry { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            #inicio { height: auto; padding-top: 160px; padding-bottom: 100px; }
+        }
+
+        @media (max-width: 576px) {
+            .display-title { font-size: 2.6rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .profile-wrapper { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body data-theme="dark">
+
+    <!-- Anillo de Cursor Personalizado Interactivo -->
+    <div id="custom-cursor"></div>
 
     <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('active')">
         <i class="fa-solid fa-bars"></i>
     </button>
 
     <nav class="sidebar">
-        <a href="#inicio" class="nav-link-custom"><i class="fa-solid fa-house"></i> <span data-key="nav-home">Inicio</span></a>
-        <a href="#sobre-mi" class="nav-link-custom"><i class="fa-solid fa-user"></i> <span data-key="nav-about">Sobre Mí</span></a>
-        <a href="#habilidades" class="nav-link-custom"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-key="nav-skills">Habilidades</span></a>
-        <a href="#proyectos" class="nav-link-custom"><i class="fa-solid fa-heart"></i> <span data-key="nav-projects">Proyectos</span></a>
-        <a href="#contacto" class="nav-link-custom"><i class="fa-solid fa-envelope"></i> <span data-key="nav-contact">Contacto</span></a>
+        <div class="brand-logo">Ángela S.<span>Díaz</span></div>
         
-        <div class="nav-item">
-            <button class="nav-link-custom" onclick="this.nextElementSibling.classList.toggle('show')">
-                <i class="fa-solid fa-briefcase"></i> <span data-key="nav-cv">Curriculum</span>
-            </button>
-            <div class="collapse-menu">
-                <a href="https://drive.google.com/file/d/1jFYblduqJbAQPlV5EWYGL9Sr-EW6Hgpt/view?usp=sharing" target="_blank">Español</a>
-                <a href="assets/cv-en.pdf" target="_blank">English</a>
+        <div class="nav-links-wrapper">
+            <a href="#inicio" class="nav-link-custom"><span data-key="nav-home">Inicio</span></a>
+            <a href="#sobre-mi" class="nav-link-custom"><span data-key="nav-about">Sobre Mí</span></a>
+            <a href="#habilidades" class="nav-link-custom"><span data-key="nav-skills">Habilidades</span></a>
+            <a href="#proyectos" class="nav-link-custom"><span data-key="nav-projects">Proyectos</span></a>
+            <a href="#contacto" class="nav-link-custom"><span data-key="nav-contact">Contacto</span></a>
+            
+            <div class="mt-3">
+                <button class="nav-link-custom" onclick="this.nextElementSibling.classList.toggle('show')">
+                    <span data-key="nav-cv">Curriculum</span> <i class="fa-solid fa-chevron-down ms-2" style="font-size:0.7rem;"></i>
+                </button>
+                <div class="collapse-menu">
+                    <a href="https://drive.google.com/file/d/1jFYblduqJbAQPlV5EWYGL9Sr-EW6Hgpt/view?usp=sharing" target="_blank">// Español</a>
+                    <a href="assets/cv-en.pdf" target="_blank">// English</a>
+                </div>
             </div>
         </div>
 
-        <div class="nav-item" onclick="toggleTheme()">
-            <div class="nav-link-custom"><i id="theme-icon" class="fa-solid fa-sun"></i> <span id="theme-text" data-key="theme-light">Modo Claro</span></div>
-        </div>
-
-        <div class="mt-auto border-top border-secondary pt-3">
-            <button class="nav-link-custom" onclick="this.nextElementSibling.classList.toggle('show')">
-                <i class="fa-solid fa-language"></i> <span data-key="nav-lang">Idioma</span>
-            </button>
-            <div class="collapse-menu show">
-                <span onclick="setLanguage('es')">Español</span>
-                <span onclick="setLanguage('en')">English</span>
+        <div class="mt-auto pt-4">
+            <div class="nav-link-custom" onclick="toggleTheme()" style="cursor:pointer;">
+                <i id="theme-icon" class="fa-solid fa-sun me-2"></i> <span id="theme-text" data-key="theme-light">Modo Claro</span>
+            </div>
+            
+            <div class="mt-3 border-top border-secondary pt-3" style="--bs-border-opacity: 0.15;">
+                <span class="text-muted d-block mb-2" style="font-size:0.75rem; font-family:var(--font-mono);" data-key="nav-lang">Idioma</span>
+                <div class="d-flex gap-3" style="font-family: var(--font-mono); font-size: 0.85rem;">
+                    <span class="text-white" style="cursor:pointer;" onclick="setLanguage('es')">ES</span>
+                    <span class="text-muted" style="cursor:pointer;" onclick="setLanguage('en')">EN</span>
+                </div>
             </div>
         </div>
     </nav>
 
     <div class="main-content">
-        <section id="inicio" style="border:none;">
-            <header class="custom-header">
-                <img class="img-fluid rounded-circle mb-4 profile-img" src="assets/25037.jpg" alt="Angela" />
-                <h1 class="display-5 fw-bold text-white">Ángela Sánchez Díaz</h1>
-                <p class="fs-4 fw-light opacity-75 tech-font text-white" data-key="header-subtitle">Diseño y Desarrollo de Videojuegos</p>
-            </header>
+        
+        <!-- SECCIÓN HERO -->
+        <section id="inicio">
+            <div class="marquee-bg">
+                <div class="marquee-inner">Creative Developer — Game Designer — Digital Artist —&nbsp;</div>
+                <div class="marquee-inner">Creative Developer — Game Designer — Digital Artist —&nbsp;</div>
+            </div>
+            <div class="hero-container scroll-reveal">
+                <div class="profile-wrapper">
+                    <img class="profile-img" src="assets/25037.jpg" alt="Angela" />
+                    <div>
+                        <span class="subtitle-tech" data-key="header-subtitle">Diseño y Desarrollo de Videojuegos</span>
+                        <h1 class="display-title">Ángela Sánchez Díaz</h1>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="sobre-mi">
-            <h2 class="mb-5 tech-font">01. <span data-key="nav-about">Sobre Mí</span></h2>
-            <div class="lead" style="text-align: justify;" data-key="about-content">
-                <p>Soy estudiante de Diseño y Desarrollo de Videojuegos, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
+        <!-- SOBRE MÍ -->
+        <section id="sobre-mi" class="scroll-reveal">
+            <span class="section-label">01 / Concept</span>
+            <h2 class="section-title" data-key="nav-about">Sobre Mí</h2>
+            <div class="about-text" data-key="about-content">
+                <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
                 <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
-                <p>En este portafolio encontrarás una mezcla de mis trabajos en videojuegos, 3D, ilustración y proyectos digitales.</p>
-                <p class="fw-bold">¡Si buscas a alguien con ganas e ilusión, échale un ojo a mi trabajo!</p>
+                <p>En este espacio encontrarás una cuidada selección de mis trabajos en arquitectura de videojuegos, modelado 3D, ilustración y desarrollo estratégico digital.</p>
             </div>
         </section>
 
-        <section id="habilidades">
-            <h2 class="mb-5 tech-font">02. <span data-key="nav-skills">Habilidades</span></h2>
-            <div class="row g-5 text-center">
-                <div class="col-6 col-md-3"><i class="fa-brands fa-unity fa-3x mb-2"></i><p>Unity</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-cube fa-3x mb-2"></i><p>3D Modeling</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-paintbrush fa-3x mb-2"></i><p>Texturing</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-person-walking fa-3x mb-2"></i><p>Animación</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-video fa-3x mb-2"></i><p>Producción de Vídeo</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-window-restore fa-3x mb-2"></i><p>UI/UX Design</p></div>
-                <div class="col-6 col-md-3"><i class="fa-solid fa-bezier-curve fa-3x mb-2"></i><p>Diseño Gráfico</p></div>
-                <div class="col-6 col-md-3"><i class="fa-brands fa-html5 fa-3x mb-2"></i><p>Web Design</p></div>
-                <div class="col-12 mt-4"><i class="fa-solid fa-pen-nib fa-3x mb-2"></i><p>Ilustración</p></div>
+        <!-- HABILIDADES -->
+        <section id="habilidades" class="scroll-reveal">
+            <span class="section-label">02 / System</span>
+            <h2 class="section-title" data-key="nav-skills">Habilidades</h2>
+            <div class="skills-grid">
+                <div class="skill-item-card"><i class="fa-brands fa-unity fa-2x"></i><p>Unity Engine</p></div>
+                <div class="skill-item-card"><i class="fa-solid fa-cube fa-2x"></i><p>3D Modeling</p></div>
+                <div class="skill-item-card"><i class="fa-solid fa-paintbrush fa-2x"></i><p>Texturing</p></div>
+                <div class="skill-item-card"><i class="fa-solid fa-person-walking fa-2x"></i><p>Animación</p></div>
+                <div class="skill-item-card"><i class="fa-solid fa-video fa-2x"></i><p>Producción Vídeo</p></div>
+                <div class="skill-item-card"><i class="fa-solid fa-window-restore fa-2x"></i><p>UI/UX Design</p></div>
+                <div class="skill-item-card"><i class="fa-solid fa-bezier-curve fa-2x"></i><p>Diseño Gráfico</p></div>
+                <div class="skill-item-card"><i class="fa-brands fa-html5 fa-2x"></i><p>Web Design</p></div>
             </div>
         </section>
 
-        <section id="proyectos">
-            <h2 class="mb-5 tech-font">03. <span data-key="nav-projects">Proyectos</span></h2>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalVideojuegos">
-                        <img src="assets/1.png" alt="videojuegosCover">
-                        <h3 class="h5 fw-bold">Videojuegos</h3>
-                        <p class="small opacity-75">Haz clic para ver mis proyectos de videojuegos.</p>
+        <!-- PROYECTOS -->
+        <section id="proyectos" class="scroll-reveal">
+            <span class="section-label">03 / Output</span>
+            <h2 class="section-title" data-key="nav-projects">Proyectos</h2>
+            
+            <div class="projects-masonry">
+                <!-- Card 1 -->
+                <div class="project-card-editorial" data-bs-toggle="modal" data-bs-target="#modalVideojuegos">
+                    <div class="project-img-container"><img src="assets/1.png" alt="videojuegosCover"></div>
+                    <div class="project-meta-content">
+                        <h3>Videojuegos</h3>
+                        <p>Interactivos, mecánicas y desarrollo de entornos jugables.</p>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="project-card" data-bs-toggle="modal" data-bs-target="#modal3D">
-                        <img src="assets/4.png" alt="3dCover">
-                        <h3 class="h5 fw-bold">3D y Texturizado</h3>
-                        <p class="small opacity-75">Pulsa para ver algunos proyectos de modelado, texturizado y renders.</p>
+                <!-- Card 2 -->
+                <div class="project-card-editorial" data-bs-toggle="modal" data-bs-target="#modal3D">
+                    <div class="project-img-container"><img src="assets/4.png" alt="3dCover"></div>
+                    <div class="project-meta-content">
+                        <h3>3D y Texturizado</h3>
+                        <p>Modelado de props, entornos y optimización de materiales.</p>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalIlustracion">
-                        <img src="assets/2.png" alt="ilustracionCover">
-                        <h3 class="h5 fw-bold">Ilustración</h3>
-                        <p class="small opacity-75">Haz clic para ver más de mi arte digital y concept art!</p>
+                <!-- Card 3 -->
+                <div class="project-card-editorial" data-bs-toggle="modal" data-bs-target="#modalIlustracion">
+                    <div class="project-img-container"><img src="assets/2.png" alt="ilustracionCover"></div>
+                    <div class="project-meta-content">
+                        <h3>Ilustración Artística</h3>
+                        <p>Concept art digital, cartelería y composición visual.</p>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="project-card" data-bs-toggle="modal" data-bs-target="#modalMarketing">
-                        <img src="assets/3.png" alt="marketingCover">
-                        <h3 class="h5 fw-bold">Web & Digital Marketing</h3>
-                        <p class="small opacity-75">Haz clic para ver parte de mi diseño web y diseño gráfico.</p>
+                <!-- Card 4 -->
+                <div class="project-card-editorial" data-bs-toggle="modal" data-bs-target="#modalMarketing">
+                    <div class="project-img-container"><img src="assets/3.png" alt="marketingCover"></div>
+                    <div class="project-meta-content">
+                        <h3>Web & Digital Marketing</h3>
+                        <p>Desarrollo de interfaces web de marca y dirección de arte.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contacto" style="border:none;">
-            <h2 class="mb-5 tech-font">04. <span data-key="nav-contact">Contacto</span></h2>
-            <div class="row g-4 text-center">
-                <div class="col-md-3">
-                    <a href="mailto:angelasanchezd04@gmail.com" class="contact-box">
-                        <i class="fa-solid fa-envelope fa-2x mb-3"></i><h6>Gmail</h6>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://www.linkedin.com/in/angela-sanchez-53388a3a8/" target="_blank" class="contact-box">
-                        <i class="fa-brands fa-linkedin fa-2x mb-3"></i><h6>LinkedIn</h6>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://angelasdiaz.itch.io" target="_blank" class="contact-box">
-                        <i class="fa-brands fa-itch-io fa-2x mb-3"></i><h6>Itch.io</h6>
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="https://instagram.com/deex.ddv" target="_blank" class="contact-box">
-                        <i class="fa-brands fa-instagram fa-2x mb-3"></i><h6>Instagram</h6>
-                    </a>
-                </div>
+        <!-- CONTACTO -->
+        <section id="contacto" class="scroll-reveal">
+            <span class="section-label">04 / Connection</span>
+            <h2 class="section-title" data-key="nav-contact">Contacto</h2>
+            
+            <div class="contact-grid">
+                <a href="mailto:angelasanchezd04@gmail.com" class="contact-card-modern">
+                    <i class="fa-solid fa-envelope fa-2x"></i><h6>Gmail</h6>
+                </a>
+                <a href="https://www.linkedin.com/in/angela-sanchez-53388a3a8/" target="_blank" class="contact-card-modern">
+                    <i class="fa-brands fa-linkedin fa-2x"></i><h6>LinkedIn</h6>
+                </a>
+                <a href="https://angelasdiaz.itch.io" target="_blank" class="contact-card-modern">
+                    <i class="fa-brands fa-itch-io fa-2x"></i><h6>Itch.io</h6>
+                </a>
+                <a href="https://instagram.com/deex.ddv" target="_blank" class="contact-card-modern">
+                    <i class="fa-brands fa-instagram fa-2x"></i><h6>Instagram</h6>
+                </a>
             </div>
         </section>
     </div>
 
+    <!-- MODAL PRINCIPAL: VIDEOJUEGOS -->
     <div class="modal fade" id="modalVideojuegos" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header border-0"><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-header"><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
                 <div class="modal-body">
-                    <div class="polaroid-grid">
-                        <div class="polaroid" style="transform: rotate(-3deg);" data-bs-toggle="modal" data-bs-target="#modalSpyware">
-                            <div class="tape"></div>
+                    <div class="art-modern-grid">
+                        <div class="art-box" data-bs-toggle="modal" data-bs-target="#modalSpyware">
                             <img src="assets/spyw4re.png" alt="Spyw4re">
-                            <p>Spyw4re - Game Jam Project</p>
+                            <p>Spyw4re — Game Jam</p>
                         </div>
-                        <div class="polaroid" style="transform: rotate(3deg);" data-bs-toggle="modal" data-bs-target="#modalCat">
-                            <div class="tape"></div>
+                        <div class="art-box" data-bs-toggle="modal" data-bs-target="#modalCat">
                             <img src="assets/catpuccino.png" alt="Catpuccinos">
-                            <p>Catpuccino - Game Project</p>
+                            <p>Catpuccino — Desktop Game</p>
                         </div>
-                        <div class="polaroid" style="transform: rotate(-2deg);" data-bs-toggle="modal" data-bs-target="#modalMiau">
-                            <div class="tape"></div>
+                        <div class="art-box" data-bs-toggle="modal" data-bs-target="#modalMiau">
                             <img src="assets/miaupet.png" alt="Miaupet">
-                            <p>Miaupet - Mobile Game</p>
+                            <p>Miaupet — Mobile Project</p>
                         </div>
                     </div>
                 </div>
@@ -308,18 +519,19 @@
         </div>
     </div>
 
+    <!-- MODALES DE DETALLE DE JUEGOS -->
     <div class="modal fade" id="modalSpyware" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content text-center">
-                <div class="modal-header border-0">
+            <div class="modal-content">
+                <div class="modal-header">
                     <button type="button" class="btn-back" data-bs-toggle="modal" data-bs-target="#modalVideojuegos"><i class="fa-solid fa-arrow-left"></i> Volver</button>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body p-4">
-                    <img src="assets/spyw4re.png" class="img-fluid rounded mb-4" style="aspect-ratio: 16/9; object-fit: contain;">
-                    <h2 class="h4">Spyw4re</h2>
-                    <p class="opacity-75 text-start">Toma el control de los sistemas de vigilancia como guardia de seguridad. Tu misión es coordinar las cámaras y puntos de acceso para guiar a un paciente hacia la salida antes de que el edificio colapse por completo.</p>
-                    <a href="https://botpa.itch.io/spyw4re" target="_blank" class="btn-oval mt-3">Ver más sobre <em>Spyw4re</em></a>
+                <div class="modal-body p-4 text-center">
+                    <img src="assets/spyw4re.png" class="img-fluid rounded-4 mb-4" style="aspect-ratio: 16/9; object-fit: cover; width:100%;">
+                    <h2 class="h3 mb-3 fw-bold">Spyw4re</h2>
+                    <p class="text-muted text-start mb-4">Toma el control de los sistemas de vigilancia como guardia de seguridad. Tu misión es coordinar las cámaras y puntos de acceso para guiar a un paciente hacia la salida antes de que el edificio colapse por completo.</p>
+                    <a href="https://botpa.itch.io/spyw4re" target="_blank" class="btn-oval">Ver Proyecto en Itch.io</a>
                 </div>
             </div>
         </div>
@@ -327,16 +539,16 @@
 
     <div class="modal fade" id="modalCat" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content text-center">
-                <div class="modal-header border-0">
+            <div class="modal-content">
+                <div class="modal-header">
                     <button type="button" class="btn-back" data-bs-toggle="modal" data-bs-target="#modalVideojuegos"><i class="fa-solid fa-arrow-left"></i> Volver</button>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body p-4">
-                    <img src="assets/catpuccino.png" class="img-fluid rounded mb-4" style="aspect-ratio: 16/9; object-fit: contain;">
-                    <h2 class="h4">Catpuccino</h2>
-                    <p class="opacity-75 text-start">Sumérgete en la gestión de una acogedora cafetería. Prepara las mejores recetas de café, atiende a tus clientes y expande tu colección de adorables gatos para crear el ambiente perfecto.</p>
-                    <a href="https://mangostudiourjc.itch.io/catpuccino" target="_blank" class="btn-oval mt-3">Ver más sobre <em>Catpuccino</em></a>
+                <div class="modal-body p-4 text-center">
+                    <img src="assets/catpuccino.png" class="img-fluid rounded-4 mb-4" style="aspect-ratio: 16/9; object-fit: cover; width:100%;">
+                    <h2 class="h3 mb-3 fw-bold">Catpuccino</h2>
+                    <p class="text-muted text-start mb-4">Sumérgete en la gestión de una acogedora cafetería. Prepara las mejores recetas de café, atiende a tus clientes y expande tu colección de adorables gatos para crear el ambiente perfecto.</p>
+                    <a href="https://mangostudiourjc.itch.io/catpuccino" target="_blank" class="btn-oval">Ver Proyecto en Itch.io</a>
                 </div>
             </div>
         </div>
@@ -344,33 +556,36 @@
 
     <div class="modal fade" id="modalMiau" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content text-center">
-                <div class="modal-header border-0">
+            <div class="modal-content">
+                <div class="modal-header">
                     <button type="button" class="btn-back" data-bs-toggle="modal" data-bs-target="#modalVideojuegos"><i class="fa-solid fa-arrow-left"></i> Volver</button>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body p-4">
-                    <img src="assets/miaupet.png" class="img-fluid rounded mb-4" style="aspect-ratio: 16/9; object-fit: contain;">
-                    <h2 class="h4">Miaupet</h2>
-                    <p class="opacity-75 text-start">Tu compañero ideal. Cuida, alimenta y juega con tu mascota virtual.</p>
-                    <a href="https://mangostudiourjc.itch.io/mioupet" target="_blank" class="btn-oval mt-3">Ver más sobre <em>Miaupet</em></a>
+                <div class="modal-body p-4 text-center">
+                    <img src="assets/miaupet.png" class="img-fluid rounded-4 mb-4" style="aspect-ratio: 16/9; object-fit: cover; width:100%;">
+                    <h2 class="h3 mb-3 fw-bold">Miaupet</h2>
+                    <p class="text-muted text-start mb-4">Tu compañero ideal en plataformas móviles. Gestiona las necesidades básicas, diviértete con minijuegos y personaliza el entorno de tu mascota virtual.</p>
+                    <a href="https://mangostudiourjc.itch.io/mioupet" target="_blank" class="btn-oval">Ver Proyecto en Itch.io</a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- MODAL: ILUSTRACIÓN -->
     <div class="modal fade" id="modalIlustracion" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content text-center">
-                <div class="modal-header border-0">
-                    <h4 class="modal-title w-100 tech-font">ILUSTRACIONES</h4>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title w-100 fw-bold fs-5" style="font-family: var(--font-mono)">ILUSTRACIONES</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body p-4">
-                    <h5 class="tech-font" style="color: var(--accent);">Portada del cartel de fiestas de Almonacid de Toledo (2021)</h5>
-                    <p class="opacity-75 text-start mb-4">Diseño de la ilustración principal para el cartel de las fiestas patronales de Almonacid de Toledo en 2021, reflejando la tradición y el espíritu festivo local.</p>
+                <div class="modal-body p-3">
+                    <div class="mb-4 p-3 rounded-4" style="background: var(--bg-alt); border: 1px solid var(--border);">
+                        <h5 class="fw-bold mb-2 fs-6 text-uppercase" style="color: var(--accent); font-family: var(--font-mono);">Cartelería Oficial Festiva (2021)</h5>
+                        <p class="text-muted small m-0 text-justify">Diseño de la obra e ilustración principal para el cartel de las fiestas patronales de Almonacid de Toledo en 2021, conceptualizando las raíces culturales tradicionales con técnicas digitales modernas.</p>
+                    </div>
                     
-                    <h5 class="tech-font mt-5 mb-3" style="color: var(--accent);">Galería de Ilustraciones</h5>
+                    <h5 class="fw-bold mb-3 fs-6 text-uppercase px-2" style="color: var(--accent); font-family: var(--font-mono);">Galería Completa</h5>
                     <div id="carouselIllustration" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner"></div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselIllustration" data-bs-slide="prev">
@@ -385,15 +600,16 @@
         </div>
     </div>
 
+    <!-- MODAL: 3D -->
     <div class="modal fade" id="modal3D" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content text-center">
-                <div class="modal-header border-0">
-                    <h4 class="modal-title w-100 tech-font">MODELADO Y TEXTURIZADO 3D</h4>
+                <div class="modal-header">
+                    <h4 class="modal-title w-100 fw-bold fs-5" style="font-family: var(--font-mono)">MODELADO Y TEXTURIZADO 3D</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="modal-body p-4">
-                    <p class="opacity-75 text-start mb-4">Trabajos realizados en modelado 3D, enfocados en assets para videojuegos, props y entornos.</p>
+                <div class="modal-body p-3">
+                    <p class="text-muted text-start mb-4 px-2">Desglose de assets poligonales, props escénicos y mapas texturizados optimizados para pipelines de renderizado en tiempo real.</p>
                     <div id="carousel3D" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner"></div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carousel3D" data-bs-slide="prev">
@@ -408,37 +624,37 @@
         </div>
     </div>
 
+    <!-- MODAL: MARKETING & BRANDING -->
     <div class="modal fade" id="modalMarketing" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h4 class="modal-title w-100 tech-font text-center">Web & Digital Marketing</h4>
+                <div class="modal-header">
+                    <h4 class="modal-title w-100 fw-bold fs-5 text-center" style="font-family: var(--font-mono)">WEB & DIGITAL MARKETING</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div class="mb-5">
-                        <h5 class="tech-font mb-3" style="color: var(--accent);">Diseño Institucional</h5>
-                        <p class="opacity-75 mb-3">En 2024, colaboré con el <strong>Ayuntamiento de Almonacid de Toledo</strong> en la creación de un cartel turístico.</p>
-                        <h5 class="tech-font mb-3" style="color: var(--accent);">Diseño cartel para Spyw4re Gerrilla 2024</h5>
-                        <div class="text-center">
-                            <img src="assets/spywareCartel.PNG" class="img-fluid rounded shadow-sm" style="max-height: 400px; width: auto; object-fit: contain;">
+                        <h5 class="fw-bold mb-2 fs-6 text-uppercase" style="color: var(--accent); font-family: var(--font-mono);">Diseño Institucional</h5>
+                        <p class="text-muted mb-3">Colaboración de diseño gráfico con el Ayuntamiento de Almonacid de Toledo para el despliegue del área turística e identitaria regional.</p>
+                        
+                        <h5 class="fw-bold mb-3 fs-6 text-uppercase mt-4" style="color: var(--accent); font-family: var(--font-mono);">Material Gráfico / Spyw4re</h5>
+                        <div class="text-center bg-black p-3 rounded-4" style="--bs-bg-opacity:0.3;">
+                            <img src="assets/spywareCartel.PNG" class="img-fluid rounded-3 shadow" style="max-height: 380px; width: auto;">
                         </div>
                     </div>
-                    <hr class="opacity-25">
-                    <div class="mb-5">
-                        <h5 class="tech-font mb-3" style="color: var(--accent);">Gestión de Marca y Contenido</h5>
-                        <p class="opacity-75">Lideré la estrategia de contenidos para el proyecto ficticio <strong>Mango Studio</strong>.</p>
+                    <div class="mb-5 border-top border-secondary pt-4" style="--bs-border-opacity:0.1;">
+                        <h5 class="fw-bold mb-2 fs-6 text-uppercase" style="color: var(--accent); font-family: var(--font-mono);">Dirección de Arte y Contenido</h5>
+                        <p class="text-muted">Desarrollo integral de la identidad corporativa y despliegue estratégico multimedia para Mango Studio.</p>
                     </div>
-                    <hr class="opacity-25">
-                    <div class="mb-4">
-                        <h5 class="tech-font mb-3" style="color: var(--accent);">Desarrollo Web y Branding</h5>
-                        <div class="row g-4">
-                            <div class="col-md-6"><img src="assets/WebMango.png" class="img-fluid rounded"></div>
-                            <div class="col-md-6"><img src="assets/logos.PNG" class="img-fluid rounded"></div>
+                    <div class="mb-4 border-top border-secondary pt-4" style="--bs-border-opacity:0.1;">
+                        <h5 class="fw-bold mb-3 fs-6 text-uppercase" style="color: var(--accent); font-family: var(--font-mono);">Ecosistema Web & Branding</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6"><img src="assets/WebMango.png" class="img-fluid rounded-3"></div>
+                            <div class="col-md-6"><img src="assets/logos.PNG" class="img-fluid rounded-3"></div>
                         </div>
                     </div>
                     <div class="text-center mt-5">
-                        <a href="https://mangostudiosa.github.io/Catpuccino/" target="_blank" class="btn-oval">Ver Web de Mango Studio</a>
+                        <a href="https://mangostudiosa.github.io/Catpuccino/" target="_blank" class="btn-oval">Explorar Sitio de Mango Studio</a>
                     </div>
                 </div>
             </div>
@@ -451,6 +667,38 @@
             es: { "nav-home": "Inicio", "nav-about": "Sobre Mí", "nav-skills": "Habilidades", "nav-projects": "Proyectos", "nav-contact": "Contacto", "nav-cv": "Curriculum", "nav-lang": "Idioma", "theme-light": "Modo Claro", "theme-dark": "Modo Oscuro", "header-subtitle": "Diseño y Desarrollo de Videojuegos" },
             en: { "nav-home": "Home", "nav-about": "About Me", "nav-skills": "Skills", "nav-projects": "Projects", "nav-contact": "Contact", "nav-cv": "Resume", "nav-lang": "Language", "theme-light": "Light Mode", "theme-dark": "Dark Mode", "header-subtitle": "Game Design & Development" }
         };
+
+        // --- Lógica del Custom Cursor Avanzado ---
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursor.style.opacity = '1';
+        });
+        
+        // Efecto magnético/escala en elementos clicables
+        const interactiveElements = document.querySelectorAll('a, button, .project-card-editorial, .art-box, span');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.8)';
+                cursor.style.backgroundColor = 'rgba(181, 126, 220, 0.1)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.backgroundColor = 'transparent';
+            });
+        });
+
+        // --- Lógica Scroll Reveal (Intersection Observer) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.05 });
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
 
         function setLanguage(lang) {
             document.querySelectorAll('[data-key]').forEach(el => {
@@ -465,22 +713,21 @@
             const isDark = body.getAttribute('data-theme') === 'dark';
             const newTheme = isDark ? 'light' : 'dark';
             body.setAttribute('data-theme', newTheme);
-            document.getElementById('theme-icon').className = newTheme === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+            document.getElementById('theme-icon').className = newTheme === 'light' ? 'fa-solid fa-moon me-2' : 'fa-solid fa-sun me-2';
             document.getElementById('theme-text').innerText = newTheme === 'light' ? translations[getCurrentLanguage()]['theme-dark'] : translations[getCurrentLanguage()]['theme-light'];
         }
 
         function getCurrentLanguage() { return localStorage.getItem('lang') || 'es'; }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Ilustraciones
+            // Inicializar Carruseles
             const carouselInnerIllus = document.querySelector('#carouselIllustration .carousel-inner');
             let illusHTML = '';
             for (let i = 1; i <= 16; i++) {
                 illusHTML += `<div class="carousel-item${i === 1 ? ' active' : ''}"><img src="assets/ilustracion (${i}).PNG" class="d-block w-100"></div>`;
             }
-            carouselInnerIllus.innerHTML = illusHTML;
+            if(carouselInnerIllus) carouselInnerIllus.innerHTML = illusHTML;
 
-            // Carrusel 3D
             const carouselInner3D = document.querySelector('#carousel3D .carousel-inner');
             let threeDHTML = '';
             threeDHTML += `<div class="carousel-item active"><img src="assets/4.png" class="d-block w-100"></div>`;
@@ -488,7 +735,7 @@
             for (let i = 1; i <= 7; i++) {
                 threeDHTML += `<div class="carousel-item"><img src="assets/modelado (${i}).png" class="d-block w-100"></div>`;
             }
-            carouselInner3D.innerHTML = threeDHTML;
+            if(carouselInner3D) carouselInner3D.innerHTML = threeDHTML;
             
             document.body.setAttribute('data-theme', 'dark');
             setLanguage(getCurrentLanguage());
