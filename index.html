@@ -143,14 +143,20 @@
         }
         .brand-logo span { color: var(--accent); }
 
+        /* === CONFIGURACIÓN Y COLOR DEL ICONO DE MENÚ RESPONSIVE === */
         .menu-toggle {
             display: none;
             position: fixed; top: 25px; right: 25px;
-            z-index: 1100; background: var(--text-main);
-            color: var(--bg-main); border: none; width: 45px; height: 45px;
+            z-index: 1100; 
+            background: #ffffff; /* Color de fondo del botón circular blanco */
+            color: var(--accent); /* Cambiado al morado correspondiente para las barras del icono */
+            border: none; width: 45px; height: 45px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: transform 0.2s ease, color 0.2s ease;
         }
+        .menu-toggle:active { transform: scale(0.9); }
 
         .nav-links-wrapper { display: flex; flex-direction: column; gap: 12px; }
 
@@ -180,7 +186,7 @@
         section { padding: 140px 80px; position: relative; }
         section:nth-child(even) { background-color: var(--bg-alt); }
 
-        /* === RESTAURACIÓN EXACTA DE TU SECCIÓN HERO ORIGINAL === */
+        /* --- Hero Section Editorial --- */
         #inicio { 
             height: 100vh; display: flex; align-items: center; justify-content: flex-start;
             overflow: hidden; padding-top: 0; padding-bottom: 0;
@@ -210,7 +216,6 @@
         
         .display-title { font-size: 4.5rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: 15px; }
         .subtitle-tech { font-family: var(--font-titles); color: var(--accent); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em; }
-        /* === FIN RESTAURACIÓN HERO === */
 
         /* --- Secciones Tipográficas --- */
         .section-label { font-family: var(--font-editorial); font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; display: block; }
@@ -389,11 +394,11 @@
 
     <div id="custom-cursor"></div>
 
-    <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('active')">
-        <i class="fa-solid fa-bars"></i>
+    <button class="menu-toggle" id="menu-toggle-btn">
+        <i class="fa-solid fa-bars" id="menu-icon"></i>
     </button>
 
-    <nav class="sidebar">
+    <nav class="sidebar" id="sidebar-menu">
         <div class="brand-logo">Ángela S.<span>Díaz</span></div>
         
         <div class="nav-links-wrapper">
@@ -701,6 +706,40 @@
             }, 3500); 
         });
 
+        // === INTERACCIÓN DEL ICONO RESPONSIVE (ABRIR / OCULTAR MENÚ) ===
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const sidebar = document.getElementById('sidebar-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        toggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('active');
+            
+            // Alterna el icono de barras (hamburguesa) a una 'X' de cerrar para dar feedback visual
+            if (sidebar.classList.contains('active')) {
+                menuIcon.className = 'fa-solid fa-xmark';
+            } else {
+                menuIcon.className = 'fa-solid fa-bars';
+            }
+        });
+
+        // Cerrar el menú automáticamente al hacer clic en cualquier enlace del menú (móvil)
+        document.querySelectorAll('.nav-link-custom').forEach(link => {
+            link.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                menuIcon.className = 'fa-solid fa-bars';
+            });
+        });
+
+        // Cerrar el menú si se hace clic fuera de él en la pantalla
+        document.addEventListener('click', function(e) {
+            if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+                sidebar.classList.remove('active');
+                menuIcon.className = 'fa-solid fa-bars';
+            }
+        });
+
+        // Sincronización del sistema de idiomas
         const translations = {
             es: { "nav-home": "Inicio", "nav-about": "Sobre Mí", "nav-skills": "Habilidades", "nav-projects": "Proyectos", "nav-contact": "Contacto", "nav-cv": "Curriculum", "nav-lang": "Idioma", "theme-light": "Modo Claro", "theme-dark": "Modo Oscuro", "header-subtitle": "Diseño y Desarrollo de Videojuegos" },
             en: { "nav-home": "Home", "nav-about": "About Me", "nav-skills": "Skills", "nav-projects": "Projects", "nav-contact": "Contact", "nav-cv": "Resume", "nav-lang": "Language", "theme-light": "Light Mode", "theme-dark": "Dark Mode", "header-subtitle": "Game Design & Development" }
