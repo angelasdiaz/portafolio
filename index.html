@@ -58,8 +58,8 @@
             background-color: var(--bg-main);
             color: var(--text-main);
             transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
-            letter-spacing: -0.01em;
+            overflow-x: hidden;
+            letter-spacing: -0.02em;
         }
 
         /* === ESTILOS DEL PRELOADER (A pantalla completa con tu GIF) === */
@@ -135,8 +135,9 @@
         }
 
         .brand-logo {
-            font-size: 1.5rem;
-            letter-spacing: -0.02em;
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
             margin-bottom: 60px;
             text-transform: uppercase;
         }
@@ -179,7 +180,7 @@
         section { padding: 140px 80px; position: relative; }
         section:nth-child(even) { background-color: var(--bg-alt); }
 
-        /* --- Hero Section Editorial --- */
+        /* === RESTAURACIÓN EXACTA DE TU SECCIÓN HERO ORIGINAL === */
         #inicio { 
             height: 100vh; display: flex; align-items: center; justify-content: flex-start;
             overflow: hidden; padding-top: 0; padding-bottom: 0;
@@ -190,7 +191,7 @@
         .marquee-bg {
             position: absolute; bottom: 10%; left: 0; width: 100%;
             overflow: hidden; white-space: nowrap; pointer-events: none; opacity: 0.03;
-            font-family: var(--font-titles); font-size: 12vw; text-transform: uppercase;
+            font-family: var(--font-titles); font-weight: 800; font-size: 12vw; text-transform: uppercase;
         }
         .marquee-inner { display: inline-block; animation: marquee 25s linear infinite; }
 
@@ -207,14 +208,15 @@
         }
         .profile-wrapper:hover .profile-img { filter: grayscale(0%); transform: scale(1.03); }
         
-        .display-title { font-size: 5.2rem; line-height: 1.1; margin-bottom: 15px; }
-        .subtitle-tech { font-family: var(--font-editorial); color: var(--accent); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .display-title { font-size: 4.5rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: 15px; }
+        .subtitle-tech { font-family: var(--font-titles); color: var(--accent); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em; }
+        /* === FIN RESTAURACIÓN HERO === */
 
         /* --- Secciones Tipográficas --- */
         .section-label { font-family: var(--font-editorial); font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; display: block; }
-        .section-title { font-size: 3.5rem; margin-bottom: 50px; }
+        .section-title { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 50px; }
 
-        .about-text { max-width: 800px; font-size: 1.3rem; line-height: 1.6; color: var(--text-muted); }
+        .about-text { max-width: 800px; font-size: 1.25rem; line-height: 1.6; color: var(--text-muted); }
         .about-text p { margin-bottom: 25px; }
         .about-text strong { color: var(--text-main); font-weight: 600; }
 
@@ -235,7 +237,7 @@
             overflow: hidden;
         }
         .skill-item-card i { color: var(--accent); margin-bottom: 20px; transition: transform 0.3s ease; }
-        .skill-item-card p { font-size: 1.05rem; margin: 0; }
+        .skill-item-card p { font-weight: 500; font-size: 1rem; margin: 0; }
         .skill-item-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
@@ -267,8 +269,8 @@
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .project-meta-content { padding: 30px; }
-        .project-meta-content h3 { font-size: 1.8rem; margin-bottom: 8px; }
-        .project-meta-content p { color: var(--text-muted); font-size: 1rem; margin: 0; }
+        .project-meta-content h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+        .project-meta-content p { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
         
         .project-card-editorial:hover {
             border-color: var(--accent);
@@ -292,7 +294,7 @@
             transition: 0.3s ease;
         }
         .art-box img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
-        .art-box p { font-size: 0.95rem; margin: 0; text-align: left; color: var(--text-main); }
+        .art-box p { font-size: 0.85rem; margin: 0; text-align: left; color: var(--text-main); }
         .art-box:hover { border-color: var(--accent); transform: scale(1.02); }
 
         /* --- Caja de Contacto --- */
@@ -315,7 +317,7 @@
             align-items: center;
             gap: 15px;
         }
-        .contact-card-modern h6 { font-size: 1.2rem; margin: 0; }
+        .contact-card-modern h6 { font-size: 1rem; font-weight: 500; margin: 0; }
         .contact-card-modern i { color: var(--text-muted); transition: color 0.3s; }
         .contact-card-modern:hover {
             border-color: var(--accent);
@@ -340,7 +342,7 @@
             border: 1px solid var(--text-main); background: transparent; 
             color: var(--text-main); border-radius: 50px; padding: 12px 32px; 
             text-decoration: none; display: inline-block; transition: 0.3s ease;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         .btn-oval:hover { background: var(--text-main); color: var(--bg-main); transform: translateY(-2px); }
         .btn-back { 
@@ -357,7 +359,7 @@
         /* --- Responsive Design --- */
         @media (max-width: 1200px) {
             section { padding: 100px 40px; }
-            .display-title { font-size: 4rem; }
+            .display-title { font-size: 3.5rem; }
         }
 
         @media (max-width: 991px) {
@@ -372,10 +374,10 @@
         }
 
         @media (max-width: 576px) {
-            .display-title { font-size: 3rem; }
+            .display-title { font-size: 2.6rem; }
             .contact-grid { grid-template-columns: 1fr; }
             .profile-wrapper { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .section-title { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -443,9 +445,9 @@
             <span class="section-label">01 / Concept</span>
             <h2 class="section-title" data-key="nav-about">Sobre Mí</h2>
             <div class="about-text" data-key="about-content">
-                <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas creativas.</p>
-                <p>Soy una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
-                <p>En este espacio encontrarás una selección de mis trabajos en arquitectura de videojuegos, modelado 3D, ilustración y desarrollo estratégico digital.</p>
+                <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
+                <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
+                <p>En este espacio encontrarás una cuidada selección de mis trabajos en arquitectura de videojuegos, modelado 3D, ilustración y desarrollo estratégico digital.</p>
             </div>
         </section>
 
