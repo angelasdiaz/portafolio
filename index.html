@@ -62,14 +62,14 @@
             letter-spacing: -0.01em;
         }
 
-        /* --- ESTILOS DEL PRELOADER (Capa del GIF) --- */
+        /* === ESTILOS DEL PRELOADER (A pantalla completa con tu GIF) === */
         #preloader {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 100vw;
             height: 100vh;
-            background-color: var(--bg-main);
+            background-color: var(--bg-main); /* El fondo del preloader es el mismo de la web */
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -77,13 +77,19 @@
             transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
             visibility: visible;
             opacity: 1;
+            overflow: hidden;
         }
 
+        /* Estilo para que el GIF ocupe toda la pantalla y no se deforme */
         #preloader img {
-            max-width: 150px; /* Si quieres que el GIF se vea más grande o pequeño, cambia este valor */
-            height: auto;
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain; /* Ajusta la escala proporcional sin recortar */
             user-select: none;
             pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         #preloader.fade-out {
@@ -695,18 +701,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bundle.min.js"></script>
     <script>
-        // === LÓGICA DEL PRELOADER ===
+        // === LÓGICA DEL PRELOADER MODIFICADA (5 SEGUNDOS) ===
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             
+            // Forzamos que la animación se mantenga visible exactamente 5000ms (5 segundos)
             setTimeout(function() {
+                // Iniciamos la animación de desvanecimiento suave (opacidad a 0)
                 preloader.classList.add('fade-out');
                 
+                // Una vez termina la transición de CSS (0.8s), liberamos el scroll de la web
                 setTimeout(function() {
                     document.body.style.overflow = 'visible';
                 }, 800);
                 
-            }, 1000); 
+            }, 5000); 
         });
 
         const translations = {
