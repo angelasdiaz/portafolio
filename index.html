@@ -190,6 +190,17 @@
         section { padding: 140px 80px; position: relative; }
         section:nth-child(even) { background-color: var(--bg-alt); }
 
+        #sobre-mi {
+            background-image: linear-gradient(rgba(10, 10, 12, 0.85), rgba(10, 10, 12, 0.85)), url('assets/fondoSobreMi.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll; /* Cambiar a 'fixed' si quieres efecto Parallax */
+        }
+        [data-theme="light"] #sobre-mi {
+            background-image: linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)), url('assets/fondoSobreMi.png');
+        }
+
         /* --- Hero Section Editorial --- */
         #inicio { 
             height: 100vh; display: flex; align-items: center; justify-content: flex-start;
