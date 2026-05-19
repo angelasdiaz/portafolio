@@ -242,15 +242,24 @@
         section:nth-child(even) { background-color: var(--bg-alt); }
 
         #sobre-mi {
-            background-image: linear-gradient(rgba(10, 10, 12, 0.85), rgba(10, 10, 12, 0.85)), url('assets/fondoSobreMi.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
-        }
-        [data-theme="light"] #sobre-mi {
-            background-image: linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)), url('assets/fondoSobreMi.png');
-        }
+    width: 1920px;
+    height: 1080px;
+    min-width: 1920px;
+    min-height: 1080px;
+    margin: 0 auto; /* Centra la sección en monitores que sean más grandes de 1080p */
+    display: flex;
+    align-items: center; /* Centra verticalmente el texto y el collage */
+    position: relative;
+    
+    background-image: linear-gradient(rgba(10, 10, 12, 0.85), rgba(10, 10, 12, 0.85)), url('assets/fondoSobreMi.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+[data-theme="light"] #sobre-mi {
+    background-image: linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)), url('assets/fondoSobreMi.png');
+}
 
         /* --- Hero Section Editorial --- */
         #inicio { 
