@@ -65,8 +65,8 @@
 .capa-medio {
     z-index: 2; /* Libro (Parte Superior Derecha) */
     width: 270%;         /* Reducimos su escala individual para que no compita con el pasaporte */
-    top: 0px;         /* Lo subimos un poco */
-    right: 0px;       /* Lo pegamos bien a la derecha */
+    top: -185px;         /* Lo subimos un poco */
+    right: -35px;       /* Lo pegamos bien a la derecha */
     left: auto;         /* Rompemos el amarre de la izquierda para poder usar 'right' de forma limpia */
     transform: rotate(0deg); /* Le damos esa inclinación juguetona hacia la derecha */
 }
@@ -75,7 +75,7 @@
     z-index: 3; /* Cartel / Pasaporte Abierto (Abajo) */
     width: 270%;         /* Que sea el elemento con más peso visual */
     top: -185px;         /* Lo bajamos para dejarle hueco al libro de arriba */
-    right: 0px;       /* Lo sacamos un pelín por el borde derecho */
+    right: -35px;       /* Lo sacamos un pelín por el borde derecho */
     left: auto;         /* Rompemos el amarre de la izquierda */
     transform: rotate(0deg); /* Rotación muy sutil, casi recta como en tu boceto */
 }
