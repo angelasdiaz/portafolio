@@ -55,28 +55,30 @@
         */
 
         .capa-fondo {
-            z-index: 1; /* Estrellas */
-            width: 150%;      /* Puedes darle el tamaño que quieras independiente del libro */
-            top: 0px;
-            left: 0px;
-        }
+    z-index: 1; /* Estrellas */
+    width: 140%;        /* Hacemos el lienzo de estrellas enorme para que cubra todo el fondo */
+    top: -20px;
+    left: -290px;       /* Las empujamos fuertemente a la izquierda para que queden bajo el texto */
+    transform: scale(0.9); /* Ajuste sutil de escala si necesitas achicarlas un pelo */
+}
 
-        .capa-medio {
-            z-index: 2; /* Libro */
-            width: 100%;       /* Control de tamaño propio */
-            top: 0px;
-            left: 0px;
-            transform: rotate(3deg);
-        }
+.capa-medio {
+    z-index: 2; /* Libro (Parte Superior Derecha) */
+    width: 65%;         /* Reducimos su escala individual para que no compita con el pasaporte */
+    top: -60px;         /* Lo subimos un poco */
+    right: -40px;       /* Lo pegamos bien a la derecha */
+    left: auto;         /* Rompemos el amarre de la izquierda para poder usar 'right' de forma limpia */
+    transform: rotate(6deg); /* Le damos esa inclinación juguetona hacia la derecha */
+}
 
-        .capa-frente {
-            z-index: 3; /* Cartel */
-            width: 100%;       /* Control de tamaño propio */
-            top: 0px;
-            right: -10px;
-            transform: rotate(-4deg);
-        }
-
+.capa-frente {
+    z-index: 3; /* Cartel / Pasaporte Abierto (Abajo) */
+    width: 82%;         /* Que sea el elemento con más peso visual */
+    top: 140px;         /* Lo bajamos para dejarle hueco al libro de arriba */
+    right: -70px;       /* Lo sacamos un pelín por el borde derecho */
+    left: auto;         /* Rompemos el amarre de la izquierda */
+    transform: rotate(-1deg); /* Rotación muy sutil, casi recta como en tu boceto */
+}
         @media (max-width: 991px) {
             .contenedor-collage-libre {
                 height: 350px; /* Reducimos el lienzo en tablets y móviles */
