@@ -44,41 +44,34 @@
         .capa-img {
             position: absolute;
             pointer-events: none;
-            /* Eliminamos 'width: 100%' y 'object-fit' para que las imágenes usen 
-               su tamaño real o escalado nativo, rompiendo la dependencia mutua */
         }
 
-        /* Toquetear las capas de forma 100% independiente.
-           Usa 'top' o 'bottom' / 'left' o 'right' para ubicarlas en el lienzo.
-           Usa 'width' para controlar el tamaño de cada una individualmente.
-           Usa 'transform: rotate()' si quieres inclinarlas.
-        */
-
         .capa-fondo {
-    z-index: 1; /* Estrellas */
-    width: 140%;        /* Hacemos el lienzo de estrellas enorme para que cubra todo el fondo */
-    top: -80px;
-    left: -850px;       /* Las empujamos fuertemente a la izquierda para que queden bajo el texto */
-    transform: scale(1.0); /* Ajuste sutil de escala si necesitas achicarlas un pelo */
-}
+            z-index: 1; /* Estrellas */
+            width: 140%;        /* Hacemos el lienzo de estrellas enorme para que cubra todo el fondo */
+            top: -80px;
+            left: -850px;       /* Las empujamos fuertemente a la izquierda para que queden bajo el texto */
+            transform: scale(1.0); /* Ajuste sutil de escala si necesitas achicarlas un pelo */
+        }
 
-.capa-medio {
-    z-index: 2; /* Libro (Parte Superior Derecha) */
-    width: 195%;         /* Reducimos su escala individual para que no compita con el pasaporte */
-    top: -305px;         /* Lo subimos un poco */
-    right: -155px;       /* Lo pegamos bien a la derecha */
-    left: auto;         /* Rompemos el amarre de la izquierda para poder usar 'right' de forma limpia */
-    transform: rotate(0deg); /* Le damos esa inclinación juguetona hacia la derecha */
-}
+        .capa-medio {
+            z-index: 2; /* Libro (Parte Superior Derecha) */
+            width: 195%;         /* Reducimos su escala individual para que no compita con el pasaporte */
+            top: -305px;         /* Lo subimos un poco */
+            right: -155px;       /* Lo pegamos bien a la derecha */
+            left: auto;          /* Rompemos el amarre de la izquierda para poder usar 'right' de forma limpia */
+            transform: rotate(0deg); /* Le damos esa inclinación juguetona hacia la derecha */
+        }
 
-.capa-frente {
-    z-index: 3; /* Cartel / Pasaporte Abierto (Abajo) */
-    width: 195%;         /* Que sea el elemento con más peso visual */
-    top: -295px;         /* Lo bajamos para dejarle hueco al libro de arriba */
-    right: -155px;       /* Lo sacamos un pelín por el borde derecho */
-    left: auto;         /* Rompemos el amarre de la izquierda */
-    transform: rotate(0deg); /* Rotación muy sutil, casi recta como en tu boceto */
-}
+        .capa-frente {
+            z-index: 3; /* Cartel / Pasaporte Abierto (Abajo) */
+            width: 195%;         /* Que sea el elemento con más peso visual */
+            top: -295px;         /* Lo bajamos para dejarle hueco al libro de arriba */
+            right: -155px;       /* Lo sacamos un pelín por el borde derecho */
+            left: auto;          /* Rompemos el amarre de la izquierda */
+            transform: rotate(0deg); /* Rotación muy sutil, casi recta como en tu boceto */
+        }
+
         @media (max-width: 991px) {
             .contenedor-collage-libre {
                 height: 350px; /* Reducimos el lienzo en tablets y móviles */
@@ -241,7 +234,14 @@
         section { padding: 140px 80px; position: relative; }
         section:nth-child(even) { background-color: var(--bg-alt); }
 
+        /* NUEVO APARTADO: Forzar Fondo de Sobre Mí exacto a 1920x1080 */
         #sobre-mi {
+            width: 100%;
+            min-height: 100vh;
+            height: 1080px; /* Altura 1080p estricta */
+            max-height: 1080px;
+            display: flex;
+            align-items: center; /* Centra los elementos verticalmente dentro del contenedor gigante */
             background-image: linear-gradient(rgba(10, 10, 12, 0.85), rgba(10, 10, 12, 0.85)), url('assets/fondoSobreMi.png');
             background-size: cover;
             background-position: center;
@@ -250,6 +250,17 @@
         }
         [data-theme="light"] #sobre-mi {
             background-image: linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)), url('assets/fondoSobreMi.png');
+        }
+
+        .section-label-gigante {
+            font-family: var(--font-titles) !important;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            display: block;
+            letter-spacing: 0.05em;
+            opacity: 0.9;
         }
 
         /* --- Hero Section Editorial --- */
@@ -284,15 +295,13 @@
 
         /* --- Secciones Tipográficas --- */
         .section-label { font-family: var(--font-editorial); font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; display: block; }
-        .section-title { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 50px; }
+        .section-title { font-size: 3.5rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0; }
 
         .about-text { max-width: 800px; font-size: 1.25rem; line-height: 1.6; color: var(--text-muted); }
         .about-text p { margin-bottom: 25px; }
         .about-text strong { color: var(--text-main); font-weight: 600; }
 
-        /* ==============================================================
-           === CONSTELACIÓN DE HABILIDADES EN CÍRCULO ===
-           ============================================================== */
+        /* === CONSTELACIÓN DE HABILIDADES EN CÍRCULO === */
         .skills-system-container {
             position: relative;
             width: 100%;
@@ -542,6 +551,7 @@
 
         @media (max-width: 991px) {
             section { padding: 100px 30px; }
+            #sobre-mi { height: auto; max-height: none; min-height: 100vh; padding-top: 140px; }
             .projects-masonry { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: repeat(2, 1fr); }
             #inicio { height: auto; padding-top: 160px; padding-bottom: 100px; }
@@ -551,7 +561,6 @@
             .display-title { font-size: 2.6rem; }
             .contact-grid { grid-template-columns: 1fr; }
             .profile-wrapper { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -617,17 +626,13 @@
 
         <section id="sobre-mi" class="scroll-reveal">
             <div class="container-fluid p-0">
-                <span class="section-label">01 / Información</span>
-                
                 <div class="row align-items-center justify-content-between g-5">
-                    <div class="col-lg-7 col-xl-6">
-                        <div class="about-text" style="text-align: justify; text-justify: inter-word;">
-                            <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
-                            <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
-                        </div>
+                    <div class="col-lg-6 col-xl-6">
+                        <span class="section-label-gigante">01 / Concept</span>
+                        <h2 class="section-title" data-key="nav-about">Sobre Mí</h2>
                     </div>
                     
-                    <div class="col-lg-6 col-xl-6 text-center">
+                    <div class="col-lg-6 col-xl-5 text-center">
                         <div class="contenedor-collage-libre">
                             <img src="assets/estrellas.png" class="capa-img capa-fondo" alt="Estrellas">
                             <img src="assets/libro.png" class="capa-img capa-medio" alt="Libro">
