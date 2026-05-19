@@ -33,7 +33,7 @@
             --font-titles: 'Coolvetica', sans-serif;
         }
 
-        /* --- NUEVO SISTEMA DE COLLAGE DESVINCULADO --- */
+        /* --- NUEVO SISTEMA DE COLLAGE DESVINCULADO + ANIMACIONES ANIMADAS --- */
         .contenedor-collage-libre {
             position: relative;
             width: 100%;
@@ -44,41 +44,66 @@
         .capa-img {
             position: absolute;
             pointer-events: none;
-            /* Eliminamos 'width: 100%' y 'object-fit' para que las imágenes usen 
-               su tamaño real o escalado nativo, rompiendo la dependencia mutua */
+            will-change: transform, opacity; /* Optimiza el rendimiento de la animación en el navegador */
         }
 
-        /* Toquetear las capas de forma 100% independiente.
-           Usa 'top' o 'bottom' / 'left' o 'right' para ubicarlas en el lienzo.
-           Usa 'width' para controlar el tamaño de cada una individualmente.
-           Usa 'transform: rotate()' si quieres inclinarlas.
-        */
-
+        /* Toquetear las capas de forma 100% independiente */
         .capa-fondo {
-    z-index: 1; /* Estrellas */
-    width: 140%;        /* Hacemos el lienzo de estrellas enorme para que cubra todo el fondo */
-    top: -70px;
-    left: -850px;       /* Las empujamos fuertemente a la izquierda para que queden bajo el texto */
-    transform: scale(2.0); /* Ajuste sutil de escala si necesitas achicarlas un pelo */
-}
+            z-index: 1; /* Estrellas */
+            width: 140%;        /* Hacemos el lienzo de estrellas enorme para que cubra todo el fondo */
+            top: -70px;
+            left: -850px;       /* Las empujamos fuertemente a la izquierda para que queden bajo el texto */
+            animation: estrellasPulso 4s ease-in-out infinite;
+        }
 
-.capa-medio {
-    z-index: 2; /* Libro (Parte Superior Derecha) */
-    width: 270%;         /* Reducimos su escala individual para que no compita con el pasaporte */
-    top: -220px;         /* Lo subimos un poco */
-    right: -35px;       /* Lo pegamos bien a la derecha */
-    left: auto;         /* Rompemos el amarre de la izquierda para poder usar 'right' de forma limpia */
-    transform: rotate(0deg); /* Le damos esa inclinación juguetona hacia la derecha */
-}
+        .capa-medio {
+            z-index: 2; /* Libro (Parte Superior Derecha) */
+            width: 270%;         /* Reducimos su escala individual para que no compita con el pasaporte */
+            top: -220px;         /* Lo subimos un poco */
+            right: -35px;       /* Lo pegamos bien a la derecha */
+            left: auto;         /* Rompemos el amarre de la izquierda para poder usar 'right' de forma limpia */
+            animation: flotarLibro 6s ease-in-out infinite;
+        }
 
-.capa-frente {
-    z-index: 3; /* Cartel / Pasaporte Abierto (Abajo) */
-    width: 270%;         /* Que sea el elemento con más peso visual */
-    top: -220px;         /* Lo bajamos para dejarle hueco al libro de arriba */
-    right: -35px;       /* Lo sacamos un pelín por el borde derecho */
-    left: auto;         /* Rompemos el amarre de la izquierda */
-    transform: rotate(0deg); /* Rotación muy sutil, casi recta como en tu boceto */
-}
+        .capa-frente {
+            z-index: 3; /* Cartel / Pasaporte Abierto (Abajo) */
+            width: 270%;         /* Que sea el elemento con más peso visual */
+            top: -220px;         /* Lo bajamos para dejarle hueco al libro de arriba */
+            right: -35px;       /* Lo sacamos un pelín por el borde derecho */
+            left: auto;         /* Rompemos el amarre de la izquierda */
+            animation: flotarCartel 7s ease-in-out infinite;
+        }
+
+        /* --- KEYFRAMES PARA EL COLLAGE --- */
+        @keyframes estrellasPulso {
+            0%, 100% {
+                transform: scale(2.0) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                opacity: 0.4;
+            }
+            50% {
+                transform: scale(2.05) cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes flotarLibro {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(2deg); /* Sube un poco e inclina a la derecha */
+            }
+        }
+
+        @keyframes flotarCartel {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(12px) rotate(-1.5deg); /* Baja un poco (descompasado del libro) e inclina a la izquierda */
+            }
+        }
+
         @media (max-width: 991px) {
             .contenedor-collage-libre {
                 height: 350px; /* Reducimos el lienzo en tablets y móviles */
@@ -230,7 +255,7 @@
 
         /* --- Contenido Principal --- */
         .main-content { margin-left: 280px; }
-        
+         
         .scroll-reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -242,24 +267,24 @@
         section:nth-child(even) { background-color: var(--bg-alt); }
 
         #sobre-mi {
-    width: 1920px;
-    height: 1080px;
-    min-width: 1920px;
-    min-height: 1080px;
-    margin: 0 auto; /* Centra la sección en monitores que sean más grandes de 1080p */
-    display: flex;
-    align-items: center; /* Centra verticalmente el texto y el collage */
-    position: relative;
-    
-    background-image: linear-gradient(rgba(10, 10, 12, 0.85), rgba(10, 10, 12, 0.85)), url('assets/fondoSobreMi.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+            width: 1920px;
+            height: 1080px;
+            min-width: 1920px;
+            min-height: 1080px;
+            margin: 0 auto; /* Centra la sección en monitores que sean más grandes de 1080p */
+            display: flex;
+            align-items: center; /* Centra verticalmente el texto y el collage */
+            position: relative;
+            
+            background-image: linear-gradient(rgba(10, 10, 12, 0.85), rgba(10, 10, 12, 0.85)), url('assets/fondoSobreMi.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-[data-theme="light"] #sobre-mi {
-    background-image: linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)), url('assets/fondoSobreMi.png');
-}
+        [data-theme="light"] #sobre-mi {
+            background-image: linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)), url('assets/fondoSobreMi.png');
+        }
 
         /* --- Hero Section Editorial --- */
         #inicio { 
@@ -267,7 +292,7 @@
             overflow: hidden; padding-top: 0; padding-bottom: 0;
         }
         .hero-container { position: relative; z-index: 2; width: 100%; }
-        
+         
         .marquee-bg {
             position: absolute; bottom: 10%; left: 0; width: 100%;
             overflow: hidden; white-space: nowrap; pointer-events: none; opacity: 0.03;
@@ -287,7 +312,7 @@
             border-radius: 24px; border: 1px solid var(--border);
         }
         .profile-wrapper:hover .profile-img { filter: grayscale(0%); transform: scale(1.03); }
-        
+         
         .display-title { font-size: 4.5rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; margin-bottom: 15px; }
         .subtitle-tech { font-family: var(--font-titles); color: var(--accent); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em; }
 
@@ -625,32 +650,32 @@
         </section>
 
         <section id="sobre-mi" class="scroll-reveal">
-    <div class="container-fluid p-0">
-        
-        <div class="row align-items-center justify-content-center g-5">
-            
-            <div class="col-lg-9 col-xl-8" style="position: relative; top: -120px;">
+            <div class="container-fluid p-0">
                 
-                <span class="section-label" style="margin-bottom: 30px;">01 / Informacion</span>
-                
-                <div class="about-text" data-key="about-content" style="text-align: justify; text-justify: inter-word; max-width: 1100px; width: 100%;">
-                    <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
-                    <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
+                <div class="row align-items-center justify-content-center g-5">
+                    
+                    <div class="col-lg-9 col-xl-8" style="position: relative; top: -120px;">
+                        
+                        <span class="section-label" style="margin-bottom: 30px;">01 / Informacion</span>
+                        
+                        <div class="about-text" data-key="about-content" style="text-align: justify; text-justify: inter-word; max-width: 1100px; width: 100%;">
+                            <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
+                            <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="col-lg-3 col-xl-4 text-center">
+                        <div class="contenedor-collage-libre">
+                            <img src="assets/estrellas.png" class="capa-img capa-fondo" alt="Estrellas">
+                            <img src="assets/libro.png" class="capa-img capa-medio" alt="Libro">
+                            <img src="assets/cartelSobreMi.png" class="capa-img capa-frente" alt="Cartel Sobre Mí">
+                        </div>
+                    </div>
+                    
                 </div>
-                
             </div>
-            
-            <div class="col-lg-3 col-xl-4 text-center">
-                <div class="contenedor-collage-libre">
-                    <img src="assets/estrellas.png" class="capa-img capa-fondo" alt="Estrellas">
-                    <img src="assets/libro.png" class="capa-img capa-medio" alt="Libro">
-                    <img src="assets/cartelSobreMi.png" class="capa-img capa-frente" alt="Cartel Sobre Mí">
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
+        </section>
 
         <section id="habilidades" class="scroll-reveal">
             <span class="section-label">02 / System</span>
@@ -755,6 +780,7 @@
         </section>
     </div>
 
+    <!-- Modales -->
     <div class="modal fade" id="modalVideojuegos" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
