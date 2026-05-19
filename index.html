@@ -52,23 +52,20 @@
             pointer-events: none;
         }
 
-        .capa-fondo {
-            z-index: 1; /* estrellas.png */
-        }
+/* Toquetear las Estrellas (Fondo) */
+.capa-fondo {
+    transform: translate(-10px, 15px) scale(1.05);
+}
 
-        .capa-medio {
-            z-index: 2; /* libro.png */
-        }
+/* Toquetear el Libro (Medio) */
+.capa-medio {
+    transform: translate(0px, 0px) rotate(2deg);
+}
 
-        .capa-frente {
-            z-index: 3; /* cartelSobreMi.png */
-        }
-
-        @media (min-width: 992px) {
-            .sobre-mi-capas {
-                transform: scale(1.1); /* Escalado sutil para dar más impacto al collage en PC */
-            }
-        }
+/* Toquetear el Cartel (Frente) */
+.capa-frente {
+    transform: translate(25px, -10px) rotate(-4deg) scale(0.9);
+}
 
         [data-theme="light"] {
             --bg-main: #f8f9fa;
