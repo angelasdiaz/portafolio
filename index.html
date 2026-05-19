@@ -26,6 +26,8 @@
             --border: rgba(255, 255, 255, 0.07);
             --modal-bg: #0a0a0c;
             --btn-close: invert(1);
+            --btn-toggle-bg: var(--accent);
+            
             
             /* --- Sistema tipográfico unificado --- */
             --font-editorial: 'Cream', 'Plus Jakarta Sans', sans-serif;
@@ -146,13 +148,17 @@
             display: none;
             position: fixed; top: 25px; right: 25px;
             z-index: 1100; 
-            background: #ffffff; 
-            color: var(--accent); 
+            background: var(--btn-toggle-bg); 
+            color: #000000; 
             border: none; width: 45px; height: 45px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
             cursor: pointer;
-            transition: transform 0.2s ease, color 0.2s ease;
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
+        .menu-toggle:hover {
+            color: #000000;
+            background: var(--accent);
         }
         .menu-toggle:active { transform: scale(0.9); }
 
@@ -481,11 +487,13 @@
             .display-title { font-size: 3.5rem; }
         }
 
+        /* Forzamos que el menú empiece oculto y el contenido ocupe toda la pantalla en escritorio */
+        .sidebar { transform: translateX(-100%); }
+        .sidebar.active { transform: translateX(0); box-shadow: 30px 0 60px rgba(0,0,0,0.5); }
+        .menu-toggle { display: flex; }
+        .main-content { margin-left: 0; }
+
         @media (max-width: 991px) {
-            .sidebar { transform: translateX(-100%); width: 280px; }
-            .sidebar.active { transform: translateX(0); box-shadow: 30px 0 60px rgba(0,0,0,0.5); }
-            .menu-toggle { display: flex; }
-            .main-content { margin-left: 0; }
             section { padding: 100px 30px; }
             .projects-masonry { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: repeat(2, 1fr); }
