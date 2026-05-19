@@ -26,6 +26,8 @@
             --border: rgba(255, 255, 255, 0.07);
             --modal-bg: #0a0a0c;
             --btn-close: invert(1);
+            --btn-toggle-bg: var(--accent);
+            
             
             /* --- Sistema tipográfico unificado --- */
             --font-editorial: 'Cream', 'Plus Jakarta Sans', sans-serif;
@@ -146,13 +148,17 @@
             display: none;
             position: fixed; top: 25px; right: 25px;
             z-index: 1100; 
-            background: #ffffff; 
-            color: var(--accent); 
+            background: var(--btn-toggle-bg); 
+            color: #000000; 
             border: none; width: 45px; height: 45px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
             cursor: pointer;
-            transition: transform 0.2s ease, color 0.2s ease;
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
+        .menu-toggle:hover {
+            color: #000000;
+            background: var(--accent);
         }
         .menu-toggle:active { transform: scale(0.9); }
 
@@ -183,6 +189,17 @@
 
         section { padding: 140px 80px; position: relative; }
         section:nth-child(even) { background-color: var(--bg-alt); }
+
+        #sobre-mi {
+            background-image: linear-gradient(rgba(10, 10, 12, 0.85), rgba(10, 10, 12, 0.85)), url('assets/fondoSobreMi.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll; /* Cambiar a 'fixed' si quieres efecto Parallax */
+        }
+        [data-theme="light"] #sobre-mi {
+            background-image: linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)), url('assets/fondoSobreMi.png');
+        }
 
         /* --- Hero Section Editorial --- */
         #inicio { 
@@ -481,11 +498,13 @@
             .display-title { font-size: 3.5rem; }
         }
 
+        /* Forzamos que el menú empiece oculto y el contenido ocupe toda la pantalla en escritorio */
+        .sidebar { transform: translateX(-100%); }
+        .sidebar.active { transform: translateX(0); box-shadow: 30px 0 60px rgba(0,0,0,0.5); }
+        .menu-toggle { display: flex; }
+        .main-content { margin-left: 0; }
+
         @media (max-width: 991px) {
-            .sidebar { transform: translateX(-100%); width: 280px; }
-            .sidebar.active { transform: translateX(0); box-shadow: 30px 0 60px rgba(0,0,0,0.5); }
-            .menu-toggle { display: flex; }
-            .main-content { margin-left: 0; }
             section { padding: 100px 30px; }
             .projects-masonry { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: repeat(2, 1fr); }
@@ -561,36 +580,13 @@
         </section>
 
         <section id="sobre-mi" class="scroll-reveal">
-            <img src="assets/cartelSobreMi.png" alt="cartel" class="cartel-img" />
-            <div class="text-top-container">
-                <h3 class="section-top-label">01 / CONCEPT</h3>
-                <div class="about-text-top">
-                    <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
-                </div>
+            <span class="section-label">01 / Concept</span>
+            <h2 class="section-title" data-key="nav-about">Sobre Mí</h2>
+            <div class="about-text" data-key="about-content">
+                <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
+                <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
+                <p>En este espacio encontrarás una cuidada selección de mis trabajos en arquitectura de videojuegos, modelado 3D, ilustración y desarrollo estratégico digital.</p>
             </div>
-            <div class="text-bottom-container">
-                <div class="about-text-bottom">
-                    <p>Me considero una persona creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
-                </div>
-            </div>
-            <div class="content-middle">
-                <img src="assets/libro.png" alt="libro" class="libro-img" />
-                <div class="text-middle-block">
-                    <h2 class="section-title" data-key="nav-about">Sobre Mí</h2>
-                    <div class="about-text-content" data-key="about-content">
-                        <p>En este espacio encontrarás una cuidada selección de mis trabajos en arquitectura de videojuegos, modelado 3D, ilustración y desarrollo estratégico digital.</p>
-                    </div>
-                </div>
-                <div class="photo-side-top">
-                    <img src="assets/25037.jpg" alt="foto" class="side-photo" />
-                </div>
-                <div class="photo-side-bottom">
-                    <img src="assets/icono1.png" alt="foto" class="side-photo" />
-                </div>
-            </div>
-            <img src="assets/estrellas.png" alt="estrella" class="star-img star-left-bottom" />
-            <img src="assets/estrellas.png" alt="estrella" class="star-img star-middle" />
-            <img src="assets/estrellas.png" alt="estrella" class="star-img star-right-middle" />
         </section>
 
         <section id="habilidades" class="scroll-reveal">
