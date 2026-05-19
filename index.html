@@ -34,35 +34,41 @@
         }
 
         /* --- Estilos del sistema de capas superpuestas (Canvas "Sobre Mí") --- */
-        .sobre-mi-capas {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 1 / 1; /* Ajusta esto (ej. 16/9) si tus imágenes no son cuadradas */
-            margin: 20px auto 0 auto;
-        }
-        
-        .capa-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            pointer-events: none;
-        }
+        /* --- Estilos del sistema de capas superpuestas (Canvas "Sobre Mí") --- */
+.sobre-mi-capas {
+    position: relative;
+    width: 100%;
+    max-width: 450px; /* Controla el tamaño máximo del conjunto */
+    aspect-ratio: 1 / 1; /* Forzamos un contenedor perfectamente cuadrado */
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        .capa-fondo {
-            z-index: 1; /* estrellas.png abajo */
-        }
+.capa-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Cambiamos contain por cover para que todas llenen el contenedor 
+       cuadrado exactamente igual y no se desalineen */
+    object-fit: cover; 
+    pointer-events: none;
+}
 
-        .capa-medio {
-            z-index: 2; /* libro.png en el medio */
-        }
+.capa-fondo {
+    z-index: 1; /* estrellas.png abajo */
+}
 
-        .capa-frente {
-            z-index: 3; /* cartelSobreMi.png arriba de todo */
-        }
+.capa-medio {
+    z-index: 2; /* libro.png en el medio */
+}
+
+.capa-frente {
+    z-index: 3; /* cartelSobreMi.png arriba de todo */
+}
 
         [data-theme="light"] {
             --bg-main: #f8f9fa;
@@ -595,29 +601,29 @@
         </section>
 
         <section id="sobre-mi" class="scroll-reveal">
-            <div class="container-fluid p-0">
-                <span class="section-label">01 / Concept</span>
-                <h2 class="section-title" data-key="nav-about">Sobre Mí</h2>
-                
-                <div class="row align-items-center g-5">
-                    <div class="col-lg-7">
-                        <div class="about-text" data-key="about-content">
-                            <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
-                            <p>Me considero una personan creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
-                            <p>En este espacio encontrarás una cuidada selección de mis trabajos en arquitectura de videojuegos, modelado 3D, ilustración y desarrollo estratégico digital.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-5">
-                        <div class="sobre-mi-capas">
-                            <img src="assets/estrellas.png" class="capa-img capa-fondo" alt="Estrellas">
-                            <img src="assets/libro.png" class="capa-img capa-medio" alt="Libro">
-                            <img src="assets/cartelSobreMi.png" class="capa-img capa-frente" alt="Cartel Sobre Mí">
-                        </div>
-                    </div>
+    <div class="container-fluid p-0">
+        <span class="section-label">01 / Concept</span>
+        <h2 class="section-title" data-key="nav-about">Sobre Mí</h2>
+        
+        <div class="row align-items-center justify-content-center g-5">
+            
+            <div class="col-lg-6">
+                <div class="about-text" data-key="about-content">
+                    <p>Soy estudiante de <strong>Diseño y Desarrollo de Videojuegos</strong>, con muchas ganas de seguir aprendiendo y creando nuevos proyectos. Me apasiona el arte digital, la ilustración y todo lo que tenga que ver con dar vida a ideas en mundos virtuales.</p>
+                    <p>Me considero una personan creativa, curiosa y que se desenvuelve bien a la hora trabajar en equipo.</p>
                 </div>
             </div>
-        </section>
+            
+            <div class="col-lg-5">
+                <div class="sobre-mi-capas">
+                    <img src="assets/estrellas.png" class="capa-img capa-fondo" alt="Estrellas">
+                    <img src="assets/libro.png" class="capa-img capa-medio" alt="Libro">
+                    <img src="assets/cartelSobreMi.png" class="capa-img capa-frente" alt="Cartel Sobre Mí">
+                </div>
+            </div>
+
+        </div> </div>
+</section>
 
         <section id="habilidades" class="scroll-reveal">
             <span class="section-label">02 / System</span>
