@@ -33,7 +33,7 @@
             --font-titles: 'Coolvetica', sans-serif;
         }
 
-        /* --- NUEVO SISTEMA DE COLLAGE DESVINCULADO + ANIMACIONES ANIMADAS --- */
+        /* --- SISTEMA DE COLLAGE DESVINCULADO --- */
         .contenedor-collage-libre {
             position: relative;
             width: 100%;
@@ -44,7 +44,7 @@
         .capa-img {
             position: absolute;
             pointer-events: none;
-            will-change: transform, opacity; /* Optimiza el rendimiento de la animación en el navegador */
+            will-change: transform; /* Optimiza el rendimiento de la animación en el navegador */
         }
 
         /* Toquetear las capas de forma 100% independiente */
@@ -53,7 +53,7 @@
             width: 140%;        /* Hacemos el lienzo de estrellas enorme para que cubra todo el fondo */
             top: -70px;
             left: -850px;       /* Las empujamos fuertemente a la izquierda para que queden bajo el texto */
-            animation: estrellasPulso 4s ease-in-out infinite;
+            transform: scale(2.0); /* Restaurado a su ajuste estático original */
         }
 
         .capa-medio {
@@ -74,18 +74,7 @@
             animation: flotarCartel 7s ease-in-out infinite;
         }
 
-        /* --- KEYFRAMES PARA EL COLLAGE --- */
-        @keyframes estrellasPulso {
-            0%, 100% {
-                transform: scale(2.0) cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                opacity: 0.4;
-            }
-            50% {
-                transform: scale(2.05) cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                opacity: 0.9;
-            }
-        }
-
+        /* --- KEYFRAMES PARA EL COLLAGE (LIBRO Y CARTEL) --- */
         @keyframes flotarLibro {
             0%, 100% {
                 transform: translateY(0) rotate(0deg);
@@ -100,7 +89,7 @@
                 transform: translateY(0) rotate(0deg);
             }
             50% {
-                transform: translateY(12px) rotate(-1.5deg); /* Baja un poco (descompasado del libro) e inclina a la izquierda */
+                transform: translateY(12px) rotate(-1.5deg); /* Baja un poco e inclina a la izquierda */
             }
         }
 
