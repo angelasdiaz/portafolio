@@ -239,7 +239,6 @@
         section { padding: 140px 80px; position: relative; }
         section:nth-child(even) { background-color: var(--bg-alt); }
 
-        /* ARREGLADO: Cambiado a fluido para evitar desbordamientos y barras molestas */
         #sobre-mi {
             width: 100%;
             min-height: 100vh;
@@ -256,7 +255,6 @@
             background-image: linear-gradient(rgba(248, 249, 250, 0.9), rgba(248, 249, 250, 0.9)), url('assets/fondoSobreMi.png');
         }
 
-        /* --- Hero Section Editorial --- */
         #inicio { 
             height: 100vh; 
             display: flex; 
@@ -312,7 +310,6 @@
             margin-bottom: 5px;
         }
 
-        /* --- Secciones Tipográficas --- */
         .section-label { font-family: var(--font-editorial); font-size: 0.9rem; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; display: block; }
         .section-title { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 50px; }
 
@@ -320,7 +317,6 @@
         .about-text p { margin-bottom: 25px; }
         .about-text strong { color: var(--text-main); font-weight: 600; }
 
-        /* --- CONSTELACIÓN DE HABILIDADES --- */
         .skills-system-container {
             position: relative;
             width: 100%;
@@ -439,39 +435,63 @@
             .skill-satellite-node p { font-size: 1rem; }
         }
 
-        /* --- Retícula de Proyectos Estilo Editorial --- */
-        .projects-masonry {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+        /* ==============================================================
+           === NUEVO SISTEMA DE PESTAÑAS (NAVTABS) PARA PROYECTOS ===
+           ============================================================== */
+        .projects-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            border-bottom: 2px solid var(--text-main);
+            padding-bottom: 0px;
+            margin-bottom: 40px;
         }
-        .project-card-editorial {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-        }
-        .project-img-container {
-            width: 100%; aspect-ratio: 16 / 10; overflow: hidden;
-            background: rgba(0,0,0,0.2); position: relative;
-        }
-        .project-card-editorial img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .project-meta-content { padding: 30px; }
-        .project-meta-content h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
-        .project-meta-content p { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
-        
-        .project-card-editorial:hover {
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-        .project-card-editorial:hover img { transform: scale(1.04); }
 
+        .tab-button {
+            background-color: var(--card-bg);
+            color: var(--text-muted);
+            border: 2px solid transparent;
+            padding: 12px 28px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            border-radius: 10px 10px 0 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-bottom: -2px; 
+            font-family: var(--font-titles) !important;
+        }
+
+        .tab-button:hover {
+            color: var(--text-main);
+            background-color: var(--bg-alt);
+        }
+
+        /* Estilo pestaña activa (Brillo e Identidad Morada) */
+        .tab-button.active {
+            background-color: var(--accent);
+            color: #0a0a0c !important;
+            border: 2px solid var(--accent);
+            box-shadow: 0px 0px 20px rgba(181, 126, 220, 0.5);
+            z-index: 1;
+        }
+
+        .tab-content-panel {
+            display: none;
+            animation: panelFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .tab-content-panel.active {
+            display: block;
+        }
+
+        @keyframes panelFadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilos de las cajas internas de cuadrículas antiguas preservadas */
         .art-modern-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -562,7 +582,6 @@
 
         @media (max-width: 991px) {
             section { padding: 100px 30px; }
-            .projects-masonry { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: repeat(2, 1fr); }
             #inicio { height: auto; padding-top: 160px; padding-bottom: 100px; }
         }
@@ -703,36 +722,36 @@
         <section id="proyectos" class="scroll-reveal">
             <span class="section-label">03 / Proyectos</span>
             
-            <div class="projects-masonry">
-                <div class="project-card-editorial" data-bs-toggle="modal" data-bs-target="#modalVideojuegos">
-                    <div class="project-img-container"><img src="assets/1.png" alt="videojuegosCover"></div>
-                    <div class="project-meta-content">
-                        <h3>Videojuegos</h3>
-                        <p>Interactivos, mecánicas y desarrollo de entornos jugables.</p>
-                    </div>
-                </div>
-                <div class="project-card-editorial" data-bs-toggle="modal" data-bs-target="#modal3D">
-                    <div class="project-img-container"><img src="assets/4.png" alt="3dCover"></div>
-                    <div class="project-meta-content">
-                        <h3>3D y Texturizado</h3>
-                        <p>Modelado de props, entornos y optimización de materiales.</p>
-                    </div>
-                </div>
-                <div class="project-card-editorial" data-bs-toggle="modal" data-bs-target="#modalIlustracion">
-                    <div class="project-img-container"><img src="assets/2.png" alt="ilustracionCover"></div>
-                    <div class="project-meta-content">
-                        <h3>Ilustración Artística</h3>
-                        <p>Concept art digital, cartelería y composición visual.</p>
-                    </div>
-                </div>
-                <div class="project-card-editorial" data-bs-toggle="modal" data-bs-target="#modalMarketing">
-                    <div class="project-img-container"><img src="assets/3.png" alt="marketingCover"></div>
-                    <div class="project-meta-content">
-                        <h3>Web & Digital Marketing</h3>
-                        <p>Desarrollo de interfaces web de marca y dirección de arte.</p>
-                    </div>
-                </div>
+            <div class="projects-nav">
+                <button class="tab-button active" onclick="switchProjectTab(event, 'tab-3d-models')">3D Models</button>
+                <button class="tab-button" onclick="switchProjectTab(event, 'tab-videojuegos')">Videojuegos</button>
+                <button class="tab-button" onclick="switchProjectTab(event, 'tab-diseno-grafico')">Diseño Gráfico</button>
+                <button class="tab-button" onclick="switchProjectTab(event, 'tab-ilustracion')">Ilustración</button>
+                <button class="tab-button" onclick="switchProjectTab(event, 'tab-ui-design')">UI Design</button>
+                <button class="tab-button" onclick="switchProjectTab(event, 'tab-web')">Web</button>
+                <button class="tab-button" onclick="switchProjectTab(event, 'tab-videos')">Videos</button>
             </div>
+
+            <div id="tab-3d-models" class="tab-content-panel active">
+                </div>
+
+            <div id="tab-videojuegos" class="tab-content-panel">
+                </div>
+
+            <div id="tab-diseno-grafico" class="tab-content-panel">
+                </div>
+
+            <div id="tab-ilustracion" class="tab-content-panel">
+                </div>
+
+            <div id="tab-ui-design" class="tab-content-panel">
+                </div>
+
+            <div id="tab-web" class="tab-content-panel">
+                </div>
+
+            <div id="tab-videos" class="tab-content-panel">
+                </div>
         </section>
 
         <section id="contacto" class="scroll-reveal">
@@ -960,7 +979,6 @@
             }
         });
 
-        // ARREGLADO: Cambiado el diccionario para que el script ponga "Porfolio" al cargar idiomas
         const translations = {
             es: { "nav-home": "Inicio", "nav-about": "Sobre Mí", "nav-skills": "Habilidades", "nav-projects": "Proyectos", "nav-contact": "Contacto", "nav-cv": "Curriculum", "nav-lang": "Idioma", "theme-light": "Modo Claro", "theme-dark": "Modo Oscuro", "header-subtitle": "Porfolio" },
             en: { "nav-home": "Home", "nav-about": "About Me", "nav-skills": "Skills", "nav-projects": "Projects", "nav-contact": "Contact", "nav-cv": "Resume", "nav-lang": "Language", "theme-light": "Light Mode", "theme-dark": "Dark Mode", "header-subtitle": "Portfolio" }
@@ -975,7 +993,7 @@
         });
         
         function applyCursorInteractions() {
-            const interactiveElements = document.querySelectorAll('a, button, .project-card-editorial, .art-box, span, [onclick], .skill-satellite-node');
+            const interactiveElements = document.querySelectorAll('a, button, .project-card-editorial, .art-box, span, [onclick], .skill-satellite-node, .tab-button');
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.style.width = '45px';
@@ -1020,6 +1038,21 @@
         }
 
         function getCurrentLanguage() { return localStorage.getItem('lang') || 'es'; }
+
+        // === CONTROL INTERNO DE LAS PESTAÑAS DE PROYECTOS ===
+        function switchProjectTab(event, targetTabId) {
+            // Ocultar todos los paneles de proyectos
+            const panels = document.querySelectorAll('.tab-content-panel');
+            panels.forEach(panel => panel.classList.remove('active'));
+
+            // Quitar el estado activo de todos los botones de la barra de proyectos
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Activar el panel seleccionado y su respectivo botón
+            document.getElementById(targetTabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
 
         document.addEventListener('DOMContentLoaded', function() {
             // Inicializar Carruseles
