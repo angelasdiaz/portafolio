@@ -435,9 +435,7 @@
             .skill-satellite-node p { font-size: 1rem; }
         }
 
-        /* ==============================================================
-           === NUEVO SISTEMA DE PESTAÑAS (NAVTABS) PARA PROYECTOS ===
-           ============================================================== */
+        /* --- NAVEGACIÓN Y TABS DE PROYECTOS --- */
         .projects-nav {
             display: flex;
             flex-wrap: wrap;
@@ -468,7 +466,6 @@
             background-color: var(--bg-alt);
         }
 
-        /* Estilo pestaña activa (Brillo e Identidad Morada) */
         .tab-button.active {
             background-color: var(--accent);
             color: #0a0a0c !important;
@@ -491,26 +488,120 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Estilos de las cajas internas de cuadrículas antiguas preservadas */
-        .art-modern-grid {
+        /* --- GRID DE CARPETAS DE ARCHIVOS DESLIZANTES --- */
+        .folder-tabs-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            padding: 10px 0;
+            grid-template-columns: repeat(2, 1fr); /* Dos columnas idénticas fijas por fila */
+            gap: 30px;
+            padding: 20px 0;
         }
-        .art-box {
-            background: var(--bg-alt);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 15px;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-        .art-box img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
-        .art-box p { font-size: 0.85rem; margin: 0; text-align: left; color: var(--text-main); }
-        .art-box:hover { border-color: var(--accent); transform: scale(1.02); }
 
-        /* --- Caja de Contacto --- */
+        .folder-card {
+            position: relative;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            height: 320px; 
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .folder-tab-aside {
+            background-color: var(--accent);
+            color: #0a0a0c;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 3;
+            clip-path: polygon(0 0, 80% 0, 100% 15%, 100% 100%, 0 100%);
+        }
+
+        .folder-tab-aside h3 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            word-break: break-all;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .folder-content-body {
+            display: grid;
+            grid-template-columns: 0fr 1fr;
+            width: 100%;
+            height: 100%;
+            transition: grid-template-columns 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .folder-text-pane {
+            overflow: hidden;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--card-bg);
+            opacity: 0;
+            transform: translateX(-15px);
+            transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .folder-text-pane p {
+            color: var(--accent);
+            font-size: 1.05rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            font-family: var(--font-editorial);
+        }
+
+        .folder-text-pane span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-family: var(--font-editorial);
+        }
+
+        .folder-img-pane {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .folder-img-pane img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Acciones Interactivas Hover */
+        .folder-card:hover .folder-content-body {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .folder-card:hover .folder-text-pane {
+            padding: 30px;
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.1s;
+        }
+
+        .folder-card:hover .folder-img-pane img {
+            transform: scale(1.04);
+        }
+
+        .folder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(181, 126, 220, 0.2);
+        }
+
+        /* --- CONTACTO Y RETÍCULAS INTERNAS --- */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -539,7 +630,6 @@
         }
         .contact-card-modern:hover i { color: var(--accent); }
 
-        /* --- Modales --- */
         .modal-content { 
             background-color: var(--modal-bg); 
             border: 1px solid var(--border); 
@@ -569,7 +659,6 @@
             max-height: 550px; object-fit: contain; width: 100%; border-radius: 12px;
         }
 
-        /* --- Responsive Design --- */
         @media (max-width: 1200px) {
             section { padding: 100px 40px; }
             .display-title { font-size: 3.5rem; }
@@ -582,6 +671,10 @@
 
         @media (max-width: 991px) {
             section { padding: 100px 30px; }
+            .folder-tabs-container { grid-template-columns: 1fr; }
+            .folder-card { height: auto; grid-template-columns: 1fr; }
+            .folder-tab-aside { clip-path: polygon(0 0, 90% 0, 100% 30%, 100% 100%, 0 100%); }
+            .folder-card:hover .folder-content-body { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: repeat(2, 1fr); }
             #inicio { height: auto; padding-top: 160px; padding-bottom: 100px; }
         }
@@ -592,95 +685,6 @@
             .profile-wrapper { flex-direction: column; align-items: flex-start; gap: 20px; }
             .section-title { font-size: 2rem; }
         }
-/* --- CONTENEDOR DE 2 COLUMNAS FIJAS POR FILA --- */
-.videojuegos-grid-clean {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Fuerza exactamente 2 imágenes por fila */
-    gap: 30px;
-    padding: 20px 0;
-}
-
-/* Tarjeta minimalista interactiva */
-.game-card-clean {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9; 
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: box-shadow 0.4s ease, transform 0.4s ease;
-}
-
-/* Contenedor e Imagen con Zoom suave */
-.game-card-clean .img-box {
-    width: 100%;
-    height: 100%;
-}
-
-.game-card-clean .img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Máscara oscura interactiva (Se vuelve visible al hacer hover) */
-.game-card-clean .hover-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(10, 10, 12, 0.75); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 2;
-}
-
-/* Texto centrado en color morado */
-.game-card-clean .hover-title {
-    color: var(--accent); 
-    font-family: var(--font-titles);
-    font-size: 2rem; /* Un poco más grande al haber más espacio de tarjeta */
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0;
-    transform: translateY(10px);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* === EFECTOS HOVER (AL PASAR EL CURSOR) === */
-.game-card-clean:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-}
-
-.game-card-clean:hover .img-box img {
-    transform: scale(1.06); /* Pequeño zoom al pasar el cursor */
-}
-
-.game-card-clean:hover .hover-overlay {
-    opacity: 1; /* Muestra la capa oscura */
-}
-
-.game-card-clean:hover .hover-title {
-    transform: translateY(0); /* Eleva el título suavemente */
-}
-
-/* Adaptación para pantallas muy pequeñas (móviles) para que no se estruje el diseño */
-@media (max-width: 768px) {
-    .videojuegos-grid-clean {
-        grid-template-columns: 1fr;
-    }
-}
-        
     </style>
 </head>
 <body data-theme="dark">
@@ -812,8 +816,8 @@
             <span class="section-label">03 / Proyectos</span>
             
             <div class="projects-nav">
-                <button class="tab-button active" onclick="switchProjectTab(event, 'tab-3d-models')">3D Models</button>
-                <button class="tab-button" onclick="switchProjectTab(event, 'tab-videojuegos')">Videojuegos</button>
+                <button class="tab-button" onclick="switchProjectTab(event, 'tab-3d-models')">3D Models</button>
+                <button class="tab-button active" onclick="switchProjectTab(event, 'tab-videojuegos')">Videojuegos</button>
                 <button class="tab-button" onclick="switchProjectTab(event, 'tab-diseno-grafico')">Diseño Gráfico</button>
                 <button class="tab-button" onclick="switchProjectTab(event, 'tab-ilustracion')">Ilustración</button>
                 <button class="tab-button" onclick="switchProjectTab(event, 'tab-ui-design')">UI Design</button>
@@ -821,41 +825,59 @@
                 <button class="tab-button" onclick="switchProjectTab(event, 'tab-videos')">Videos</button>
             </div>
 
-            <div id="tab-3d-models" class="tab-content-panel active">
+            <div id="tab-3d-models" class="tab-content-panel">
                 </div>
 
-            <div id="tab-videojuegos" class="tab-content-panel">
-    <div class="videojuegos-grid-clean">
-        
-        <a href="https://mangostudiourjc.itch.io/catpuccino" target="_blank" class="game-card-clean">
-            <div class="img-box">
-                <img src="assets/catpuccino.png" alt="Catpuccino Café">
-            </div>
-            <div class="hover-overlay">
-                <h3 class="hover-title">Catpuccino Cafe</h3>
-            </div>
-        </a>
+            <div id="tab-videojuegos" class="tab-content-panel active">
+                <div class="folder-tabs-container">
+                    
+                    <a href="https://mangostudiourjc.itch.io/catpuccino" target="_blank" class="folder-card">
+                        <div class="folder-tab-aside">
+                            <h3>catpuccino</h3>
+                        </div>
+                        <div class="folder-content-body">
+                            <div class="folder-text-pane">
+                                <p>Informacion sobre el juego de gestion de cafeterias gacha y adorables gatos.</p>
+                                <span>si quiere saber mas haga click en la imagen</span>
+                            </div>
+                            <div class="folder-img-pane">
+                                <img src="assets/catpuccino.png" alt="Catpuccino Cafe">
+                            </div>
+                        </div>
+                    </a>
 
-        <a href="https://botpa.itch.io/spyw4re" target="_blank" class="game-card-clean">
-            <div class="img-box">
-                <img src="assets/1.png" alt="Spyw4re">
-            </div>
-            <div class="hover-overlay">
-                <h3 class="hover-title">Spyw4re</h3>
-            </div>
-        </a>
+                    <a href="https://botpa.itch.io/spyw4re" target="_blank" class="folder-card">
+                        <div class="folder-tab-aside">
+                            <h3>spyw4re</h3>
+                        </div>
+                        <div class="folder-content-body">
+                            <div class="folder-text-pane">
+                                <p>Informacion sobre el juego de infiltracion y hackeo de camaras de seguridad.</p>
+                                <span>si quiere saber mas haga click en la imagen</span>
+                            </div>
+                            <div class="folder-img-pane">
+                                <img src="assets/1.png" alt="Spyw4re">
+                            </div>
+                        </div>
+                    </a>
 
-        <a href="https://mangostudiourjc.itch.io/mioupet" target="_blank" class="game-card-clean">
-            <div class="img-box">
-                <img src="assets/miaupet.png" alt="Miaupet">
-            </div>
-            <div class="hover-overlay">
-                <h3 class="hover-title">Miaupet</h3>
-            </div>
-        </a>
+                    <a href="https://mangostudiourjc.itch.io/mioupet" target="_blank" class="folder-card">
+                        <div class="folder-tab-aside">
+                            <h3>miaupet</h3>
+                        </div>
+                        <div class="folder-content-body">
+                            <div class="folder-text-pane">
+                                <p>Informacion sobre el proyecto movil de crianza y minijuegos con sensores de tu mascota virtual.</p>
+                                <span>si quiere saber mas haga click en la imagen</span>
+                            </div>
+                            <div class="folder-img-pane">
+                                <img src="assets/miaupet.png" alt="Miaupet">
+                            </div>
+                        </div>
+                    </a>
 
-    </div>
-</div>
+                </div>
+            </div>
 
             <div id="tab-diseno-grafico" class="tab-content-panel">
                 </div>
@@ -894,171 +916,8 @@
         </section>
     </div>
 
-    <div class="modal fade" id="modalVideojuegos" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header"><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-                <div class="modal-body">
-                    <div class="art-modern-grid">
-                        <div class="art-box" data-bs-toggle="modal" data-bs-target="#modalSpyware">
-                            <img src="assets/spyw4re.png" alt="Spyw4re">
-                            <p>Spyw4re — Game Jam</p>
-                        </div>
-                        <div class="art-box" data-bs-toggle="modal" data-bs-target="#modalCat">
-                            <img src="assets/catpuccino.png" alt="Catpuccinos">
-                            <p>Catpuccino — Desktop Game</p>
-                        </div>
-                        <div class="art-box" data-bs-toggle="modal" data-bs-target="#modalMiau">
-                            <img src="assets/miaupet.png" alt="Miaupet">
-                            <p>Miaupet — Mobile Project</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalSpyware" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-back" data-bs-toggle="modal" data-bs-target="#modalVideojuegos"><i class="fa-solid fa-arrow-left"></i> Volver</button>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4 text-center">
-                    <img src="assets/spyw4re.png" class="img-fluid rounded-4 mb-4" style="aspect-ratio: 16/9; object-fit: cover; width:100%;">
-                    <h2 class="h3 mb-3 fw-bold">Spyw4re</h2>
-                    <p class="text-muted text-start mb-4">Toma el control de los sistemas de vigilancia como guardia de seguridad. Tu misión es coordinar las cámaras y puntos de acceso para guiar a un paciente hacia la salida antes de que el edificio colapse por completo.</p>
-                    <a href="https://botpa.itch.io/spyw4re" target="_blank" class="btn-oval">Ver Proyecto en Itch.io</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalCat" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-back" data-bs-toggle="modal" data-bs-target="#modalVideojuegos"><i class="fa-solid fa-arrow-left"></i> Volver</button>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4 text-center">
-                    <img src="assets/catpuccino.png" class="img-fluid rounded-4 mb-4" style="aspect-ratio: 16/9; object-fit: cover; width:100%;">
-                    <h2 class="h3 mb-3 fw-bold">Catpuccino</h2>
-                    <p class="text-muted text-start mb-4">Sumérgete en la gestión de una acogedora cafetería. Prepara las mejores recetas de café, atiende a tus clientes y expande tu colección de adorables gatos para crear el ambiente perfecto.</p>
-                    <a href="https://mangostudiourjc.itch.io/catpuccino" target="_blank" class="btn-oval">Ver Proyecto en Itch.io</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalMiau" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-back" data-bs-toggle="modal" data-bs-target="#modalVideojuegos"><i class="fa-solid fa-arrow-left"></i> Volver</button>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4 text-center">
-                    <img src="assets/miaupet.png" class="img-fluid rounded-4 mb-4" style="aspect-ratio: 16/9; object-fit: cover; width:100%;">
-                    <h2 class="h3 mb-3 fw-bold">Miaupet</h2>
-                    <p class="text-muted text-start mb-4">Tu compañero ideal en plataformas móviles. Gestiona las necesidades básicas, diviértete con minijuegos y personaliza el entorno de tu mascota virtual.</p>
-                    <a href="https://mangostudiourjc.itch.io/mioupet" target="_blank" class="btn-oval">Ver Proyecto en Itch.io</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalIlustracion" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title w-100 fw-bold fs-5">ILUSTRACIONES</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-3">
-                    <div class="mb-4 p-3 rounded-4" style="background: var(--bg-alt); border: 1px solid var(--border);">
-                        <h5 class="fw-bold mb-2 fs-6 text-uppercase" style="color: var(--accent);">Cartelería Oficial Festiva (2021)</h5>
-                        <p class="text-muted small m-0 text-justify">Diseño de la obra e ilustración principal para el cartel de las fiestas patronales de Almonacid de Toledo en 2021, conceptualizando las raíces culturales tradicionales con técnicas digitales modernas.</p>
-                    </div>
-                    
-                    <h5 class="fw-bold mb-3 fs-6 text-uppercase px-2" style="color: var(--accent);">Galería Completa</h5>
-                    <div id="carouselIllustration" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner"></div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselIllustration" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselIllustration" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modal3D" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content text-center">
-                <div class="modal-header">
-                    <h4 class="modal-title w-100 fw-bold fs-5">MODELADO Y TEXTURIZADO 3D</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-3">
-                    <p class="text-muted text-start mb-4 px-2">Desglose de assets poligonales, props escénicos y mapas texturizados optimizados para pipelines de renderizado en tiempo real.</p>
-                    <div id="carousel3D" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner"></div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel3D" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel3D" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="modalMarketing" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title w-100 fw-bold fs-5 text-center">WEB & DIGITAL MARKETING</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <div class="mb-5">
-                        <h5 class="fw-bold mb-2 fs-6 text-uppercase" style="color: var(--accent);">Diseño Institucional</h5>
-                        <p class="text-muted mb-3">Colaboración de diseño gráfico con el Ayuntamiento de Almonacid de Toledo para el despliegue del área turística e identitaria regional.</p>
-                        
-                        <h5 class="fw-bold mb-3 fs-6 text-uppercase mt-4" style="color: var(--accent);">Material Gráfico / Spyw4re</h5>
-                        <div class="text-center bg-black p-3 rounded-4" style="--bs-bg-opacity:0.3;">
-                            <img src="assets/spywareCartel.PNG" class="img-fluid rounded-3 shadow" style="max-height: 380px; width: auto;">
-                        </div>
-                    </div>
-                    <div class="mb-5 border-top border-secondary pt-4" style="--bs-border-opacity:0.1;">
-                        <h5 class="fw-bold mb-2 fs-6 text-uppercase" style="color: var(--accent);">Dirección de Arte y Contenido</h5>
-                        <p class="text-muted">Desarrollo integral de la identidad corporativa y despliegue estratégico multimedia para Mango Studio.</p>
-                    </div>
-                    <div class="mb-4 border-top border-secondary pt-4" style="--bs-border-opacity:0.1;">
-                        <h5 class="fw-bold mb-3 fs-6 text-uppercase" style="color: var(--accent);">Ecosistema Web & Branding</h5>
-                        <div class="row g-3">
-                            <div class="col-md-6"><img src="assets/WebMango.png" class="img-fluid rounded-3"></div>
-                            <div class="col-md-6"><img src="assets/logos.PNG" class="img-fluid rounded-3"></div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-5">
-                        <a href="https://mangostudiosa.github.io/Catpuccino/" target="_blank" class="btn-oval">Explorar Sitio de Mango Studio</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bundle.min.js"></script>
     <script>
-        // === LÓGICA DEL PRELOADER ===
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             setTimeout(function() {
@@ -1069,7 +928,6 @@
             }, 3500); 
         });
 
-        // === INTERACCIÓN DEL ICONO RESPONSIVE ===
         const toggleBtn = document.getElementById('menu-toggle-btn');
         const sidebar = document.getElementById('sidebar-menu');
         const menuIcon = document.getElementById('menu-icon');
@@ -1103,7 +961,6 @@
             en: { "nav-home": "Home", "nav-about": "About Me", "nav-skills": "Skills", "nav-projects": "Projects", "nav-contact": "Contact", "nav-cv": "Resume", "nav-lang": "Language", "theme-light": "Light Mode", "theme-dark": "Dark Mode", "header-subtitle": "Portfolio" }
         };
 
-        // --- Lógica del Custom Cursor Avanzado ---
         const cursor = document.getElementById('custom-cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
@@ -1112,7 +969,7 @@
         });
         
         function applyCursorInteractions() {
-            const interactiveElements = document.querySelectorAll('a, button, .project-card-editorial, .art-box, span, [onclick], .skill-satellite-node, .tab-button');
+            const interactiveElements = document.querySelectorAll('a, button, .project-card-editorial, .art-box, span, [onclick], .skill-satellite-node, .tab-button, .folder-card');
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.style.width = '45px';
@@ -1128,7 +985,6 @@
             });
         }
 
-        // --- Lógica Scroll Reveal (Intersection Observer) ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -1158,23 +1014,18 @@
 
         function getCurrentLanguage() { return localStorage.getItem('lang') || 'es'; }
 
-        // === CONTROL INTERNO DE LAS PESTAÑAS DE PROYECTOS ===
         function switchProjectTab(event, targetTabId) {
-            // Ocultar todos los paneles de proyectos
             const panels = document.querySelectorAll('.tab-content-panel');
             panels.forEach(panel => panel.classList.remove('active'));
 
-            // Quitar el estado activo de todos los botones de la barra de proyectos
             const buttons = document.querySelectorAll('.tab-button');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Activar el panel seleccionado y su respectivo botón
             document.getElementById(targetTabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar Carruseles
             const carouselInnerIllus = document.querySelector('#carouselIllustration .carousel-inner');
             let illusHTML = '';
             for (let i = 1; i <= 16; i++) {
@@ -1195,7 +1046,6 @@
             setLanguage(getCurrentLanguage());
             applyCursorInteractions();
 
-            // --- SUAVE SCROLL DESDE NODOS HACIA PROYECTOS ---
             document.querySelectorAll('.skill-satellite-node').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
