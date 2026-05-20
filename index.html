@@ -1090,7 +1090,17 @@
             </div>
 
             <div id="tab-diseno-grafico" class="tab-content-panel">
+                <div class="ui-grid-container">
+                    <button type="button" class="ui-card-interactive" data-bs-toggle="modal" data-bs-target="#modalCartelGuerrilla">
+                        <div class="img-box">
+                            <img src="assets/spywareCartel.png" alt="Cartel Guerrilla 2024">
+                        </div>
+                        <div class="hover-overlay">
+                            <h3 class="hover-title">Cartel Guerrilla 2024</h3>
+                        </div>
+                    </button>
                 </div>
+            </div>
 
             <div id="tab-ilustracion" class="tab-content-panel">
                 <div class="wrapper-ilustracion-completa">
@@ -1339,6 +1349,36 @@
                                 <button class="carousel-control-next" type="button" data-bs-target="#carruselFloatingIsland" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalCartelGuerrilla" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content" style="background-color: var(--modal-bg); border: 1px solid var(--border); border-radius: 24px; padding: 20px;">
+                <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: var(--btn-close);"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5 mb-4 mb-lg-0 pe-lg-4">
+                            <h2 style="font-family: var(--font-titles); color: var(--accent); font-size: 2.5rem; margin-bottom: 20px;">
+                                Cartel Guerrilla 2024
+                            </h2>
+                            <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; text-align: justify;">
+                                Diseño de cartel promocional enfocado en una estética de guerrilla urbana. El objetivo fue crear un impacto visual fuerte mediante el uso de contrastes y tipografía experimental.
+                            </p>
+                        </div>
+                        <div class="col-lg-7">
+                            <div id="carruselGuerrilla" class="carousel slide" data-bs-ride="carousel" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid var(--border);">
+                                <div class="carousel-inner" style="aspect-ratio: 16/9; background-color: var(--card-bg);">
+                                    <div class="carousel-item active h-100">
+                                        <img src="assets/spywareCartel.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Cartel Guerrilla">
+                                    </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
