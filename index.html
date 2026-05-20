@@ -621,45 +621,36 @@
             display: block;
         }
 
-        /* --- APARTADO VIDEOS: REPRODUCTOR EMBEBIDO RESPONSIVE --- */
-        .videos-grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 30px;
-            padding: 20px 0;
-            align-items: start; /* Evita que los videos se estiren de forma desigual */
-        }
+        /* Ajuste para que la grilla no obligue a todos los vídeos a ser iguales */
+.videos-grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 20px 0;
+    align-items: start;
+}
 
-        .video-box-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: border-color 0.3s ease;
-        }
+/* Contenedor estándar (YouTube) */
+.iframe-responsive-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
 
-        .video-box-card:hover {
-            border-color: rgba(181, 126, 220, 0.3);
-        }
+/* Contenedor específico para TikTok (Vertical) */
+.iframe-responsive-wrapper.vertical {
+    padding-bottom: 177.77%; /* 9:16 */
+}
 
-        .iframe-responsive-wrapper {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; 
-            height: 0;
-            background-color: #000000;
-        }
-
-        .iframe-responsive-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
+.iframe-responsive-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
         /* NUEVO: Proporción para vídeos verticales (TikTok) */
         .iframe-responsive-wrapper.vertical {
             padding-bottom: 177.77%; 
@@ -1088,10 +1079,10 @@
                     
                     <a href="catpuccino-ui.html" class="ui-card-interactive">
                         <div class="img-box">
-                            <img src="assets/catpuccino.png" alt="Catpuccino UI">
+                            <img src="assets/catpuccinoUI.png" alt="Catpuccino UI">
                         </div>
                         <div class="hover-overlay">
-                            <h3 class="hover-title">CATPUCCINO UI</h3>
+                            <h3 class="hover-title">catpuccino UI</h3>
                         </div>
                     </a>
 
@@ -1115,28 +1106,27 @@
             </div>
 
             <div id="tab-videos" class="tab-content-panel">
-                <div class="videos-grid-container">
-                    
-                    <div class="video-box-card">
-                        <div class="iframe-responsive-wrapper">
-                            <iframe src="https://www.youtube.com/embed/7V81M-Dmcpg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    
-                    <div class="video-box-card">
-                        <div class="iframe-responsive-wrapper">
-                            <iframe src="https://www.youtube.com/embed/rLvt3jiJG98" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </div>
-
-                    <div class="video-box-card">
-                        <div class="iframe-responsive-wrapper vertical">
-                            <iframe src="https://www.tiktok.com/embed/v2/7571610494839147798" allow="fullscreen" allowfullscreen></iframe>
-                        </div>
-                    </div>
-
-                </div>
+    <div class="videos-grid-container">
+        
+        <div class="video-box-card">
+            <div class="iframe-responsive-wrapper">
+                <iframe src="https://www.youtube.com/embed/7V81M-Dmcpg" allowfullscreen></iframe>
             </div>
+        </div>
+        <div class="video-box-card">
+            <div class="iframe-responsive-wrapper">
+                <iframe src="https://www.youtube.com/embed/rLvt3jiJG98" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="video-box-card" style="grid-column: span 2; max-width: 400px; margin: 0 auto;">
+            <div class="iframe-responsive-wrapper vertical">
+                <iframe src="https://www.tiktok.com/embed/v2/7571610494839147798" allowfullscreen></iframe>
+            </div>
+        </div>
+
+    </div>
+</div>
         </section>
 
         <section id="contacto" class="scroll-reveal">
