@@ -592,145 +592,92 @@
             .profile-wrapper { flex-direction: column; align-items: flex-start; gap: 20px; }
             .section-title { font-size: 2rem; }
         }
-
-        /* --- GRID ASIMÉTRICO DE VIDEOJUEGOS (NIVEL DISEÑO GRÁFICO) --- */
-.videojuegos-grid {
+/* --- CONTENEDOR DE 2 COLUMNAS FIJAS POR FILA --- */
+.videojuegos-grid-clean {
     display: grid;
-    grid-template-columns: 1.6fr 1fr; /* Columna grande para destacado, columna normal para los otros */
-    gap: 25px;
-    align-items: stretch;
+    grid-template-columns: repeat(2, 1fr); /* Fuerza exactamente 2 imágenes por fila */
+    gap: 30px;
+    padding: 20px 0;
 }
 
-.videojuegos-col-secundaria {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-/* Tarjeta contenedora principal con enfoque tipográfico */
-.game-card-premium {
-    position: relative;
-    background-color: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Variación horizontal para el juego destacado */
-.game-card-premium.featured {
-    height: 100%;
-    min-height: 500px;
-}
-
-/* Contenedor de la imagen */
-.game-img-wrapper {
+/* Tarjeta minimalista interactiva */
+.game-card-clean {
     position: relative;
     width: 100%;
+    aspect-ratio: 16 / 9; 
+    border-radius: 12px;
     overflow: hidden;
-    background-color: rgba(0,0,0,0.3);
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.4s ease, transform 0.4s ease;
 }
 
-.game-card-premium.featured .game-img-wrapper {
-    flex: 1; /* Hace que la imagen ocupe todo el espacio sobrante */
+/* Contenedor e Imagen con Zoom suave */
+.game-card-clean .img-box {
+    width: 100%;
+    height: 100%;
 }
 
-.game-card-premium:not(.featured) .game-img-wrapper {
-    aspect-ratio: 16 / 9;
-}
-
-.game-img-wrapper img {
+.game-card-clean .img-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Detalles del texto: Limpios y con contraste */
-.game-info-wrapper {
-    padding: 30px;
-    position: relative;
-    z-index: 2;
-    background: linear-gradient(to top, var(--card-bg) 80%, transparent);
-}
-
-.game-card-premium.featured .game-info-wrapper {
+/* Máscara oscura interactiva (Se vuelve visible al hacer hover) */
+.game-card-clean .hover-overlay {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(10, 10, 12, 0.95) 60%, rgba(10, 10, 12, 0));
-    padding: 40px;
+    height: 100%;
+    background-color: rgba(10, 10, 12, 0.75); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
 }
 
-/* Etiquetas flotantes tipo "Tag" */
-.game-badge {
-    display: inline-block;
-    padding: 6px 14px;
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    border-radius: 30px;
-    margin-bottom: 15px;
+/* Texto centrado en color morado */
+.game-card-clean .hover-title {
+    color: var(--accent); 
     font-family: var(--font-titles);
-}
-
-.game-card-premium:hover .game-badge {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-.game-title-premium {
-    font-size: 2.2rem;
+    font-size: 2rem; /* Un poco más grande al haber más espacio de tarjeta */
     font-weight: 400;
-    line-height: 1.1;
-    margin-bottom: 10px;
-    letter-spacing: -0.02em;
-}
-
-.game-desc-premium {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     margin: 0;
-    max-width: 90%;
+    transform: translateY(10px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Efectos Hover de alta fidelidad */
-.game-card-premium:hover {
-    border-color: rgba(181, 126, 220, 0.3);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(181, 126, 220, 0.05);
-    transform: translateY(-5px);
+/* === EFECTOS HOVER (AL PASAR EL CURSOR) === */
+.game-card-clean:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-.game-card-premium:hover .game-img-wrapper img {
-    transform: scale(1.03);
+.game-card-clean:hover .img-box img {
+    transform: scale(1.06); /* Pequeño zoom al pasar el cursor */
 }
 
-/* Adaptación responsiva para móviles */
-@media (max-width: 991px) {
-    .videojuegos-grid {
+.game-card-clean:hover .hover-overlay {
+    opacity: 1; /* Muestra la capa oscura */
+}
+
+.game-card-clean:hover .hover-title {
+    transform: translateY(0); /* Eleva el título suavemente */
+}
+
+/* Adaptación para pantallas muy pequeñas (móviles) para que no se estruje el diseño */
+@media (max-width: 768px) {
+    .videojuegos-grid-clean {
         grid-template-columns: 1fr;
-    }
-    .game-card-premium.featured {
-        min-height: auto;
-    }
-    .game-card-premium.featured .game-img-wrapper {
-        aspect-ratio: 16 / 10;
-        flex: none;
-    }
-    .game-card-premium.featured .game-info-wrapper {
-        position: relative;
-        background: var(--card-bg);
-        padding: 30px;
     }
 }
         
@@ -878,44 +825,34 @@
                 </div>
 
             <div id="tab-videojuegos" class="tab-content-panel">
-    <div class="videojuegos-grid">
+    <div class="videojuegos-grid-clean">
         
-        <a href="https://mangostudiourjc.itch.io/catpuccino" target="_blank" class="game-card-premium featured">
-            <div class="game-img-wrapper">
-                <img src="assets/catpuccino.png" alt="Catpuccino">
+        <a href="https://mangostudiourjc.itch.io/catpuccino" target="_blank" class="game-card-clean">
+            <div class="img-box">
+                <img src="assets/catpuccino.png" alt="Catpuccino Café">
             </div>
-            <div class="game-info-wrapper">
-                <span class="game-badge">Desktop Project / Cozy Management</span>
-                <h3 class="game-title-premium">Catpuccino</h3>
-                <p class="game-desc-premium">Gestión de recursos y coleccionables en una acogedora cafetería de gatos. Dirección de arte estilizada, branding integral y diseño de interfaz de usuario enfocado en la experiencia e interacción del jugador.</p>
+            <div class="hover-overlay">
+                <h3 class="hover-title">Catpuccino Cafe</h3>
             </div>
         </a>
 
-        <div class="videojuegos-col-secundaria">
-            
-            <a href="https://botpa.itch.io/spyw4re" target="_blank" class="game-card-premium">
-                <div class="game-img-wrapper">
-                    <img src="assets/1.png" alt="Spyw4re">
-                </div>
-                <div class="game-info-wrapper">
-                    <span class="game-badge">Game Jam / Puzzle Strategy</span>
-                    <h3 class="game-title-premium">Spyw4re</h3>
-                    <p class="game-desc-premium">Coordinación de sistemas de vigilancia y mecánicas de hackeo contra reloj en un entorno distópico colapsable.</p>
-                </div>
-            </a>
+        <a href="https://botpa.itch.io/spyw4re" target="_blank" class="game-card-clean">
+            <div class="img-box">
+                <img src="assets/1.png" alt="Spyw4re">
+            </div>
+            <div class="hover-overlay">
+                <h3 class="hover-title">Spyw4re</h3>
+            </div>
+        </a>
 
-            <a href="https://mangostudiourjc.itch.io/mioupet" target="_blank" class="game-card-premium">
-                <div class="game-img-wrapper">
-                    <img src="assets/miaupet.png" alt="Miaupet">
-                </div>
-                <div class="game-info-wrapper">
-                    <span class="game-badge">Mobile Game / Virtual Pet</span>
-                    <h3 class="game-title-premium">Miaupet</h3>
-                    <p class="game-desc-premium">Compañero virtual interactivo optimizado para plataformas móviles, con minijuegos integrados y personalización de entornos.</p>
-                </div>
-            </a>
-
-        </div>
+        <a href="https://mangostudiourjc.itch.io/mioupet" target="_blank" class="game-card-clean">
+            <div class="img-box">
+                <img src="assets/miaupet.png" alt="Miaupet">
+            </div>
+            <div class="hover-overlay">
+                <h3 class="hover-title">Miaupet</h3>
+            </div>
+        </a>
 
     </div>
 </div>
