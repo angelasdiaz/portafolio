@@ -600,31 +600,26 @@
             border-color: rgba(181, 126, 220, 0.2);
         }
 
-        /* --- CO-ESTILOS DE GRIDS PARA OTROS APARTADOS --- */
-        .art-modern-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+        /* --- APARTADO ILUSTRACIÓN: AJUSTADO A 1920PX SCROLL VERTICAL --- */
+        .wrapper-ilustracion-completa {
+            width: 100%;
+            overflow-x: auto; /* Permite scroll horizontal si la pantalla es menor a 1920px */
             padding: 10px 0;
         }
-        .art-box {
-            background: var(--bg-alt);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 15px;
-            cursor: pointer;
-            transition: 0.3s ease;
+
+        .canvas-ilustracion {
+            width: 1920px;
+            height: 9720px;
+            margin: 0 auto;
+            display: block;
         }
-        .art-box img { 
-            width: 100%; 
-            max-height: 400px; 
-            object-fit: contain; 
-            background-color: rgba(0, 0, 0, 0.2); 
-            border-radius: 8px; 
-            margin-bottom: 12px; 
+
+        .canvas-ilustracion img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            display: block;
         }
-        .art-box p { font-size: 0.85rem; margin: 0; text-align: left; color: var(--text-main); }
-        .art-box:hover { border-color: var(--accent); transform: scale(1.02); }
 
         /* --- Caja de Contacto --- */
         .contact-grid {
@@ -855,7 +850,6 @@
 
             <div id="tab-videojuegos" class="tab-content-panel active">
                 <div class="folder-tabs-container">
-                    
                     <a href="https://mangostudiourjc.itch.io/catpuccino" target="_blank" class="folder-card">
                         <div class="folder-tab-aside">
                             <h3>catpuccino</h3>
@@ -900,7 +894,6 @@
                             </div>
                         </div>
                     </a>
-
                 </div>
             </div>
 
@@ -908,10 +901,9 @@
                 </div>
 
             <div id="tab-ilustracion" class="tab-content-panel">
-                <div class="art-modern-grid">
-                    <div class="art-box">
-                        <img src="assets/ilustracion.png" alt="Ilustración Artística">
-                        <p>Obra Conceptual — Arte Digital</p>
+                <div class="wrapper-ilustracion-completa">
+                    <div class="canvas-ilustracion">
+                        <img src="assets/ilustracion.png" alt="Ilustración Completa">
                     </div>
                 </div>
             </div>
@@ -1000,7 +992,7 @@
         });
         
         function applyCursorInteractions() {
-            const interactiveElements = document.querySelectorAll('a, button, .project-card-editorial, .art-box, span, [onclick], .skill-satellite-node, .tab-button, .folder-card');
+            const interactiveElements = document.querySelectorAll('a, button, .project-card-editorial, span, [onclick], .skill-satellite-node, .tab-button, .folder-card');
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.style.width = '45px';
@@ -1057,13 +1049,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const carouselInnerIllus = document.querySelector('#carouselIllustration .carousel-inner');
-            let illusHTML = '';
-            for (let i = 1; i <= 16; i++) {
-                illusHTML += `<div class="carousel-item${i === 1 ? ' active' : ''}"><img src="assets/ilustracion (${i}).PNG" class="d-block w-100"></div>`;
-            }
-            if(carouselInnerIllus) carouselInnerIllus.innerHTML = illusHTML;
-
             const carouselInner3D = document.querySelector('#carousel3D .carousel-inner');
             let threeDHTML = '';
             threeDHTML += `<div class="carousel-item active"><img src="assets/4.png" class="d-block w-100"></div>`;
