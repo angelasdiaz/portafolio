@@ -1014,7 +1014,28 @@
             </div>
 
             <div id="tab-3d-models" class="tab-content-panel">
+                <div class="ui-grid-container">
+                    
+                    <button type="button" class="ui-card-interactive" data-bs-toggle="modal" data-bs-target="#modalCatpuccino3D">
+                        <div class="img-box">
+                            <img src="assets/catpuccino3d.png" alt="Catpuccino 3D">
+                        </div>
+                        <div class="hover-overlay">
+                            <h3 class="hover-title">Catpuccino 3D</h3>
+                        </div>
+                    </button>
+
+                    <button type="button" class="ui-card-interactive" data-bs-toggle="modal" data-bs-target="#modalFloatingIsland">
+                        <div class="img-box">
+                            <img src="assets/floatingIsland.png" alt="Floating Island">
+                        </div>
+                        <div class="hover-overlay">
+                            <h3 class="hover-title">Floating Island</h3>
+                        </div>
+                    </button>
+
                 </div>
+            </div>
 
             <div id="tab-videojuegos" class="tab-content-panel active">
                 <div class="folder-tabs-container">
@@ -1155,22 +1176,17 @@
         </section>
     </div>
 
-    <!-- PANTALLA EMERGENTE (MODAL) PARA UI DESIGN -->
     <div class="modal fade" id="uiModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
-            <!-- Aplicamos el fondo var(--modal-bg) directamente al contenido de la ventana -->
             <div class="modal-content" style="background-color: var(--modal-bg); border: 1px solid var(--border); border-radius: 24px; padding: 20px;">
                 
-                <!-- Cabecera limpia solo con el botón de cerrar -->
                 <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: var(--btn-close);"></button>
                 </div>
                 
                 <div class="modal-body">
-                    <!-- Fila que divide en dos columnas en pantallas grandes -->
                     <div class="row align-items-center">
                         
-                        <!-- LADO IZQUIERDO: TEXTO (Ocupa 5 de 12 columnas) -->
                         <div class="col-lg-5 mb-4 mb-lg-0 pe-lg-4">
                             <h2 style="font-family: var(--font-titles); color: var(--accent); font-size: 2.5rem; margin-bottom: 20px;">
                                 Catpuccino UI
@@ -1182,11 +1198,9 @@
                             
                         </div>
                         
-                        <!-- LADO DERECHO: CARRUSEL (Ocupa 7 de 12 columnas) -->
                         <div class="col-lg-7">
                             <div id="carruselUI" class="carousel slide" data-bs-ride="carousel" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid var(--border);">
                                 
-                                <!-- Indicadores de abajo (las barritas) -->
                                 <div class="carousel-indicators">
                                     <button type="button" data-bs-target="#carruselUI" data-bs-slide-to="0" class="active"></button>
                                     <button type="button" data-bs-target="#carruselUI" data-bs-slide-to="1"></button>
@@ -1196,38 +1210,28 @@
                                     <button type="button" data-bs-target="#carruselUI" data-bs-slide-to="5"></button>
                                 </div>
 
-                                <!-- Las 5 imágenes y el GIF (Proporción 16:9 fija para que no salte) -->
                                 <div class="carousel-inner" style="aspect-ratio: 16/9; background-color: var(--card-bg);">
                                     
-                                    <!-- Imagen 1 -->
                                     <div class="carousel-item active h-100">
                                         <img src="assets/animacionUI.gif" class="d-block w-100 h-100" style="object-fit: contain;" alt="Flujo de interacción UI">
                                     </div>
                                     <div class="carousel-item h-100">
                                         <img src="assets/ui1.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Pantalla de inicio UI">
                                     </div>
-                                    <!-- Imagen 2 -->
                                     <div class="carousel-item h-100">
                                         <img src="assets/ui2.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Menú principal UI">
                                     </div>
-                                    <!-- Imagen 3 -->
                                     <div class="carousel-item h-100">
                                         <img src="assets/catpuccinoUI.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Tienda UI">
                                     </div>
-                                    <!-- Imagen 4 -->
                                     <div class="carousel-item h-100">
                                         <img src="assets/ui4.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Colección gatos UI">
                                     </div>
-                                    <!-- Imagen 5 -->
                                     <div class="carousel-item h-100">
                                         <img src="assets/ui5.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Ajustes UI">
                                     </div>
-                                    <!-- El GIF animado -->
-                                    
+                                    </div>
 
-                                </div>
-
-                                <!-- Flechas de navegación -->
                                 <button class="carousel-control-prev" type="button" data-bs-target="#carruselUI" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Anterior</span>
@@ -1239,6 +1243,104 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCatpuccino3D" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content" style="background-color: var(--modal-bg); border: 1px solid var(--border); border-radius: 24px; padding: 20px;">
+                <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: var(--btn-close);"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5 mb-4 mb-lg-0 pe-lg-4">
+                            <h2 style="font-family: var(--font-titles); color: var(--accent); font-size: 2.5rem; margin-bottom: 20px;">
+                                Catpuccino 3D
+                            </h2>
+                            <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; text-align: justify;">
+                                Modelado y texturizado 3D de los elementos principales para el juego Catpuccino. 
+                            </p>
+                            <span class="badge" style="background-color: rgba(181, 126, 220, 0.15); color: var(--accent); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; margin-top: 10px; border: 1px solid var(--accent);">3ds Max</span>
+                            <span class="badge" style="background-color: rgba(181, 126, 220, 0.15); color: var(--accent); padding: 8px 15px; border-radius: 20px; font-size: 0.9rem; margin-top: 10px; border: 1px solid var(--accent);">Substance Painter</span>
+                        </div>
+                        <div class="col-lg-7">
+                            <div id="carruselCatpuccino3D" class="carousel slide" data-bs-ride="carousel" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid var(--border);">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carruselCatpuccino3D" data-bs-slide-to="0" class="active"></button>
+                                    <button type="button" data-bs-target="#carruselCatpuccino3D" data-bs-slide-to="1"></button>
+                                    <button type="button" data-bs-target="#carruselCatpuccino3D" data-bs-slide-to="2"></button>
+                                </div>
+                                <div class="carousel-inner" style="aspect-ratio: 16/9; background-color: var(--card-bg);">
+                                    <div class="carousel-item active h-100">
+                                        <img src="assets/cat3d_1.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Catpuccino 3D 1">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="assets/cat3d_2.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Catpuccino 3D 2">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="assets/cat3d_3.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Catpuccino 3D 3">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carruselCatpuccino3D" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carruselCatpuccino3D" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalFloatingIsland" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content" style="background-color: var(--modal-bg); border: 1px solid var(--border); border-radius: 24px; padding: 20px;">
+                <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: var(--btn-close);"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5 mb-4 mb-lg-0 pe-lg-4">
+                            <h2 style="font-family: var(--font-titles); color: var(--accent); font-size: 2.5rem; margin-bottom: 20px;">
+                                Floating Island
+                            </h2>
+                            <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; text-align: justify;">
+                                Creación de un entorno 3D tipo diorama, enfocado en la iluminación y la composición escénica.
+                            </p>
+                        </div>
+                        <div class="col-lg-7">
+                            <div id="carruselFloatingIsland" class="carousel slide" data-bs-ride="carousel" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid var(--border);">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#carruselFloatingIsland" data-bs-slide-to="0" class="active"></button>
+                                    <button type="button" data-bs-target="#carruselFloatingIsland" data-bs-slide-to="1"></button>
+                                    <button type="button" data-bs-target="#carruselFloatingIsland" data-bs-slide-to="2"></button>
+                                </div>
+                                <div class="carousel-inner" style="aspect-ratio: 16/9; background-color: var(--card-bg);">
+                                    <div class="carousel-item active h-100">
+                                        <img src="assets/island_1.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Floating Island 1">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="assets/island_2.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Floating Island 2">
+                                    </div>
+                                    <div class="carousel-item h-100">
+                                        <img src="assets/island_3.png" class="d-block w-100 h-100" style="object-fit: contain;" alt="Floating Island 3">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carruselFloatingIsland" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carruselFloatingIsland" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
