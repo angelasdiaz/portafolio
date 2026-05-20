@@ -276,18 +276,51 @@
         }
 
         /* --- Hero Section Editorial --- */
-        #inicio { 
-            height: 100vh; display: flex; align-items: center; justify-content: flex-start;
-            overflow: hidden; padding-top: 0; padding-bottom: 0;
-        }
-        .hero-container { position: relative; z-index: 2; width: 100%; }
-         
-        .marquee-bg {
-            position: absolute; bottom: 10%; left: 0; width: 100%;
-            overflow: hidden; white-space: nowrap; pointer-events: none; opacity: 0.03;
-            font-family: var(--font-titles); font-weight: 800; font-size: 12vw; text-transform: uppercase;
-        }
-        .marquee-inner { display: inline-block; animation: marquee 25s linear infinite; }
+#inicio { 
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* --- Título Principal y Subtítulo --- */
+.display-title {
+    font-size: 4.5rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 15px;
+    color: var(--text-main); /* Asegura que el texto sea visible en fondo oscuro */
+}
+
+.subtitle-tech {
+    font-family: var(--font-titles);
+    color: var(--accent); /* Color morado para "Porfolio" */
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 5px; /* Ajuste para el nuevo texto */
+}
+
+/* --- Texto de Fondo Marquee --- */
+.marquee-bg {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0.03;
+    font-family: var(--font-titles);
+    font-weight: 800;
+    font-size: 12vw;
+    text-transform: uppercase;
+    color: var(--text-muted); /* Color para el texto de fondo */
+}
 
         @keyframes marquee {
             0% { transform: translate3d(0, 0, 0); }
@@ -622,19 +655,19 @@
     <div class="main-content">
         
         <section id="inicio">
-            <div class="marquee-bg">
-                <div class="marquee-inner">Creative Developer — Game Designer — Digital Artist —&nbsp;</div>
-                <div class="marquee-inner">Creative Developer — Game Designer — Digital Artist —&nbsp;</div>
+    <div class="marquee-bg">
+        <div class="marquee-inner">Creative Developer — Game Designer — Digital Artist —&nbsp;</div>
+        <div class="marquee-inner">Creative Developer — Game Designer — Digital Artist —&nbsp;</div>
+    </div>
+    <div class="hero-container scroll-reveal">
+        <div class="profile-wrapper">
+            <div>
+                <span class="subtitle-tech" data-key="header-subtitle">Porfolio</span>
+                <h1 class="display-title">Ángela Sánchez Díaz</h1>
             </div>
-            <div class="hero-container scroll-reveal">
-                <div class="profile-wrapper">
-                    <div>
-                        <span class="subtitle-tech" data-key="header-subtitle">Porfolio</span>
-                        <h1 class="display-title">Ángela Sánchez Díaz</h1>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
+    </div>
+</section>
 
         <section id="sobre-mi" class="scroll-reveal">
             <div class="container-fluid p-0">
