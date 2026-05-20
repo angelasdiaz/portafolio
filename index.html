@@ -627,6 +627,7 @@
             grid-template-columns: repeat(2, 1fr); 
             gap: 30px;
             padding: 20px 0;
+            align-items: start; /* Evita que los videos se estiren de forma desigual */
         }
 
         .video-box-card {
@@ -659,6 +660,10 @@
             border: 0;
         }
 
+        /* NUEVO: Proporción para vídeos verticales (TikTok) */
+        .iframe-responsive-wrapper.vertical {
+            padding-bottom: 177.77%; 
+        }
         /* --- APARTADO WEB: GRID DE TARJETAS LIMPIAS INTERACTIVAS --- */
         .web-grid-container {
             display: grid;
@@ -1101,8 +1106,8 @@
                             <img src="assets/WebMango.png" alt="Mango Studio Catpuccino Site">
                         </div>
                         <div class="web-info-pane">
-                            <h3>Mango Studio — Catpuccino</h3>
-                            <p>Sitio promocional e informativo oficial del ecosistema de juego. Interfaz de marca totalmente responsive orientada a la experiencia de usuario.</p>
+                            <h3>Mango Studio</h3>
+                            <p>Cree la imagen de marca de una empresa de videojuegos que promocionaba su primer lanzamiento Catpucciono.</p>
                         </div>
                     </a>
 
@@ -1111,22 +1116,31 @@
 
             <div id="tab-videos" class="tab-content-panel">
                 <div class="videos-grid-container">
+                    
                     <div class="video-box-card">
                         <div class="iframe-responsive-wrapper">
                             <iframe src="https://www.youtube.com/embed/7V81M-Dmcpg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
+                    
                     <div class="video-box-card">
                         <div class="iframe-responsive-wrapper">
                             <iframe src="https://www.youtube.com/embed/rLvt3jiJG98" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
+
+                    <div class="video-box-card">
+                        <div class="iframe-responsive-wrapper vertical">
+                            <iframe src="https://www.tiktok.com/embed/v2/7571610494839147798" allow="fullscreen" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
         <section id="contacto" class="scroll-reveal">
-            <span class="section-label">04 / Connection</span>
+            <span class="section-label">04 / Contacto</span>
             <h2 class="section-title" data-key="nav-contact">Contacto</h2>
             
             <div class="contact-grid">
