@@ -491,7 +491,7 @@
         /* --- GRID DE CARPETAS DE ARCHIVOS DESLIZANTES --- */
         .folder-tabs-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Dos columnas idénticas fijas por fila */
+            grid-template-columns: repeat(2, 1fr); 
             gap: 30px;
             padding: 20px 0;
         }
@@ -579,7 +579,6 @@
             transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Acciones Interactivas Hover */
         .folder-card:hover .folder-content-body {
             grid-template-columns: 1fr 1fr;
         }
@@ -601,7 +600,33 @@
             border-color: rgba(181, 126, 220, 0.2);
         }
 
-        /* --- CONTACTO Y RETÍCULAS INTERNAS --- */
+        /* --- CO-ESTILOS DE GRIDS PARA OTROS APARTADOS --- */
+        .art-modern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 10px 0;
+        }
+        .art-box {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+        .art-box img { 
+            width: 100%; 
+            max-height: 400px; 
+            object-fit: contain; 
+            background-color: rgba(0, 0, 0, 0.2); 
+            border-radius: 8px; 
+            margin-bottom: 12px; 
+        }
+        .art-box p { font-size: 0.85rem; margin: 0; text-align: left; color: var(--text-main); }
+        .art-box:hover { border-color: var(--accent); transform: scale(1.02); }
+
+        /* --- Caja de Contacto --- */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -883,7 +908,13 @@
                 </div>
 
             <div id="tab-ilustracion" class="tab-content-panel">
+                <div class="art-modern-grid">
+                    <div class="art-box">
+                        <img src="assets/ilustracion.png" alt="Ilustración Artística">
+                        <p>Obra Conceptual — Arte Digital</p>
+                    </div>
                 </div>
+            </div>
 
             <div id="tab-ui-design" class="tab-content-panel">
                 </div>
