@@ -659,10 +659,10 @@
             border: 0;
         }
 
-        /* --- NUEVO APARTADO WEB: GRID DE TARJETAS LIMPIAS INTERACTIVAS (ESCALABLE) --- */
+        /* --- APARTADO WEB: GRID DE TARJETAS LIMPIAS INTERACTIVAS --- */
         .web-grid-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Organiza tus webs de 2 en 2 por fila */
+            grid-template-columns: repeat(2, 1fr); 
             gap: 30px;
             padding: 20px 0;
         }
@@ -721,6 +721,72 @@
             line-height: 1.5;
             margin: 0;
         }
+
+        /* --- TARJETAS UI DESIGN (ZOOM + OVERLAY OSCURO) --- */
+        .ui-grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .ui-card-interactive {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            transition: border-color 0.4s ease;
+        }
+
+        .ui-card-interactive .img-box {
+            width: 100%;
+            height: 100%;
+        }
+
+        .ui-card-interactive .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ui-card-interactive .hover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 12, 0.85); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        .ui-card-interactive .hover-title {
+            color: #ffffff; 
+            font-family: var(--font-titles);
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 0;
+            transform: translateY(15px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ui-card-interactive:hover .img-box img { transform: scale(1.08); }
+        .ui-card-interactive:hover .hover-overlay { opacity: 1; }
+        .ui-card-interactive:hover .hover-title { transform: translateY(0); }
+        .ui-card-interactive:hover { border-color: var(--accent); }
 
         /* --- Caja de Contacto --- */
         .contact-grid {
@@ -798,6 +864,7 @@
             .folder-card:hover .folder-content-body { grid-template-columns: 1fr; }
             .web-grid-container { grid-template-columns: 1fr; }
             .videos-grid-container { grid-template-columns: 1fr; }
+            .ui-grid-container { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: repeat(2, 1fr); }
             #inicio { height: auto; padding-top: 160px; padding-bottom: 100px; }
         }
@@ -1012,7 +1079,19 @@
             </div>
 
             <div id="tab-ui-design" class="tab-content-panel">
+                <div class="ui-grid-container">
+                    
+                    <a href="catpuccino-ui.html" class="ui-card-interactive">
+                        <div class="img-box">
+                            <img src="assets/catpuccino.png" alt="Catpuccino UI">
+                        </div>
+                        <div class="hover-overlay">
+                            <h3 class="hover-title">CATPUCCINO UI</h3>
+                        </div>
+                    </a>
+
                 </div>
+            </div>
 
             <div id="tab-web" class="tab-content-panel">
                 <div class="web-grid-container">
@@ -1027,7 +1106,7 @@
                         </div>
                     </a>
 
-                    </div>
+                </div>
             </div>
 
             <div id="tab-videos" class="tab-content-panel">
@@ -1120,7 +1199,7 @@
         });
         
         function applyCursorInteractions() {
-            const interactiveElements = document.querySelectorAll('a, button, span, [onclick], .skill-satellite-node, .tab-button, .folder-card, .web-project-card');
+            const interactiveElements = document.querySelectorAll('a, button, span, [onclick], .skill-satellite-node, .tab-button, .folder-card, .web-project-card, .ui-card-interactive');
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     cursor.style.width = '45px';
