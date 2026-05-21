@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <style>
-        
+        /* Importación ultra-estable de fuentes con fallbacks directos */
         @import url('https://fonts.cdnfonts.com/css/coolvetica-2');
         @import url('https://fonts.cdnfonts.com/css/cream-2');
 
@@ -28,12 +28,12 @@
             --btn-close: invert(1);
             --btn-toggle-bg: var(--accent);
             
-           
+            /* --- Sistema tipográfico unificado --- */
             --font-editorial: 'Cream', 'Plus Jakarta Sans', sans-serif;
             --font-titles: 'Coolvetica', sans-serif;
         }
 
-        
+        /* --- SISTEMA DE COLLAGE DESVINCULADO --- */
         .contenedor-collage-libre {
             position: relative;
             width: 100%;
@@ -435,7 +435,7 @@
             .skill-satellite-node p { font-size: 1rem; }
         }
 
-        
+        /* --- NAVEGACIÓN Y TABS DE PROYECTOS --- */
         .projects-nav {
             display: flex;
             flex-wrap: wrap;
@@ -488,7 +488,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        
+        /* --- GRID DE CARPETAS DE ARCHIVOS DESLIZANTES --- */
         .folder-tabs-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr); 
@@ -600,7 +600,7 @@
             border-color: rgba(181, 126, 220, 0.2);
         }
 
-        
+        /* --- APARTADO ILUSTRACIÓN: AJUSTADO PROPORCIONAL SIN RECORTES --- */
         .wrapper-ilustracion-completa {
             width: 100%;
             padding: 10px 0;
@@ -621,7 +621,7 @@
             display: block;
         }
 
-        
+        /* Ajuste para que la grilla no obligue a todos los vídeos a ser iguales */
         .videos-grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -630,17 +630,17 @@
             align-items: start;
         }
 
-        
+        /* Contenedor estándar (YouTube) */
         .iframe-responsive-wrapper {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; 
+            padding-bottom: 56.25%; /* 16:9 */
             height: 0;
         }
 
-        
+        /* Contenedor específico para TikTok (Vertical) */
         .iframe-responsive-wrapper.vertical {
-            padding-bottom: 177.77%; 
+            padding-bottom: 177.77%; /* 9:16 */
         }
 
         .iframe-responsive-wrapper iframe {
@@ -652,7 +652,7 @@
             border: 0;
         }
         
-        
+        /* --- APARTADO WEB: GRID DE TARJETAS LIMPIAS INTERACTIVAS --- */
         .web-grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr); 
@@ -715,7 +715,7 @@
             margin: 0;
         }
 
-        
+        /* --- TARJETAS UI DESIGN (ZOOM + OVERLAY OSCURO) --- */
         .ui-grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -735,7 +735,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border: 1px solid var(--border);
             transition: border-color 0.4s ease;
-
+            /* Nuevos estilos para resetear el botón */
             appearance: none;
             background: transparent;
             padding: 0;
@@ -786,7 +786,7 @@
         .ui-card-interactive:hover .hover-title { transform: translateY(0); }
         .ui-card-interactive:hover { border-color: var(--accent); }
 
-
+        /* --- Caja de Contacto --- */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -872,29 +872,6 @@
             .contact-grid { grid-template-columns: 1fr; }
             .profile-wrapper { flex-direction: column; align-items: flex-start; gap: 20px; }
             .section-title { font-size: 2rem; }
-        }
-
-        @media (max-width: 991px) {
-            .main-content { margin-left: 0 !important; }
-            section { padding: 80px 20px !important; }
-            .folder-tabs-container, .web-grid-container, .videos-grid-container, .ui-grid-container, .contact-grid { 
-                grid-template-columns: 1fr !important; 
-            }
-            .folder-card { height: auto !important; grid-template-columns: 1fr !important; }
-            .contenedor-collage-libre { transform: scale(0.8); height: 250px; }
-            .skills-system-container { height: auto !important; padding: 40px 0; flex-direction: column; }
-            .skills-orbit-wrapper { display: none !important; }
-            .skills-core-node { position: static !important; width: 100% !important; height: auto !important; margin-bottom: 20px; }
-            .skill-satellite-node { 
-                position: static !important; width: 100% !important; max-width: 100% !important; height: auto !important; 
-                flex-direction: row !important; justify-content: flex-start !important; gap: 20px !important; 
-                padding: 15px !important; transform: none !important; animation: none !important; 
-            }
-        }
-
-        @media (max-width: 576px) {
-            .display-title { font-size: 2.4rem !important; }
-            .section-title { font-size: 2rem !important; }
         }
     </style>
 </head>
@@ -1112,29 +1089,26 @@
                 </div>
             </div>
 
-           <div id="tab-diseno-grafico" class="tab-content-panel">
-    <div class="ui-grid-container">
+            <div id="tab-diseno-grafico" class="tab-content-panel">
+                <div class="ui-grid-container">
+                    <button type="button" class="ui-card-interactive" data-bs-toggle="modal" data-bs-target="#modalCartelGuerrilla">
+                        <div class="img-box">
+                            <img src="assets/spywareCartel.PNG" alt="Cartel Guerrilla 2024">
+                        </div>
+                        <div class="hover-overlay">
+                            <h3 class="hover-title">Cartel Guerrilla 2024</h3>
+                        </div>
+                    </button>
+                </div>
+            </div>
 
-        <button type="button" class="ui-card-interactive" data-bs-toggle="modal" data-bs-target="#modalCartelGuerrilla">
-            <div class="img-box">
-                <img src="assets/spywareCartel.PNG" alt="Cartel Guerrilla 2024">
+            <div id="tab-ilustracion" class="tab-content-panel">
+                <div class="wrapper-ilustracion-completa">
+                    <div class="canvas-ilustracion">
+                        <img src="assets/ilustracion.png" alt="Ilustración Completa">
+                    </div>
+                </div>
             </div>
-            <div class="hover-overlay">
-                <h3 class="hover-title">Cartel Guerrilla 2024</h3>
-            </div>
-        </button>
-
-
-        <button type="button" class="ui-card-interactive" data-bs-toggle="modal" data-bs-target="#modalCeraVe">
-            <div class="img-box">
-                <img src="assets/CeraVe.png" alt="Rebranding CeraVe">
-            </div>
-            <div class="hover-overlay">
-                <h3 class="hover-title">Rebranding CeraVe</h3>
-            </div>
-        </button>
-    </div>
-</div>
 
             <div id="tab-ui-design" class="tab-content-panel">
                 <div class="ui-grid-container">
@@ -1182,10 +1156,10 @@
                     </div>
 
                     <div class="video-box-card" style="grid-column: span 2; max-width: 400px; margin: 0 auto;">
-    <div class="iframe-responsive-wrapper vertical">
-        <iframe src="https://www.tiktok.com/embed/7571610494839147798" allowfullscreen></iframe>
-    </div>
-</div>
+                        <div class="iframe-responsive-wrapper vertical">
+                            <iframe src="https://www.tiktok.com/embed/v2/7571610494839147798" allowfullscreen></iframe>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -1394,37 +1368,36 @@
             </div>
         </div>
     </div>
-
-    </section>
-
-
+    
     <div class="modal fade" id="modalCartelGuerrilla" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content" style="background: var(--bg-main);">
-            <div class="modal-header border-0"><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
-            <div class="modal-body d-flex align-items-center justify-content-center">
-                <img src="assets/spywareCartel.PNG" style="max-width: 90%; max-height: 90%; object-fit: contain;">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content" style="background-color: var(--modal-bg); border: 1px solid var(--border); border-radius: 24px; padding: 20px;">
+                <div class="modal-header" style="border-bottom: none; padding-bottom: 0;">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: var(--btn-close);"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5 mb-4 mb-lg-0 pe-lg-4">
+                            <h2 style="font-family: var(--font-titles); color: var(--accent); font-size: 2.5rem; margin-bottom: 20px;">
+                                Cartel Guerrilla 2024
+                            </h2>
+                            
+                        </div>
+                        <div class="col-lg-7">
+                            <div id="carruselGuerrilla" class="carousel slide" data-bs-ride="carousel" style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid var(--border);">
+                                <div class="carousel-inner" style="aspect-ratio: 16/9; background-color: var(--card-bg);">
+                                    <div class="carousel-item active h-100">
+                                        <img src="assets/spywareCartel.PNG" class="d-block w-100 h-100" style="object-fit: contain;" alt="Cartel Guerrilla">
+                                    </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="modalCeraVe" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content" style="background: var(--bg-main);">
-            <div class="modal-header border-0"><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
-            <div class="modal-body">
-                <iframe src="https://www.canva.com/design/DAGP3nN4oRk/view?embed" style="width:100%; height:90vh; border:none;" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-    </script>
-</body>
-</html>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         window.addEventListener('load', function() {
