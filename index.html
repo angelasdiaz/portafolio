@@ -85,29 +85,31 @@
 
         @media (max-width: 991px) {
             .contenedor-collage-libre {
-                height: 450px; /* Reducimos un poco para que no haya huecos vacíos gigantes */
-                margin-top: 50px; 
+                height: 380px; 
+                margin-top: 30px; 
             }
             
             .capa-fondo {
                 display: none !important;
             }
             
-            /* Truco para centrado perfecto ignorando el contenedor */
+            /* Al ser 1920x1080, mandamos en la altura para que haga "zoom" al centro */
+            .capa-medio, .capa-frente {
+                width: auto !important; /* Mantiene la proporción original */
+                height: 600px !important; /* Forzamos un alto gigante para acercar los elementos */
+                
+                /* Truco maestro para centrar elementos enormes sin usar transform (para no romper tu animación) */
+                left: -100% !important;
+                right: -100% !important;
+                margin: auto !important;
+            }
+            
             .capa-medio {
-                width: 130% !important; /* Tamaño grande pero proporcionado */
-                left: 50% !important;   /* Lo mandamos al centro de la pantalla... */
-                margin-left: -65% !important; /* ...y retrocedemos exactamente la mitad de su ancho para centrarlo */
-                right: auto !important; /* Anulamos la orden del ordenador */
-                top: -10px !important; 
+                top: -100px !important; /* Subimos el lienzo para que el libro quede centrado visualmente */
             }
             
             .capa-frente {
-                width: 130% !important; 
-                left: 50% !important; 
-                margin-left: -65% !important; 
-                right: auto !important;
-                top: 60px !important; /* Un poco más abajo que el libro para que se vea el efecto */
+                top: -40px !important; /* Un poco más abajo para mantener el efecto de superposición */
             }
         }
 
