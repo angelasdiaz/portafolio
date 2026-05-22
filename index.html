@@ -284,16 +284,21 @@
             overflow: hidden; 
             padding-top: 0; 
             padding-bottom: 0;
+            position: relative;
             
-    
-            background-image: linear-gradient(rgba(10, 10, 12, 0.8), rgba(10, 10, 12, 0.8)), url('assets/catpuccinoUi.gif');
+            /* He bajado la opacidad de 0.8 a 0.3 para que el GIF brille a través del fondo */
+            /* IMPORTANTE: Verifica que el nombre del archivo sea EXACTAMENTE este, respetando mayúsculas */
+            background-image: linear-gradient(rgba(10, 10, 12, 0.3), rgba(10, 10, 12, 0.3)), url('assets/animacionUI.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
+
         [data-theme="light"] #inicio {
-            background-image: linear-gradient(rgba(248, 249, 250, 0.85), rgba(248, 249, 250, 0.85)), url('assets/catpuccinoUi.gif');
+            /* Filtro blanco semitransparente para el modo claro */
+            background-image: linear-gradient(rgba(248, 249, 250, 0.5), rgba(248, 249, 250, 0.5)), url('assets/animacionUI.gif');
         }
+        
         .hero-container { position: relative; z-index: 2; width: 100%; }
          
         .marquee-bg {
