@@ -448,22 +448,48 @@
         @keyframes floatNode8 { 0%, 100% { transform: translate(-180px, -174px); } 50% { transform: translate(-174px, -180px); } }
 
         @media (max-width: 768px) {
-            .skills-system-container { height: auto; padding: 40px 0; flex-direction: column; gap: 15px; }
-            
-            .skills-orbit-wrapper { 
-                display: flex; 
-                flex-direction: column; 
-                position: static; 
-                width: 100%; 
-                height: auto; 
-                border: none; 
-                gap: 15px; 
+            /* Escalamos el sistema orbital completo para que quepa en móvil */
+            .skills-system-container { 
+                transform: scale(0.55); 
+                transform-origin: center center;
+                /* Ajustamos los márgenes para compensar el espacio que sobra al reducirlo */
+                margin-top: -120px; 
+                margin-bottom: -120px;
+                height: 600px;
+                display: flex;
+                flex-direction: row;
+                padding: 0;
             }
             
-            .skills-core-node { position: static; width: 100%; max-width: 280px; height: auto; border-radius: 20px; padding: 20px; margin-bottom: 20px; }
-            .skill-satellite-node { position: static !important; width: 100%; max-width: 280px; height: auto; flex-direction: row; justify-content: flex-start; gap: 20px; border-radius: 16px; padding: 15px 25px; transform: none !important; animation: none !important; }
-            .skill-satellite-node i { margin-bottom: 0; }
-            .skill-satellite-node p { font-size: 1rem; }
+            /* Volvemos a mostrar la órbita que estaba oculta */
+            .skills-orbit-wrapper { 
+                display: flex !important; 
+            }
+            
+            /* Restauramos la forma circular del nodo central */
+            .skills-core-node { 
+                position: relative; 
+                width: 180px; 
+                height: 180px; 
+                border-radius: 50%; 
+                margin: 0;
+                max-width: none;
+            }
+            
+            /* Restauramos la forma y posición de los satélites (sin afectar sus animaciones) */
+            .skill-satellite-node { 
+                position: absolute !important; 
+                width: 110px !important; 
+                height: 110px !important; 
+                max-width: none;
+                flex-direction: column !important; 
+                justify-content: center !important; 
+                border-radius: 50% !important; 
+                padding: 10px !important; 
+            }
+            
+            .skill-satellite-node i { margin-bottom: 8px !important; }
+            .skill-satellite-node p { font-size: 0.75rem !important; }
         }
 
         /* --- NAVEGACIÓN Y TABS DE PROYECTOS --- */
