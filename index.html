@@ -932,42 +932,57 @@
         @media (max-width: 991px) {
             section { padding: 100px 30px; }
             
-            /* --- TARJETAS DE PROYECTOS EN MÓVIL --- */
             .folder-tabs-container { 
                 grid-template-columns: 1fr; 
             }
             .folder-card { 
-                height: auto; 
-                display: flex; 
-                flex-direction: column; 
+                height: 200px; 
+                display: grid; 
+                grid-template-columns: 60px 1fr; 
             }
             .folder-tab-aside { 
-                display: none; 
+                display: flex; 
+                padding: 15px 10px;
+                clip-path: polygon(0 0, 80% 0, 100% 10%, 100% 100%, 0 100%);
             }
             .folder-content-body { 
-                display: flex; 
-                /* CAMBIO ESTRELLA: column-reverse pone la imagen ARRIBA y el texto ABAJO */
-                flex-direction: column-reverse; 
+                display: grid; 
+                grid-template-columns: 0fr 1fr; 
+                transition: grid-template-columns 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .folder-card:hover .folder-content-body,
+            .folder-card:active .folder-content-body { 
+                grid-template-columns: 1fr 1fr; 
+            }
+            .folder-text-pane {
+                padding: 0;
+                opacity: 0;
+                transform: translateX(-15px);
+                border-top: none;
+            }
+            .folder-card:hover .folder-text-pane,
+            .folder-card:active .folder-text-pane {
+                padding: 15px; 
+                opacity: 1;
+                transform: translateX(0);
+            }
+            .folder-text-pane p {
+                font-size: 0.95rem; 
+                margin-bottom: 8px;
+            }
+            .folder-text-pane span {
+                font-size: 0.75rem;
             }
             .folder-img-pane {
-                height: 250px; 
+                height: 100%; 
                 width: 100%;
             }
             .folder-img-pane img {
-                /* !important vitales para eliminar los huecos oscuros laterales */
                 width: 100% !important; 
                 height: 100% !important; 
                 object-fit: cover !important; 
-                object-position: center top !important; 
+                object-position: center !important; 
             }
-            .folder-text-pane {
-                opacity: 1; 
-                transform: translateX(0);
-                padding: 25px;
-                /* Quitamos la línea de arriba porque ahora el texto va abajo */
-                border-top: none; 
-            }
-            /* -------------------------------------- */
 
             .web-grid-container { grid-template-columns: 1fr; }
             .videos-grid-container { grid-template-columns: 1fr; }
