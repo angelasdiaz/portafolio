@@ -93,25 +93,23 @@
                 display: none !important;
             }
             
-            /* Al ser 1920x1080, mandamos en la altura para que haga "zoom" al centro */
+            
             .capa-medio, .capa-frente {
-                width: auto !important; /* Mantiene la proporción original */
-                height: 600px !important; /* Forzamos un alto gigante para acercar los elementos */
-                
-                /* Truco maestro para centrar elementos enormes sin usar transform (para no romper tu animación) */
-                left: -100% !important;
-                right: -100% !important;
-                margin: auto !important;
+                width: auto !important; 
+                height: 600px !important; 
+                right: auto !important;
+                margin: 0 !important;
             }
             
             .capa-medio {
-                top: -100px !important; /* Subimos el lienzo para que el libro quede centrado visualmente */
+                left: -400px !important; 
+                top: 0px !important;     
             }
             
             .capa-frente {
-                top: -40px !important; /* Un poco más abajo para mantener el efecto de superposición */
+                left: -400px !important; 
+                top: -40px !important;  
             }
-        }
 
         [data-theme="light"] {
             --bg-main: #f8f9fa;
