@@ -85,28 +85,29 @@
 
         @media (max-width: 991px) {
             .contenedor-collage-libre {
-                height: 550px; /* Aumentamos la altura para que el cartel gigante quepa bien */
-                margin-top: 60px; /* Separación del texto "Sobre Mí" */
+                height: 450px; /* Reducimos un poco para que no haya huecos vacíos gigantes */
+                margin-top: 50px; 
             }
             
             .capa-fondo {
-                display: none;
+                display: none !important;
             }
             
-            /* Hacemos el libro gigante ocupando toda la pantalla */
+            /* Truco para centrado perfecto ignorando el contenedor */
             .capa-medio {
-                width: 170%; 
-                left: -35%; /* Truco matemático para centrar un objeto del 170% */
-                right: auto;
-                top: -20px; 
+                width: 130% !important; /* Tamaño grande pero proporcionado */
+                left: 50% !important;   /* Lo mandamos al centro de la pantalla... */
+                margin-left: -65% !important; /* ...y retrocedemos exactamente la mitad de su ancho para centrarlo */
+                right: auto !important; /* Anulamos la orden del ordenador */
+                top: -10px !important; 
             }
             
-            /* Hacemos el cartel igual de gigante */
             .capa-frente {
-                width: 170%; 
-                left: -35%; 
-                right: auto;
-                top: 40px; /* Un pelín más abajo para que se vea bien la superposición */
+                width: 130% !important; 
+                left: 50% !important; 
+                margin-left: -65% !important; 
+                right: auto !important;
+                top: 60px !important; /* Un poco más abajo que el libro para que se vea el efecto */
             }
         }
 
