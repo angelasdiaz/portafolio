@@ -931,43 +931,44 @@
 
         @media (max-width: 991px) {
             section { padding: 100px 30px; }
-            .folder-tabs-container { grid-template-columns: 1fr; }
             
-            
+            /* --- TARJETAS DE PROYECTOS EN MÓVIL --- */
+            .folder-tabs-container { 
+                grid-template-columns: 1fr; 
+            }
             .folder-card { 
                 height: auto; 
                 display: flex; 
                 flex-direction: column; 
             }
-            
-            
             .folder-tab-aside { 
                 display: none; 
             }
-            
             .folder-content-body { 
                 display: flex; 
-                flex-direction: column; 
+                /* CAMBIO ESTRELLA: column-reverse pone la imagen ARRIBA y el texto ABAJO */
+                flex-direction: column-reverse; 
             }
-            
-            
             .folder-img-pane {
-                height: 220px; 
+                height: 250px; 
                 width: 100%;
             }
-            
-            
             .folder-img-pane img {
-                object-position: top center; 
+                /* !important vitales para eliminar los huecos oscuros laterales */
+                width: 100% !important; 
+                height: 100% !important; 
+                object-fit: cover !important; 
+                object-position: center top !important; 
             }
-            
-            
             .folder-text-pane {
                 opacity: 1; 
                 transform: translateX(0);
                 padding: 25px;
-                border-top: 1px solid var(--border);
+                /* Quitamos la línea de arriba porque ahora el texto va abajo */
+                border-top: none; 
             }
+            /* -------------------------------------- */
+
             .web-grid-container { grid-template-columns: 1fr; }
             .videos-grid-container { grid-template-columns: 1fr; }
             .ui-grid-container { grid-template-columns: 1fr; }
