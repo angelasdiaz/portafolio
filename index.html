@@ -309,12 +309,14 @@
             overflow: hidden; 
             white-space: nowrap; 
             pointer-events: none; 
-            opacity: 0.03;
+            opacity: 0.25; 
+            z-index: 1;
             font-family: var(--font-titles); 
             font-weight: 800; 
             font-size: 12vw; 
             text-transform: uppercase;
-            color: var(--text-muted);
+            /* 3. Cambiamos el color a blanco/texto principal para que contraste mejor */
+            color: var(--text-main); 
         }
         
         .marquee-inner { display: inline-block; animation: marquee 25s linear infinite; }
